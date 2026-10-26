@@ -1,0 +1,7 @@
+id: application
+extends: base
+title: Заявление / заявка
+applies_to: [application]
+styles:
+  title: {size_pt: 14, align: center, bold: true, all_caps: false, space_before_pt: 24, space_after_pt: 12}
+  body:  {size_pt: 14, align: justify, first_line_indent_mm: 12.5, line_spacing: 1.5}

@@ -1,0 +1,35 @@
+<sc-if value="{{ isDash }}" hint-placeholder-val="{{ false }}">
+<div data-screen-label="Обзор" style="max-width:1240px;margin:0 auto;padding:32px 36px 56px;display:flex;flex-direction:column;gap:24px">
+  <div style="display:flex;align-items:flex-end;gap:12px 20px;flex-wrap:wrap"><div style="flex:1;min-width:240px;display:flex;flex-direction:column;gap:4px"><h1 style="margin:0;font-size:34px;font-weight:800;letter-spacing:-0.04em">{{ dashHello }}</h1><span style="font-size:15px;color:#5B6478">{{ dashSub }}</span></div></div>
+  <div style="display:grid;grid-template-columns:minmax(0,2fr) minmax(260px,1fr);gap:16px">
+    <div onClick="{{ pickFile }}" onDragOver="{{ dzOver }}" onDragLeave="{{ dzLeave }}" onDrop="{{ dzDrop }}" style="border:2px dashed {{ dzBorder }};background:{{ dzBg }};border-radius:26px;padding:28px;display:flex;align-items:center;gap:20px;flex-wrap:wrap;cursor:pointer;transition:background .15s,border-color .15s">
+      <img src="{{ upIco }}" alt="" style="width:68px;height:68px;flex:none">
+      <span style="flex:1;min-width:200px;display:flex;flex-direction:column;gap:4px"><span style="font-size:20px;font-weight:800;letter-spacing:-0.02em">Перетащите фото или PDF</span><span style="font-size:13px;color:#5B6478">Или вставьте Ctrl+V · до 10 страниц за раз</span></span>
+      <span style="height:46px;padding:0 20px;border-radius:999px;background:#0B1024;color:#fff;font-size:14px;font-weight:700;display:inline-flex;align-items:center;gap:8px"><span class="material-symbols-rounded" style="font-size:20px">folder_open</span>Выбрать</span>
+    </div>
+    <div style="background:#0B1024;color:#fff;border-radius:26px;padding:22px;display:flex;flex-direction:column;gap:10px">
+      <span style="display:flex;align-items:center;gap:10px"><img src="{{ coinWhite }}" alt="" style="width:34px;height:34px"><span style="font-size:13px;font-weight:700;color:#9AA3BF">{{ dashBal.label }}</span></span>
+      <span style="font-size:34px;font-weight:800;letter-spacing:-0.04em;line-height:1">{{ dashBal.value }}</span>
+      <span style="font-size:13px;color:#C9CEDD;flex:1">{{ dashBal.note }}</span>
+      <button onClick="{{ dashBal.go }}" style="height:40px;border:none;border-radius:999px;background:#fff;color:#0B1024;font-size:13px;font-weight:800;cursor:pointer">{{ dashBal.cta }}</button>
+    </div>
+  </div>
+  <sc-if value="{{ dashCur }}">
+    <div style="background:#fff;border-radius:26px;padding:16px;display:flex;align-items:center;gap:20px;flex-wrap:wrap">
+      <div style="width:120px;height:150px;flex:none;border-radius:14px;background:#ECEBEF;display:flex;align-items:center;justify-content:center;overflow:hidden"><dc-import name="DocSheet" page="{{ dashCur.page }}" variant="word" zoom="0.17" flat="{{ true }}" values="{{ dashCur.values }}" resolved="{{ dashCur.resolved }}" hint-size="101px,143px"></dc-import></div>
+      <div style="flex:1;min-width:220px;display:flex;flex-direction:column;gap:6px"><span style="font-size:12px;font-weight:800;letter-spacing:.08em;text-transform:uppercase;color:#1F4EF5">Продолжить</span><span style="font-size:22px;font-weight:800;letter-spacing:-0.02em">{{ dashCur.type }}</span><span style="font-size:14px;color:#5B6478">{{ dashCur.meta }}</span></div>
+      <div style="display:flex;gap:8px;flex-wrap:wrap"><button onClick="{{ dashCur.goResult }}" style="height:46px;padding:0 20px;border:none;border-radius:999px;background:#1F4EF5;color:#fff;font-size:14px;font-weight:800;cursor:pointer;display:flex;align-items:center;gap:8px"><span class="material-symbols-rounded" style="font-size:20px">fact_check</span>Проверка и скачивание</button><button onClick="{{ dashCur.goEditor }}" style="height:46px;padding:0 18px;border:1px solid #E3E1EA;border-radius:999px;background:#fff;color:#0B1024;font-size:14px;font-weight:800;cursor:pointer;display:flex;align-items:center;gap:8px"><span class="material-symbols-rounded" style="font-size:20px">edit_document</span>Редактор</button></div>
+    </div>
+  </sc-if>
+  <div style="display:flex;flex-direction:column;gap:12px">
+    <div style="display:flex;align-items:center;gap:12px"><span style="font-size:19px;font-weight:800;flex:1">Последние документы</span><button onClick="{{ goDocs }}" style="border:none;background:none;color:#1F4EF5;font-size:14px;font-weight:800;cursor:pointer">Все документы →</button></div>
+    <sc-if value="{{ dashEmpty }}"><div style="background:#fff;border-radius:22px;padding:28px;font-size:14px;color:#5B6478;text-align:center">Пока пусто. Загрузите первый документ — или возьмите пример на странице загрузки.</div></sc-if>
+    <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:12px">
+      <sc-for list="{{ dashDocs }}" as="d" hint-placeholder-count="4"><button onClick="{{ d.go }}" style="background:#fff;border:none;border-radius:20px;padding:10px;display:flex;flex-direction:column;gap:10px;cursor:pointer;text-align:left" style-hover="box-shadow:0 12px 28px rgba(11,16,36,.08)"><span style="height:150px;border-radius:12px;background:#ECEBEF;display:flex;align-items:center;justify-content:center;overflow:hidden;position:relative"><dc-import name="DocSheet" page="{{ d.page }}" variant="{{ d.variant }}" zoom="0.2" blur="{{ d.blur }}" flat="{{ true }}" hint-size="119px,168px"></dc-import><span style="position:absolute;left:8px;top:8px;height:22px;padding:0 8px;border-radius:11px;background:{{ d.stBg }};color:{{ d.stFg }};font-size:11px;font-weight:800;display:flex;align-items:center">{{ d.st }}</span></span><span style="display:flex;flex-direction:column;gap:2px;padding:0 4px 4px"><span style="font-size:14px;font-weight:800;color:#0B1024;white-space:nowrap;overflow:hidden;text-overflow:ellipsis">{{ d.type }}</span><span style="font-size:12px;color:#8A90A2">{{ d.meta }}</span></span></button></sc-for>
+    </div>
+  </div>
+  <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:12px">
+    <sc-for list="{{ dashTiles }}" as="t" hint-placeholder-count="4"><button onClick="{{ t.go }}" style="background:#fff;border:none;border-radius:20px;padding:18px;display:flex;gap:14px;align-items:center;cursor:pointer;text-align:left" style-hover="box-shadow:0 12px 28px rgba(11,16,36,.08)"><img src="{{ t.ico }}" alt="" style="width:52px;height:52px;flex:none"><span style="display:flex;flex-direction:column;gap:2px"><span style="font-size:15px;font-weight:800;color:#0B1024">{{ t.t }}</span><span style="font-size:12px;color:#5B6478">{{ t.d }}</span></span></button></sc-for>
+  </div>
+</div>
+</sc-if>

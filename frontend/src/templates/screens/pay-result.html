@@ -1,0 +1,8 @@
+<sc-if value="{{ isPayResult }}" hint-placeholder-val="{{ false }}">
+<div data-screen-label="Оплата" style="max-width:640px;margin:0 auto;padding:88px 40px;display:flex;flex-direction:column;gap:18px;align-items:center;text-align:center">
+  <img src="{{ payRes.ico }}" alt="" style="width:120px;height:120px">
+  <h1 style="margin:0;font-size:40px;font-weight:800;letter-spacing:-0.045em">{{ payRes.title }}</h1>
+  <p style="margin:0;font-size:17px;line-height:1.55;color:#4A5368">{{ payRes.text }}</p>
+  <div style="display:flex;gap:10px;flex-wrap:wrap;justify-content:center"><button onClick="{{ payRes.primary }}" style="height:54px;padding:0 26px;border:none;border-radius:999px;background:#1F4EF5;color:#fff;font-size:16px;font-weight:800;cursor:pointer">{{ payRes.primaryLabel }}</button><button onClick="{{ goBilling }}" style="height:54px;padding:0 22px;border:1px solid #E3E1EA;border-radius:999px;background:#fff;color:#0B1024;font-size:16px;font-weight:800;cursor:pointer">Баланс</button></div>
+</div>
+</sc-if>

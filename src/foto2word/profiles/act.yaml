@@ -1,0 +1,4 @@
+id: act
+extends: base
+title: Акт
+applies_to: [act]

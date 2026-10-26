@@ -1,0 +1,68 @@
+  <section style="position:relative;isolation:isolate;overflow:hidden;background:#fff">
+
+    <div style="max-width:1240px;margin:0 auto;padding:88px 40px;display:flex;flex-direction:column;gap:40px">
+      <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,420px),1fr));gap:24px 48px;align-items:end">
+        <div style="display:flex;flex-direction:column;gap:16px">
+          <span style="display:flex;align-items:center;gap:12px;font-size:12px;font-weight:800;letter-spacing:.12em;text-transform:uppercase;color:#1F4EF5">Свой редактор</span>
+          <h2 style="margin:0;font-size:clamp(34px,3.8vw,52px);line-height:1.02;font-weight:800;letter-spacing:-0.045em;text-wrap:balance">Доправьте документ прямо в браузере</h2>
+        </div>
+        <div style="display:flex;flex-direction:column;gap:14px">
+          <p style="margin:0;font-size:17px;line-height:1.55;color:#4A5368;max-width:520px;text-wrap:pretty">Word на компьютере не нужен. Copeeq открывает результат в своём редакторе: впишите данные, поставьте галочки и подпись — и скачайте готовый .docx.</p>
+          <span style="font-family:Caveat,cursive;font-size:26px;line-height:1.1;color:#1F4EF5;transform:rotate(-1.5deg);align-self:flex-start">попробуйте — всё ниже работает ↓</span>
+        </div>
+      </div>
+
+      <div style="border-radius:22px;overflow:hidden;background:#fff;border:1px solid #E3E6EE;box-shadow:0 30px 70px rgba(11,16,36,.12)">
+        <div style="height:52px;display:flex;align-items:center;gap:12px;padding:0 16px;border-bottom:1px solid #EEF0F4;background:#FAFBFD">
+          <span style="width:30px;height:30px;flex:none;border-radius:8px;background:#1F4EF5;color:#fff;display:flex;align-items:center;justify-content:center"><span class="material-symbols-rounded" style="font-size:18px">description</span></span>
+          <span style="display:flex;flex-direction:column;min-width:0"><span style="font-size:14px;font-weight:800;white-space:nowrap">Заявление.docx</span><span style="font-size:11px;color:#7A8296;white-space:nowrap">Редактор Copeeq</span></span>
+          <div style="display:flex;padding:3px;background:#EEF0F4;border-radius:999px;gap:2px;margin-left:12px">
+            <span style="height:28px;padding:0 12px;border-radius:999px;background:#fff;color:#0B1024;font-size:12px;font-weight:700;display:flex;align-items:center;box-shadow:0 1px 2px rgba(11,16,36,.12)">Редактор</span>
+            <span style="height:28px;padding:0 12px;border-radius:999px;color:#5B6478;font-size:12px;font-weight:700;display:flex;align-items:center">Редактор + фото</span>
+          </div>
+          <span style="margin-left:auto;display:flex;align-items:center;gap:6px;font-size:12px;font-weight:700;color:#15803D;white-space:nowrap"><span class="material-symbols-rounded" style="font-size:17px">cloud_done</span>{{ demoSaved }}</span>
+          <button onClick="{{ demoDl }}" style="height:36px;padding:0 16px;border:none;border-radius:999px;background:#1F4EF5;color:#fff;font-size:13px;font-weight:800;display:flex;align-items:center;gap:6px;cursor:pointer;white-space:nowrap" style-hover="background:#1740D8"><span class="material-symbols-rounded" style="font-size:18px">download</span>Скачать Word</button>
+        </div>
+        <div style="height:46px;display:flex;align-items:center;gap:2px;padding:0 12px;border-bottom:1px solid #EEF0F4;overflow:hidden">
+          <button onMouseDown="{{ keep }}" title="Отменить" style="width:32px;height:32px;flex:none;border:none;border-radius:8px;background:transparent;color:#3A4156;display:flex;align-items:center;justify-content:center;cursor:default"><span class="material-symbols-rounded" style="font-size:19px">undo</span></button><button onMouseDown="{{ keep }}" title="Повторить" style="width:32px;height:32px;flex:none;border:none;border-radius:8px;background:transparent;color:#3A4156;display:flex;align-items:center;justify-content:center;cursor:default"><span class="material-symbols-rounded" style="font-size:19px">redo</span></button><span style="width:1px;height:20px;background:#E3E6EE;flex:none;margin:0 4px"></span>
+          <span style="height:32px;padding:0 10px;border:1px solid #E3E6EE;border-radius:8px;display:flex;align-items:center;font-family:'Times New Roman','PT Serif',serif;font-size:13px;flex:none;white-space:nowrap">Times New Roman · 14</span><span style="width:1px;height:20px;background:#E3E6EE;flex:none;margin:0 4px"></span>
+          <button onMouseDown="{{ keep }}" title="Полужирный" style="width:32px;height:32px;flex:none;border:none;border-radius:8px;background:transparent;color:#3A4156;display:flex;align-items:center;justify-content:center;cursor:default"><span class="material-symbols-rounded" style="font-size:19px">format_bold</span></button><button onMouseDown="{{ keep }}" title="Курсив" style="width:32px;height:32px;flex:none;border:none;border-radius:8px;background:transparent;color:#3A4156;display:flex;align-items:center;justify-content:center;cursor:default"><span class="material-symbols-rounded" style="font-size:19px">format_italic</span></button><button onMouseDown="{{ keep }}" title="Подчёркнутый" style="width:32px;height:32px;flex:none;border:none;border-radius:8px;background:transparent;color:#3A4156;display:flex;align-items:center;justify-content:center;cursor:default"><span class="material-symbols-rounded" style="font-size:19px">format_underlined</span></button><span style="width:1px;height:20px;background:#E3E6EE;flex:none;margin:0 4px"></span>
+          <button onMouseDown="{{ keep }}" title="По левому краю" style="width:32px;height:32px;flex:none;border:none;border-radius:8px;background:transparent;color:#3A4156;display:flex;align-items:center;justify-content:center;cursor:default"><span class="material-symbols-rounded" style="font-size:19px">format_align_left</span></button><button onMouseDown="{{ keep }}" title="По центру" style="width:32px;height:32px;flex:none;border:none;border-radius:8px;background:transparent;color:#3A4156;display:flex;align-items:center;justify-content:center;cursor:default"><span class="material-symbols-rounded" style="font-size:19px">format_align_center</span></button><button onMouseDown="{{ keep }}" title="По ширине" style="width:32px;height:32px;flex:none;border:none;border-radius:8px;background:transparent;color:#3A4156;display:flex;align-items:center;justify-content:center;cursor:default"><span class="material-symbols-rounded" style="font-size:19px">format_align_justify</span></button><span style="width:1px;height:20px;background:#E3E6EE;flex:none;margin:0 4px"></span>
+          <button onClick="{{ demoShift }}" style="height:32px;padding:0 10px;flex:none;border:1px solid #DCE4FB;border-radius:8px;background:#F5F8FF;color:#1F4EF5;font-size:12px;font-weight:700;display:flex;align-items:center;gap:6px;cursor:pointer;white-space:nowrap" style-hover="background:#EAF0FF"><span class="material-symbols-rounded" style="font-size:17px">event_repeat</span>Годы +1</button>
+          <button onClick="{{ demoSig }}" style="height:32px;padding:0 10px;flex:none;border:1px solid #DCE4FB;border-radius:8px;background:#F5F8FF;color:#1F4EF5;font-size:12px;font-weight:700;display:flex;align-items:center;gap:6px;cursor:pointer;white-space:nowrap" style-hover="background:#EAF0FF"><span class="material-symbols-rounded" style="font-size:17px">signature</span>{{ demoSigLabel }}</button>
+        </div>
+        <div style="display:grid;grid-template-columns:minmax(0,1fr) 270px;min-height:440px">
+          <div style="background:#EEF0F4;padding:28px 24px;display:flex;justify-content:center;align-items:flex-start;min-width:0">
+            <div style="width:100%;max-width:520px;background:#fff;padding:38px 40px 32px 52px;font-family:'Times New Roman','PT Serif',serif;font-size:14px;line-height:1.5;color:#111;display:flex;flex-direction:column;gap:16px;box-shadow:0 2px 10px rgba(11,16,36,.08);position:relative">
+              <div style="align-self:flex-end;width:62%;display:flex;flex-direction:column;gap:2px;font-size:13px">Генеральному директору<br>ООО «Северный ветер»<br>И. П. Кравцову</div>
+              <div style="text-align:center;font-weight:700;letter-spacing:.14em;margin-top:6px">ЗАЯВЛЕНИЕ</div>
+              <div style="display:flex;align-items:flex-end;gap:8px">от<span style="flex:1;position:relative;padding-bottom:14px"><input value="{{ L.demo.fio }}" onChange="{{ onDemoFio }}" aria-label="ФИО" style="width:100%;border:none;border-bottom:1px solid #111;outline:none;font:inherit;text-align:center;padding:0 4px;background:rgba(31,78,245,.06)" style-focus="background:rgba(31,78,245,.14)"><span style="position:absolute;left:0;right:0;bottom:0;text-align:center;font-size:9px;color:#333">(фамилия, имя, отчество)</span></span></div>
+              <div contentEditable="true" suppressContentEditableWarning="{{ true }}" spellCheck="false" style="text-indent:28px;text-align:justify;outline:none;border-radius:2px" style-focus="background:rgba(31,78,245,.06)">Прошу предоставить ежегодный оплачиваемый отпуск продолжительностью 14 календарных дней.</div>
+              <div style="display:flex;gap:22px;flex-wrap:wrap">
+                <sc-for list="{{ demoChecks }}" as="c"><button onClick="{{ c.onClick }}" style="display:flex;align-items:center;gap:8px;border:none;background:none;padding:0;font:inherit;color:#111;cursor:pointer"><span style="width:14px;height:14px;border:1px solid #111;display:flex;align-items:center;justify-content:center;font-size:12px;line-height:1">{{ c.mark }}</span>{{ c.t }}</button></sc-for>
+              </div>
+              <div style="display:flex;justify-content:space-between;align-items:flex-end;gap:16px;padding-top:18px">
+                <span style="position:relative;padding-bottom:14px;width:130px"><input value="{{ L.demo.date }}" onChange="{{ onDemoDate }}" aria-label="Дата" style="width:100%;border:none;border-bottom:1px solid #111;outline:none;font:inherit;text-align:center;background:rgba(31,78,245,.06)" style-focus="background:rgba(31,78,245,.14)"><span style="position:absolute;left:0;right:0;bottom:0;text-align:center;font-size:9px;color:#333">(дата)</span></span>
+                <span style="position:relative;padding-bottom:14px;width:140px"><span style="display:flex;align-items:flex-end;justify-content:center;border-bottom:1px solid #111;height:30px;font-family:Caveat,cursive;font-size:26px;line-height:1;color:#1B2FA8">{{ demoSigText }}</span><span style="position:absolute;left:0;right:0;bottom:0;text-align:center;font-size:9px;color:#333">(подпись)</span></span>
+              </div>
+            </div>
+          </div>
+          <aside style="border-left:1px solid #EEF0F4;padding:18px;display:flex;flex-direction:column;gap:14px;background:#fff">
+            <div style="display:flex;align-items:center;gap:8px"><span class="material-symbols-rounded" style="font-size:19px;color:#1F4EF5">dynamic_form</span><span style="font-size:14px;font-weight:800">Поля документа</span></div>
+            <label style="display:flex;flex-direction:column;gap:5px;font-size:11px;font-weight:700;color:#7A8296">ФИО<input value="{{ L.demo.fio }}" onChange="{{ onDemoFio }}" aria-label="ФИО — панель" style="height:36px;border:1px solid #DCE2EE;border-radius:9px;padding:0 10px;font-size:13px;font-weight:500;color:#0B1024;background:#fff;outline:none;width:100%" style-focus="border-color:#1F4EF5;box-shadow:0 0 0 3px rgba(31,78,245,.15)"></label>
+            <label style="display:flex;flex-direction:column;gap:5px;font-size:11px;font-weight:700;color:#7A8296">Дата<input value="{{ L.demo.date }}" onChange="{{ onDemoDate }}" aria-label="Дата — панель" style="height:36px;border:1px solid #DCE2EE;border-radius:9px;padding:0 10px;font-size:13px;font-weight:500;color:#0B1024;background:#fff;outline:none;width:100%" style-focus="border-color:#1F4EF5;box-shadow:0 0 0 3px rgba(31,78,245,.15)"></label>
+            <div style="font-size:12px;line-height:1.45;color:#5B6478">Меняйте здесь или прямо на листе — значения связаны.</div>
+            <div style="height:1px;background:#EEF0F4"></div>
+            <div style="display:flex;flex-direction:column;gap:8px">
+              <sc-for list="{{ demoFeats }}" as="f"><div style="display:flex;gap:10px;align-items:center;font-size:13px;color:#3A4156"><span class="material-symbols-rounded" style="font-size:18px;color:#1F4EF5">{{ f.i }}</span>{{ f.t }}</div></sc-for>
+            </div>
+          </aside>
+        </div>
+      </div>
+
+      <div style="display:flex;align-items:center;gap:16px 28px;flex-wrap:wrap">
+        <button onClick="{{ goNew }}" style="height:54px;padding:0 26px;border:none;border-radius:999px;background:#1F4EF5;color:#fff;font-size:16px;font-weight:800;display:flex;align-items:center;gap:10px;cursor:pointer" style-hover="background:#1740D8">Открыть свой документ в редакторе<span class="material-symbols-rounded" style="font-size:22px">arrow_forward</span></button>
+        <span style="font-size:14px;color:#5B6478">Правки бесплатные — кредиты списываются только за распознавание.</span>
+      </div>
+    </div>
+  </section>

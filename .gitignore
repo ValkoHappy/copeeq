@@ -1,0 +1,27 @@
+.venv/
+__pycache__/
+*.pyc
+.env
+.env.*
+!.env.example
+.mypy_cache/
+.pytest_cache/
+.ruff_cache/
+.coverage
+htmlcov/
+out/
+*.egg-info/
+
+# Evaluation inputs and generated artifacts may contain personal data or
+# third-party documents. The public repository keeps only the format guide.
+evals/*
+!evals/README.md
+
+# Local editor and operating-system files.
+.idea/
+.vscode/
+.DS_Store
+Thumbs.db
+*.log
+node_modules/
+src/foto2word/web/copeeq/

@@ -1,0 +1,10 @@
+<sc-if value="{{ isLegal }}" hint-placeholder-val="{{ false }}">
+<div data-screen-label="Правовая" style="max-width:820px;margin:0 auto;padding:56px 40px 40px;display:flex;flex-direction:column;gap:24px">
+  <div style="display:flex;gap:6px;flex-wrap:wrap"><sc-for list="{{ legalTabs }}" as="t"><button onClick="{{ t.onClick }}" style="height:36px;padding:0 14px;border-radius:999px;border:1px solid {{ t.border }};background:{{ t.bg }};color:{{ t.fg }};font-size:13px;font-weight:700;cursor:pointer">{{ t.label }}</button></sc-for></div>
+  <h1 style="margin:0;font-size:clamp(36px,4.4vw,52px);line-height:1.02;font-weight:800;letter-spacing:-0.045em">{{ legal.h }}</h1>
+  <div style="background:#fff;border-radius:24px;padding:28px;display:flex;flex-direction:column;gap:20px">
+    <sc-for list="{{ legalSecs }}" as="s" hint-placeholder-count="4"><div style="display:flex;flex-direction:column;gap:6px"><span style="font-size:17px;font-weight:800">{{ s.t }}</span><span style="font-size:15px;line-height:1.6;color:#3A4156">{{ s.d }}</span></div></sc-for>
+  </div>
+  <span style="font-size:13px;color:#8A90A2">Черновик для прототипа. Юридический текст и реквизиты нужно утвердить до запуска.</span>
+</div>
+</sc-if>

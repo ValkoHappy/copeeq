@@ -1,0 +1,124 @@
+{
+  "schema_version": "1.0",
+  "document_type": {
+    "id": "application",
+    "title": "Заявка на заключение договора теплоснабжения",
+    "confidence": 0.95
+  },
+  "orientation": "portrait",
+  "blocks": [
+    {
+      "kind": "requisites",
+      "id": "b1",
+      "lines": [
+        "Генеральному директору",
+        "ООО \"Учебное теплоэнерго Тестоград\"",
+        "А.А. Тестову",
+        "От Сидорова Семёна Сергеевича",
+        "ИНН 000000000000",
+        "г. Тестоград, ул. Примерная 1, кв. 1.",
+        "Паспорт 0000 000000",
+        "выдан 13.05.2022",
+        "УМВД России по Тестоградой области",
+        "тел: 80000000000",
+        "E-mail: person@example.test"
+      ]
+    },
+    {
+      "kind": "spacer",
+      "id": "b2",
+      "size": "large"
+    },
+    {
+      "kind": "heading",
+      "id": "b3",
+      "level": 1,
+      "runs": [
+        {
+          "text": "Заявка"
+        }
+      ]
+    },
+    {
+      "kind": "paragraph",
+      "id": "b4",
+      "runs": [
+        {
+          "text": "Прошу Вас заключить договор теплоснабжения по отоплению на 2026 год нежилого помещения г. Тестовый, ул. Учебная 1"
+        }
+      ]
+    },
+    {
+      "kind": "spacer",
+      "id": "b5",
+      "size": "large"
+    },
+    {
+      "kind": "paragraph",
+      "id": "b6",
+      "align": "right",
+      "runs": [
+        {
+          "text": "Сидоров С.С."
+        }
+      ]
+    }
+  ],
+  "corrections": [
+    {
+      "id": "c1",
+      "block_id": "b4",
+      "kind": "replace",
+      "before": "на 2026 год",
+      "after": "на 2027 год"
+    }
+  ],
+  "fields": [
+    {
+      "kind": "person_name",
+      "value": "А.А. Тестову",
+      "block_id": "b1"
+    },
+    {
+      "kind": "person_name",
+      "value": "Сидорова Семёна Сергеевича",
+      "block_id": "b1"
+    },
+    {
+      "kind": "inn",
+      "value": "000000000000",
+      "block_id": "b1"
+    },
+    {
+      "kind": "address",
+      "value": "г. Тестоград, ул. Примерная 1, кв. 1.",
+      "block_id": "b1"
+    },
+    {
+      "kind": "passport",
+      "value": "0000 000000",
+      "block_id": "b1"
+    },
+    {
+      "kind": "date",
+      "value": "13.05.2022",
+      "block_id": "b1"
+    },
+    {
+      "kind": "phone",
+      "value": "80000000000",
+      "block_id": "b1"
+    },
+    {
+      "kind": "email",
+      "value": "person@example.test",
+      "block_id": "b1"
+    },
+    {
+      "kind": "address",
+      "value": "г. Тестовый, ул. Учебная 1",
+      "block_id": "b4"
+    }
+  ],
+  "suggestions": []
+}

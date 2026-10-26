@@ -1,0 +1,18 @@
+<sc-if value="{{ showHeader }}" hint-placeholder-val="{{ true }}">
+<header style="position:sticky;top:0;z-index:50;background:rgba(249,248,248,.88);backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);border-bottom:1px solid #ECEAF0">
+  <div style="max-width:{{ hdrMax }};margin:0 auto;padding:12px 32px;height:64px;display:flex;align-items:center;gap:28px;flex-wrap:nowrap">
+    <button onClick="{{ goHome }}" style="display:flex;align-items:center;gap:9px;border:none;background:none;padding:0;cursor:pointer"><img src="assets/logo-mark.png" alt="" style="width:34px;height:36px;object-fit:contain;mix-blend-mode:multiply;flex:none"><img src="assets/wordmark.png" alt="copeeq" style="height:23px;width:auto"></button>
+    <nav style="display:flex;gap:6px 24px;font-size:14px;font-weight:700;flex-wrap:wrap;white-space:nowrap;min-width:0;height:40px;overflow:hidden;flex:1">
+      <sc-for list="{{ topNav }}" as="n" hint-placeholder-count="3"><button onClick="{{ n.go }}" style="border:none;background:none;padding:6px 0;font-size:14px;font-weight:700;color:{{ n.fg }};cursor:pointer;border-bottom:2px solid {{ n.line }}" style-hover="color:#1F4EF5">{{ n.label }}</button></sc-for>
+    </nav>
+    <div style="margin-left:auto;display:flex;align-items:center;gap:12px;flex:none">
+      <sc-if value="{{ authed }}">
+        <button onClick="{{ goBilling }}" title="Баланс кредитов" style="position:relative;height:40px;padding:0 14px 0 10px;border:1px solid #E3E1EA;border-radius:999px;background:#fff;display:flex;align-items:center;gap:8px;cursor:pointer;font-size:14px;font-weight:800;color:#0B1024;white-space:nowrap" style-hover="border-color:#1F4EF5"><img src="{{ coinChip }}" alt="" style="width:28px;height:28px;margin-left:-4px">{{ balLabel }}<sc-if value="{{ balDelta }}"><span style="position:absolute;right:-6px;top:-14px;height:22px;padding:0 8px;border-radius:11px;background:{{ balDeltaBg }};color:#fff;font-size:12px;font-weight:800;display:flex;align-items:center;animation:fadeUp .3s ease;pointer-events:none">{{ balDelta }}</span></sc-if></button>
+      </sc-if>
+      <sc-if value="{{ guest }}"><button onClick="{{ goLogin }}" style="border:none;background:none;padding:0 6px;font-size:14px;font-weight:700;color:#0B1024;cursor:pointer;white-space:nowrap" style-hover="color:#1F4EF5">Войти</button></sc-if>
+      <button onClick="{{ goNew }}" style="height:42px;padding:0 20px;border:none;border-radius:999px;background:#1F4EF5;color:#fff;font-size:14px;font-weight:700;cursor:pointer;white-space:nowrap;display:flex;align-items:center;gap:8px;box-shadow:0 8px 20px rgba(31,78,245,.22)" style-hover="background:#1740D8"><span class="material-symbols-rounded" style="font-size:19px">upload</span>Загрузить документ</button>
+      <sc-if value="{{ authed }}"><button onClick="{{ goAccount }}" title="Профиль" style="width:40px;height:40px;border:none;border-radius:20px;background:#0B1024;color:#fff;font-size:13px;font-weight:800;cursor:pointer;flex:none">{{ initials }}</button></sc-if>
+    </div>
+  </div>
+</header>
+</sc-if>

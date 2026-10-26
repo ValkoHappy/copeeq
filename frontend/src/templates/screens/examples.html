@@ -1,0 +1,20 @@
+<sc-if value="{{ isExamples }}" hint-placeholder-val="{{ false }}">
+<div data-screen-label="Примеры" style="max-width:1240px;margin:0 auto;padding:40px 40px 48px;display:flex;flex-direction:column;gap:28px">
+  <div style="display:flex;flex-direction:column;gap:12px;max-width:760px"><h1 style="margin:0;font-size:clamp(34px,3.6vw,46px);line-height:1;font-weight:800;letter-spacing:-0.05em">Примеры: оригинал → наш Word</h1><p style="margin:0;font-size:18px;line-height:1.5;color:#4A5368">Реальные типы бланков. Скачайте файл и откройте — это обычный .docx.</p></div>
+  <div style="display:flex;gap:6px;flex-wrap:wrap"><sc-for list="{{ exChips }}" as="c" hint-placeholder-count="5"><button onClick="{{ c.onClick }}" style="height:38px;padding:0 16px;border-radius:999px;border:1px solid {{ c.border }};background:{{ c.bg }};color:{{ c.fg }};font-size:14px;font-weight:700;cursor:pointer">{{ c.label }}</button></sc-for></div>
+  <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(min(100%,520px),1fr));gap:16px">
+    <sc-for list="{{ exCards }}" as="x" hint-placeholder-count="4">
+      <div style="background:#fff;border-radius:28px;padding:16px;display:flex;flex-direction:column;gap:14px">
+        <div style="display:flex;gap:10px;justify-content:center;background:#ECEBEF;border-radius:20px;padding:18px 10px">
+          <dc-import name="DocSheet" page="{{ x.page }}" variant="photo" zoom="0.36" hint-size="214px,303px"></dc-import>
+          <dc-import name="DocSheet" page="{{ x.page }}" variant="word" zoom="0.36" hint-size="214px,303px"></dc-import>
+        </div>
+        <div style="display:flex;align-items:center;gap:10px;padding:0 6px 4px;flex-wrap:wrap">
+          <span style="flex:1;min-width:160px;display:flex;flex-direction:column;gap:6px"><span style="font-size:17px;font-weight:800">{{ x.title }}</span><span style="display:flex;gap:6px;flex-wrap:wrap"><sc-for list="{{ x.look }}" as="l"><span style="height:24px;padding:0 9px;border-radius:12px;background:#EEF3FF;color:#1F4EF5;font-size:12px;font-weight:700;display:flex;align-items:center">{{ l }}</span></sc-for></span></span>
+          <button onClick="{{ x.onDl }}" style="height:42px;padding:0 16px;border:none;border-radius:999px;background:#0B1024;color:#fff;font-size:13px;font-weight:800;cursor:pointer;display:flex;align-items:center;gap:6px"><span class="material-symbols-rounded" style="font-size:18px">download</span>Скачать файл</button>
+        </div>
+      </div>
+    </sc-for>
+  </div>
+</div>
+</sc-if>

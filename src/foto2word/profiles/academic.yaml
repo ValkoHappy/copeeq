@@ -1,0 +1,19 @@
+# Student work: essay, term paper, practice report, thesis (ГОСТ 7.32-2017 and university guides).
+# Values: what most of 42 university and college style guides of 2022–2026 require
+# (evals/guides/requirements.json, out/extract_requirements.py; RESEARCH.md §13):
+# Times New Roman 14, 1.5 lines, justified, first-line indent 1.25 cm, margins left 30 / right 10
+# (15 in a third of the guides) / top 20 / bottom 20 mm.
+id: academic
+extends: base
+title: Учебная работа (реферат, курсовая, отчёт, ВКР)
+applies_to: [academic]
+page:
+  margins: {top_mm: 20, bottom_mm: 20, left_mm: 30, right_mm: 10}
+styles:
+  body:      {size_pt: 14, align: justify, first_line_indent_mm: 12.5, line_spacing: 1.5}
+  title:     {size_pt: 14, align: center, bold: true, all_caps: true, line_spacing: 1.5, space_after_pt: 12}
+  subtitle:  {size_pt: 14, align: center, bold: true, line_spacing: 1.5, space_after_pt: 12}
+  list_item: {size_pt: 14, align: justify, first_line_indent_mm: 12.5, line_spacing: 1.5}
+  note:      {size_pt: 12, align: justify, line_spacing: 1.0}
+  table:     {size_pt: 12, align: left, line_spacing: 1.0}
+  line:      {size_pt: 14, align: left, line_spacing: 1.5}

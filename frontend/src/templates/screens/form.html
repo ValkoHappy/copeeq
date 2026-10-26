@@ -1,0 +1,17 @@
+<sc-if value="{{ isForm }}" hint-placeholder-val="{{ false }}">
+<div data-screen-label="Бланк" style="max-width:1240px;margin:0 auto;padding:40px 40px 48px;display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,440px),1fr));gap:40px;align-items:start">
+  <div style="display:flex;justify-content:center;background:#ECEBEF;border-radius:30px;padding:32px"><dc-import name="DocSheet" page="{{ form.page }}" variant="word" zoom="0.7" fillable="{{ true }}" blank="{{ true }}" hint-size="417px,589px"></dc-import></div>
+  <div style="display:flex;flex-direction:column;gap:20px;position:sticky;top:96px">
+    <button onClick="{{ goForms }}" style="align-self:flex-start;border:none;background:none;padding:0;font-size:14px;font-weight:700;color:#5B6478;cursor:pointer;display:flex;align-items:center;gap:6px"><span class="material-symbols-rounded" style="font-size:18px">arrow_back</span>Все бланки</button>
+    <h1 style="margin:0;font-size:clamp(34px,3.8vw,48px);line-height:1.04;font-weight:800;letter-spacing:-0.045em">{{ form.title }}</h1>
+    <div style="display:flex;flex-direction:column;gap:12px;font-size:15px;line-height:1.55">
+      <div style="display:flex;gap:12px"><span class="material-symbols-rounded" style="font-size:22px;color:#1F4EF5">help</span><span><b>Для чего:</b> {{ form.why }}</span></div>
+      <div style="display:flex;gap:12px"><span class="material-symbols-rounded" style="font-size:22px;color:#1F4EF5">verified</span><span><b>Источник:</b> {{ form.src }}</span></div>
+      <div style="display:flex;gap:12px"><span class="material-symbols-rounded" style="font-size:22px;color:#1F4EF5">edit_document</span><span>Поля подсвечены — их можно заполнить прямо в Word.</span></div>
+    </div>
+    <button onClick="{{ dlForm }}" style="height:56px;border:none;border-radius:999px;background:#1F4EF5;color:#fff;font-size:16px;font-weight:800;cursor:pointer;display:flex;align-items:center;justify-content:center;gap:10px;box-shadow:0 12px 26px rgba(31,78,245,.28)"><span class="material-symbols-rounded" style="font-size:22px">download</span>Скачать пустой Word · бесплатно</button>
+    <span style="font-size:13px;color:#5B6478">{{ formNote }}</span>
+    <div onClick="{{ pickFile }}" style="border:1.5px dashed #C9D3E8;border-radius:20px;padding:16px 18px;display:flex;gap:12px;align-items:center;cursor:pointer;background:#fff"><img src="{{ camIco }}" alt="" style="width:44px;height:44px;flex:none;margin:-6px"><span style="font-size:14px;line-height:1.45"><b>Уже заполнили от руки?</b> Сфотографируйте — сделаем Word с вашими записями.</span></div>
+  </div>
+</div>
+</sc-if>

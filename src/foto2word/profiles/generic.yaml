@@ -1,0 +1,4 @@
+id: generic
+extends: base
+title: Документ (общий профиль)
+applies_to: [other]

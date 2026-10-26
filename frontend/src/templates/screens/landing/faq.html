@@ -1,0 +1,16 @@
+  <section id="faq" style="position:relative;isolation:isolate;overflow:hidden;max-width:1240px;margin:0 auto;padding:0 40px 88px;display:grid;grid-template-columns:minmax(260px,1fr) minmax(0,1.7fr);gap:32px 56px;align-items:start">
+    <div style="display:flex;flex-direction:column;gap:16px;position:sticky;top:96px">
+
+      <h2 style="margin:0;font-size:clamp(34px,3.8vw,52px);line-height:1.02;font-weight:800;letter-spacing:-0.045em">Частые вопросы</h2>
+      <p style="margin:0;font-size:15px;line-height:1.55;color:#4A5368">То, что спрашивают перед первой оплатой.</p>
+      <div style="background:#fff;border-radius:22px;padding:18px;display:flex;gap:12px;align-items:center"><img src="{{ supIco }}" alt="" style="width:48px;height:48px;flex:none"><span style="display:flex;flex-direction:column;gap:2px"><span style="font-size:15px;font-weight:800">Не нашли ответ?</span><a href="mailto:support@copeeq.ru" style="font-size:14px;font-weight:700">support@copeeq.ru</a></span></div>
+    </div>
+    <div style="display:flex;flex-direction:column;gap:8px">
+      <sc-for list="{{ lFaq }}" as="q" hint-placeholder-count="6">
+        <div style="background:#fff;border-radius:20px;box-shadow:{{ q.sh }}">
+          <button onClick="{{ q.onClick }}" style="width:100%;display:flex;align-items:center;gap:16px;padding:20px 24px;border:none;background:none;text-align:left;cursor:pointer;font-size:17px;font-weight:800;color:#0B1024"><span style="flex:1">{{ q.q }}</span><span style="width:32px;height:32px;flex:none;border-radius:16px;background:{{ q.btnBg }};color:{{ q.btnFg }};display:flex;align-items:center;justify-content:center"><span class="material-symbols-rounded" style="font-size:20px">{{ q.icon }}</span></span></button>
+          <sc-if value="{{ q.open }}"><div style="padding:0 24px 22px;font-size:15px;line-height:1.6;color:#4A5368">{{ q.a }}</div></sc-if>
+        </div>
+      </sc-for>
+    </div>
+  </section>

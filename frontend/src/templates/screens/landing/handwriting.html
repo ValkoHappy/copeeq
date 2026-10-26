@@ -1,0 +1,17 @@
+  <section style="max-width:1240px;margin:0 auto;padding:88px 40px;display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,460px),1fr));gap:40px;align-items:center">
+    <div style="display:flex;gap:16px;justify-content:center;flex-wrap:wrap">
+      <dc-import name="DocSheet" page="ank3" variant="photo" zoom="0.42" hint-size="250px,354px"></dc-import>
+      <dc-import name="DocSheet" page="ank3" variant="word" zoom="0.42" resolved="{{ L.hd }}" hl="d3" on-pick="{{ noop }}" hint-size="250px,354px"></dc-import>
+    </div>
+    <div style="display:flex;flex-direction:column;gap:18px">
+      <h2 style="margin:0;font-size:clamp(34px,3.8vw,52px);line-height:1.02;font-weight:800;letter-spacing:-0.045em">Рукописное — тоже. Но честно: проверка нужна.</h2>
+      <p style="margin:0;font-size:17px;line-height:1.55;color:#4A5368">Анкету, заполненную от руки, переводим в печатный текст. Где не уверены — подсвечиваем. Принимаете или исправляете одним нажатием.</p>
+      <div style="background:#fff;border-radius:22px;padding:18px;display:flex;flex-direction:column;gap:12px;box-shadow:0 1px 2px rgba(11,16,36,.04),0 18px 40px rgba(11,16,36,.06)">
+        <div style="display:flex;align-items:center;gap:10px"><span style="width:10px;height:10px;border-radius:5px;background:{{ hdDot }}"></span><span style="font-size:13px;font-weight:700;color:#5B6478">Водительский стаж · стр. 3</span></div>
+        <span style="font-family:'PT Serif',serif;font-size:17px">{{ hdValue }}</span>
+        <div style="display:flex;gap:8px;flex-wrap:wrap">
+          <sc-for list="{{ hdOpts }}" as="o"><button onClick="{{ o.onClick }}" style="height:38px;padding:0 14px;border-radius:999px;border:1px solid {{ o.border }};background:{{ o.bg }};color:{{ o.fg }};font-size:14px;font-weight:700;cursor:pointer">{{ o.label }}</button></sc-for>
+        </div>
+      </div>
+    </div>
+  </section>

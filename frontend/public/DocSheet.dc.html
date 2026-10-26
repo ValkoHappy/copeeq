@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Caveat:wght@500;600;700&family=PT+Serif:ital,wght@0,400;0,700;1,400&display=swap"></helmet>
+<div style="zoom:{{ zoom }};width:595px;height:842px;flex:none;position:relative">
+  <div style="{{ frame }}">
+    <sc-if value="{{ src }}"><img src="{{ src }}" alt="" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover"></sc-if>
+    <sc-if value="{{ noSrc }}" hint-placeholder-val="{{ true }}">
+      <div style="{{ inner }}">
+        <sc-for list="{{ blocks }}" as="b" hint-placeholder-count="8">
+          <div style="{{ b.wrap }}">
+            <sc-if value="{{ b.isText }}"><div style="{{ b.st }}"><sc-for list="{{ b.segs }}" as="s"><sc-if value="{{ s.isT }}"><sc-if value="{{ s.ed }}"><span contentEditable="true" suppressContentEditableWarning="{{ true }}" spellCheck="false" onBlur="{{ s.onBlur }}" style="outline:none;border-radius:2px" style-focus="background:rgba(31,78,245,.06)">{{ s.t }}</span></sc-if><sc-if value="{{ s.ro }}"><span>{{ s.t }}</span></sc-if></sc-if><sc-if value="{{ s.isF }}"><span onClick="{{ s.onClick }}" style="{{ s.st }}"><sc-if value="{{ s.edF }}"><input value="{{ s.raw }}" onChange="{{ s.onChange }}" aria-label="Поле" style="width:100%;border:none;outline:none;background:transparent;font:inherit;color:inherit;text-align:inherit;padding:0;margin:0"></sc-if><sc-if value="{{ s.roF }}"><span style="{{ s.vst }}">{{ s.v }}</span></sc-if><sc-if value="{{ s.sig }}"><img src="{{ s.sig }}" alt="" style="position:absolute;left:50%;bottom:-6px;transform:translateX(-50%);height:42px;width:auto;mix-blend-mode:multiply"></sc-if><sc-if value="{{ s.cap }}"><span style="{{ capSt }}">{{ s.cap }}</span></sc-if></span></sc-if></sc-for></div></sc-if>
+            <sc-if value="{{ b.isBoxes }}"><div style="display:flex;align-items:center;gap:10px;border-radius:2px;box-shadow:{{ b.ring }}"><span style="width:104px;flex:none">{{ b.label }}</span><div style="display:flex"><sc-for list="{{ b.cells }}" as="c"><span style="{{ c.st }}">{{ c.ch }}</span></sc-for></div></div></sc-if>
+            <sc-if value="{{ b.isChecks }}"><div style="display:flex;align-items:center;flex-wrap:wrap;gap:6px 18px"><sc-if value="{{ b.label }}"><span style="white-space:nowrap">{{ b.label }}</span></sc-if><sc-for list="{{ b.items }}" as="c"><span onClick="{{ c.onClick }}" style="display:inline-flex;align-items:center;gap:7px;white-space:nowrap;cursor:{{ c.cur }}"><span style="{{ c.box }}"><span style="{{ c.mk }}">{{ c.mark }}</span></span><span>{{ c.t }}</span></span></sc-for></div></sc-if>
+            <sc-if value="{{ b.isTable }}"><div style="{{ b.grid }}"><sc-for list="{{ b.cells }}" as="c"><div onClick="{{ c.onClick }}" style="{{ c.st }}"><span style="{{ c.vst }}">{{ c.v }}</span></div></sc-for></div></sc-if>
+          </div>
+        </sc-for>
+        <sc-if value="{{ num }}"><div style="position:absolute;left:0;right:0;bottom:26px;text-align:center;font-size:11px">{{ num }}</div></sc-if>
+      </div>
+    </sc-if>
+    <sc-if value="{{ isPhoto }}"><div style="position:absolute;inset:0;pointer-events:none;background:linear-gradient(115deg,rgba(255,255,255,.32),rgba(255,255,255,0) 40%,rgba(60,40,10,.06) 70%,rgba(30,20,0,.2))"></div></sc-if>
+  </div>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props="{&quot;$preview&quot;:{&quot;width&quot;:640,&quot;height&quot;:900},&quot;page&quot;:{&quot;editor&quot;:&quot;enum&quot;,&quot;options&quot;:[&quot;zayav&quot;,&quot;ank1&quot;,&quot;ank2&quot;,&quot;ank3&quot;,&quot;akt&quot;],&quot;default&quot;:&quot;zayav&quot;,&quot;tsType&quot;:&quot;string&quot;},&quot;variant&quot;:{&quot;editor&quot;:&quot;enum&quot;,&quot;options&quot;:[&quot;word&quot;,&quot;photo&quot;,&quot;plain&quot;],&quot;default&quot;:&quot;word&quot;,&quot;tsType&quot;:&quot;string&quot;},&quot;zoom&quot;:{&quot;editor&quot;:&quot;float&quot;,&quot;default&quot;:1,&quot;min&quot;:0.2,&quot;max&quot;:2,&quot;step&quot;:0.05,&quot;tsType&quot;:&quot;number&quot;},&quot;fillable&quot;:{&quot;editor&quot;:&quot;boolean&quot;,&quot;default&quot;:false,&quot;tsType&quot;:&quot;boolean&quot;},&quot;noHand&quot;:{&quot;editor&quot;:&quot;boolean&quot;,&quot;default&quot;:false,&quot;tsType&quot;:&quot;boolean&quot;},&quot;yearShift&quot;:{&quot;editor&quot;:&quot;int&quot;,&quot;default&quot;:0,&quot;tsType&quot;:&quot;number&quot;},&quot;num&quot;:{&quot;editor&quot;:&quot;int&quot;,&quot;default&quot;:0,&quot;tsType&quot;:&quot;number&quot;},&quot;src&quot;:{&quot;editor&quot;:null,&quot;tsType&quot;:&quot;string&quot;},&quot;resolved&quot;:{&quot;editor&quot;:null,&quot;tsType&quot;:&quot;object&quot;},&quot;values&quot;:{&quot;editor&quot;:null,&quot;tsType&quot;:&quot;object&quot;},&quot;replaces&quot;:{&quot;editor&quot;:null,&quot;tsType&quot;:&quot;string[][]&quot;},&quot;hl&quot;:{&quot;editor&quot;:null,&quot;tsType&quot;:&quot;string&quot;},&quot;sig&quot;:{&quot;editor&quot;:null,&quot;tsType&quot;:&quot;string&quot;},&quot;onPick&quot;:{&quot;editor&quot;:null,&quot;tsType&quot;:&quot;(id:string)=&gt;void&quot;},&quot;blur&quot;:{&quot;editor&quot;:&quot;boolean&quot;,&quot;default&quot;:false,&quot;tsType&quot;:&quot;boolean&quot;},&quot;flat&quot;:{&quot;editor&quot;:&quot;boolean&quot;,&quot;default&quot;:false,&quot;tsType&quot;:&quot;boolean&quot;},&quot;straight&quot;:{&quot;editor&quot;:&quot;boolean&quot;,&quot;default&quot;:false,&quot;tsType&quot;:&quot;boolean&quot;}}">
+const T = t => ({ t });
+const F = (f, v, w, o) => ({ f, v, w, ...(o || {}) });
+const PAGES = {
+  zayav: [
+    { k: 'to', lines: [[T('Генеральному директору')], [T('ООО «Северный ветер»')], [T('И. П. Кравцову')], [T('от '), F('z_from', 'Соколовой Марии Андреевны', 252, { cap: '(фамилия, имя, отчество)' })], [F('z_addr', 'г. Томск, ул. Ленина, д. 12, кв. 5', 300, { cap: '(адрес)' })]], mb: 46 },
+    { k: 'title', t: 'ЗАЯВЛЕНИЕ', mb: 20 },
+    { k: 'p', segs: [T('Прошу принять меня на работу в отдел '), F('z_dep', 'продаж', 100), T(' на должность '), F('z_pos', 'менеджера по продажам', 190), T(' с '), F('z_start', '01.04.2024', 96), T(' на условиях полной занятости.')] },
+    { k: 'p', segs: [T('С правилами внутреннего трудового распорядка, положением об оплате труда и должностной инструкцией ознакомлена.')] },
+    { k: 'p', segs: [T('Приложение: копия диплома, СНИЛС, трудовая книжка.')], mb: 70 },
+    { k: 'sig', segs: [F('z_date', '28.03.2024', 104, { cap: '(дата)' }), F('z_sig', '', 120, { cap: '(подпись)', sig: 1 }), F('z_name', 'М. А. Соколова', 150, { cap: '(расшифровка подписи)' })] },
+  ],
+  ank1: [
+    { k: 'org', t: 'ООО «Северный ветер» · отдел кадров' },
+    { k: 'title', t: 'АНКЕТА СОИСКАТЕЛЯ', mb: 4 },
+    { k: 'sub', t: 'заполняется печатными буквами', mb: 24 },
+    { k: 'boxes', id: 'a_ln', label: 'Фамилия', n: 16, v: 'Соколова' },
+    { k: 'boxes', id: 'a_fn', label: 'Имя', n: 16, v: 'Мария' },
+    { k: 'boxes', id: 'a_mn', label: 'Отчество', n: 16, v: 'Андреевна' },
+    { k: 'boxes', id: 'a_bd', label: 'Дата рождения', n: 10, v: '14.07.1996', mb: 20 },
+    { k: 'checks', label: 'Пол:', items: [['мужской', 0], ['женский', 1]] },
+    { k: 'checks', label: 'Семейное положение:', items: [['не замужем / холост', 0], ['замужем / женат', 1], ['в разводе', 0]], mb: 18 },
+    { k: 'p', ind: 0, segs: [T('Телефон '), F('a_tel', '+7 913 555-12-40', 160), T('   e-mail '), F('a_mail', 'm.sokolova@mail.ru', 170)] },
+    { k: 'p', ind: 0, segs: [T('Желаемая должность '), F('a_pos', 'менеджер по продажам', 318)] },
+    { k: 'p', ind: 0, segs: [T('Ожидаемый доход '), F('a_sal', '75 000', 110, { doubt: 'd1' }), T(' руб. в месяц')], mb: 18 },
+    { k: 'checks', label: 'Готовность к командировкам:', items: [['да', 1], ['нет', 0], ['по договорённости', 0]] },
+    { k: 'checks', label: 'Как узнали о вакансии:', items: [['hh.ru', 1], ['от знакомых', 0], ['сайт компании', 0]] },
+  ],
+  ank2: [
+    { k: 'h', t: '1. Образование' },
+    { k: 'table', cols: '50px 50px minmax(0,1.6fr) minmax(0,1fr)', head: [{ v: 'Период обучения', cs: 2 }, { v: 'Учебное заведение', rs: 2 }, { v: 'Специальность', rs: 2 }, { v: 'с' }, { v: 'по' }], rows: [['2013', '2017', 'Томский государственный университет', 'Менеджмент'], ['2018', '2019', 'Учебный центр «1С: Обучение»', '1С: Управление торговлей']], mb: 24 },
+    { k: 'h', t: '2. Опыт работы' },
+    { k: 'table', cols: '44px 44px minmax(0,1.25fr) minmax(0,1fr) minmax(0,1fr)', head: [{ v: 'Период', cs: 2 }, { v: 'Организация', rs: 2 }, { v: 'Должность', rs: 2 }, { v: 'Причина ухода', rs: 2 }, { v: 'с' }, { v: 'по' }], rows: [['2019', '2021', 'ООО «Сибторг»', 'Менеджер', 'Переезд'], ['2021', '2024', { v: 'АО «ТомскСнаб»', d: 'd2' }, 'Старший менеджер', 'Карьерный рост']], mb: 24 },
+    { k: 'h', t: '3. Навыки' },
+    { k: 'checks', label: 'Программы:', items: [['Word', 1], ['Excel', 1], ['1С', 1], ['CRM', 1], ['Photoshop', 0]] },
+    { k: 'checks', label: 'Иностранный язык:', items: [['английский', 1], ['немецкий', 0], ['другой', 0]] },
+    { k: 'checks', label: 'Уровень:', items: [['начальный', 0], ['средний', 1], ['свободный', 0]] },
+  ],
+  ank3: [
+    { k: 'h', t: '4. Дополнительные сведения' },
+    { k: 'lines', label: 'Ваши сильные стороны:', rows: [['a_s1', 'умею договариваться, веду базу клиентов'], ['a_s2', 'в CRM, довожу сделки до оплаты']] },
+    { k: 'lines', label: 'Водительское удостоверение, стаж:', rows: [['a_dr', 'категория В, стаж 6 лет', 'd3']] },
+    { k: 'lines', label: 'Когда готовы приступить к работе:', rows: [['a_go', 'с 1 апреля 2024 г.']], mb: 20 },
+    { k: 'checks', label: '', items: [['Даю согласие на обработку персональных данных', 1]], mb: 6 },
+    { k: 'checks', label: '', items: [['Подтверждаю достоверность сведений', 1]], mb: 60 },
+    { k: 'sig', segs: [F('a_date', '28.03.2024', 104, { cap: '(дата)', hw: 1 }), F('a_sig', '', 120, { cap: '(подпись)', sig: 1 }), F('a_name', 'М. А. Соколова', 150, { cap: '(расшифровка)', hw: 1 })] },
+  ],
+  akt: [
+    { k: 'title', t: 'АКТ № 14', mb: 2 },
+    { k: 'sub2', t: 'сдачи-приёмки выполненных работ', mb: 18 },
+    { k: 'row', a: 'г. Томск', b: '«29» марта 2024 г.', mb: 14 },
+    { k: 'p', segs: [T('ООО «Северный ветер» (Заказчик) и ИП Гончаров А. В. (Исполнитель) составили настоящий акт о том, что Исполнитель выполнил, а Заказчик принял следующие работы:')], mb: 12 },
+    { k: 'table', cols: '24px minmax(0,2fr) 38px 46px 66px 72px', head: [{ v: '№' }, { v: 'Наименование работ' }, { v: 'Ед.' }, { v: 'Кол-во' }, { v: 'Цена, руб.' }, { v: 'Сумма, руб.' }], rows: [['1', 'Монтаж стеллажей на складе', 'шт.', '12', '1 800', '21 600'], ['2', 'Сборка рабочих столов', 'шт.', '8', '1 200', '9 600'], ['3', 'Прокладка кабеля', 'м', '40', '150', '6 000'], ['4', 'Вывоз упаковки', 'рейс', '2', '2 500', '5 000']], total: ['Итого', '42 200'], mb: 14 },
+    { k: 'p', segs: [T('Итого к оплате: сорок две тысячи двести рублей 00 копеек. НДС не облагается. Работы выполнены в срок и в полном объёме. Претензий по объёму, качеству и срокам Заказчик не имеет.')], mb: 56 },
+    { k: 'sig', segs: [T('Исполнитель '), F('k1', '', 120, { cap: '(подпись)', sig: 1 }), T('Заказчик '), F('k2', '', 120, { cap: '(подпись)' })] },
+  ],
+};
+
+class Component extends DCLogic {
+  renderVals() {
+    const p = this.props || {};
+    const v = p.variant || 'word', photo = v === 'photo', plain = v === 'plain';
+    const src = photo && p.src ? p.src : '';
+    const res = p.resolved || {}, vals = p.values || {}, shift = +p.yearShift || 0, reps = p.replaces || [];
+    const ink = photo ? '#2A2926' : '#111';
+    const tx = s => { let o = s == null ? '' : String(s); if (shift) o = o.replace(/\b(19|20)\d\d\b/g, m => String(+m + shift)); reps.forEach(r => { if (r && r[0]) o = o.split(r[0]).join(r[1] || ''); }); return o; };
+    const hand = { fontFamily: 'Caveat, cursive', fontSize: '19px', lineHeight: '1', color: '#22409A', fontWeight: 600 };
+    const ring = on => on ? '0 0 0 2px #fff, 0 0 0 4px #1F4EF5' : 'none';
+    const pick = id => e => { if (e) e.stopPropagation(); if (p.onPick) p.onPick(id); };
+    const valOf = f => { if (p.blank) return ''; if (f.hw && p.noHand && !photo) return ''; if (vals[f.f] != null) return vals[f.f]; if (f.doubt && res[f.doubt]) return res[f.doubt]; return f.v; };
+    const ed = !!p.editable && v === 'word'; let tn = 0;
+    const field = (id, v) => { if (p.onField) p.onField(id, v); };
+    const seg = (s, i, block) => {
+      if (s.f === undefined) { const id = (p.page || 'zayav') + ':t' + (tn++); const t = vals[id] != null ? vals[id] : tx(s.t); return { key: 't' + i, isT: true, isF: false, t, ed, ro: !ed, onBlur: e => { const v = e.target.innerText; if (v !== t) field(id, v); } }; }
+      let val = tx(valOf(s));
+      const open = !!s.doubt && !res[s.doubt] && !photo && !plain;
+      const sel = !!p.hl && (p.hl === s.f || p.hl === s.doubt);
+      const st = plain ? { margin: '0 4px' } : { display: block ? 'block' : 'inline-block', position: 'relative', minWidth: block ? 0 : s.w + 'px', minHeight: block ? '24px' : 0, borderBottom: '1px solid ' + ink, textAlign: block ? 'left' : 'center', padding: '0 4px', margin: block ? '0 0 8px' : '0 2px', lineHeight: '1.3', textIndent: 0, borderRadius: '2px', cursor: s.doubt ? 'pointer' : 'default',
+        background: open ? 'rgba(255,196,0,.42)' : (p.fillable && !val && !s.sig ? 'rgba(31,78,245,.09)' : 'transparent'), boxShadow: ring(sel), transition: 'background .3s, box-shadow .3s' };
+      let vst = photo ? { ...hand } : {};
+      if (photo && s.sig) { val = 'Соколова'; vst = { ...hand, fontSize: '24px', display: 'inline-block', transform: 'rotate(-7deg)', fontStyle: 'italic' }; }
+      if (ed && !s.sig) { st.width = block ? 'auto' : s.w + 'px'; st.background = 'rgba(31,78,245,.05)'; }
+      return { key: 'f' + i, isT: false, isF: true, edF: ed && !s.sig, roF: !(ed && !s.sig), raw: val, onChange: e => field(s.f, e.target.value), v: val || (plain ? '' : '\u00a0'), st, vst, cap: plain ? '' : (s.cap || ''), sig: s.sig && !photo && p.sig ? p.sig : '', onClick: s.doubt ? pick(s.doubt) : undefined };
+    };
+    const base = { fontSize: '13px', lineHeight: '1.55' };
+    const txt = (key, st, segs, mb, extra) => ({ key, isText: true, st: { ...base, ...st }, segs, wrap: { marginBottom: (mb == null ? 8 : mb) + 'px', ...(extra || {}) } });
+    const out = [];
+    (PAGES[p.page] || PAGES.zayav).forEach((b, bi) => {
+      const k = b.k, key = 'b' + bi;
+      const L = plain ? { textAlign: 'left', letterSpacing: 0 } : {};
+      if (k === 'to') { b.lines.forEach((ln, li) => out.push(txt(key + 'l' + li, plain ? {} : { width: '300px', marginLeft: 'auto' }, ln.map((s, i) => seg(s, i)), li === b.lines.length - 1 ? b.mb : (plain ? 2 : 8)))); return; }
+      if (k === 'title') { out.push(txt(key, { textAlign: 'center', fontWeight: 700, fontSize: '15px', letterSpacing: '.14em', ...L }, [T(b.t)], b.mb)); return; }
+      if (k === 'sub' || k === 'sub2') { out.push(txt(key, { textAlign: 'center', fontSize: k === 'sub' ? '11px' : '13px', fontStyle: k === 'sub' && !plain ? 'italic' : 'normal', ...L }, [T(b.t)], b.mb)); return; }
+      if (k === 'org') { out.push(txt(key, { textAlign: 'center', fontSize: '10px', letterSpacing: '.1em', textTransform: 'uppercase', ...L }, [T(b.t)], 14)); return; }
+      if (k === 'h') { out.push(txt(key, { fontWeight: 700 }, [T(b.t)], 8)); return; }
+      if (k === 'row') { out.push(txt(key, plain ? {} : { display: 'flex', justifyContent: 'space-between' }, [T(b.a), T(plain ? '  ' : ''), T(tx(b.b))], b.mb)); return; }
+      if (k === 'p') { out.push(txt(key, plain ? { fontSize: '12px' } : { textAlign: 'justify', textIndent: b.ind === 0 ? 0 : '30px' }, b.segs.map((s, i) => seg(s, i)), b.mb)); return; }
+      if (k === 'sig') { out.push(txt(key, plain ? {} : { display: 'flex', justifyContent: 'space-between', alignItems: 'flex-end', gap: '12px', paddingBottom: '16px' }, b.segs.map((s, i) => seg(s, i)), 0)); return; }
+      if (k === 'lines') {
+        out.push(txt(key + 'h', {}, [T(b.label)], 4));
+        b.rows.forEach((r, ri) => out.push(txt(key + 'r' + ri, {}, [seg({ f: r[0], v: r[1], doubt: r[2], hw: 1 }, 0, !plain)], ri === b.rows.length - 1 ? (b.mb == null ? 12 : b.mb) : 0)));
+        return;
+      }
+      if (k === 'boxes') {
+        const chars = p.blank ? [] : tx(vals[b.id] != null ? vals[b.id] : b.v).toUpperCase().split('');
+        if (plain) { out.push(txt(key, {}, [T(b.label + ' ' + chars.join(' '))], b.mb == null ? 6 : b.mb)); return; }
+        out.push({ key, isBoxes: true, label: b.label, ring: ring(p.hl === b.id), wrap: { marginBottom: (b.mb == null ? 7 : b.mb) + 'px' },
+          cells: Array.from({ length: b.n }, (_, i) => ({ key: 'c' + i, ch: chars[i] || '\u00a0', st: { width: '19px', height: '23px', border: '1px solid ' + ink, marginLeft: i ? '-1px' : 0, display: 'flex', alignItems: 'center', justifyContent: 'center', ...(photo ? { ...hand, fontSize: '18px' } : { fontSize: '13px' }) } })) });
+        return;
+      }
+      if (k === 'checks') {
+        if (plain) { out.push(txt(key, {}, [T((b.label ? b.label + ' ' : '') + b.items.map(x => x[0]).join('   '))], b.mb == null ? 6 : b.mb)); return; }
+        out.push({ key, isChecks: true, label: b.label, wrap: { marginBottom: (b.mb == null ? 8 : b.mb) + 'px', ...base },
+          items: b.items.map(([t, on0], i) => { const cid = (p.page || 'zayav') + ':c' + bi + '_' + i; const on = vals[cid] != null ? vals[cid] : on0; return { key: 'i' + i, t, cur: ed ? 'pointer' : 'default', onClick: ed ? () => field(cid, on ? 0 : 1) : undefined, mark: on && !p.blank ? '✓' : '', box: { width: '13px', height: '13px', border: '1px solid ' + ink, display: 'inline-flex', alignItems: 'center', justifyContent: 'center', flex: 'none' }, mk: photo ? { ...hand, fontSize: '21px', marginTop: '-7px', marginLeft: '3px' } : { fontSize: '11px', lineHeight: '1' } }; }) });
+        return;
+      }
+      if (k === 'table') {
+        const rows = b.rows.map(r => r.map(c => (typeof c === 'string' ? { v: c } : c)));
+        if (b.total) rows.push([{ v: b.total[0], cs: 5, b: 1 }, { v: b.total[1], b: 1 }]);
+        if (plain) {
+          out.push(txt(key + 'h', { fontSize: '12px' }, [T(b.head.map(h => h.v).join('  '))], 2));
+          rows.forEach((r, ri) => out.push(txt(key + 'r' + ri, { fontSize: '12px' }, [T(r.map(c => tx(c.v)).join('  '))], ri === rows.length - 1 ? (b.mb || 8) : 2)));
+          return;
+        }
+        const cell = (c, i, head) => {
+          const num = !head && /^[\d\s.,]+$/.test(c.v);
+          const open = c.d && !res[c.d] && !photo;
+          const just = head ? 'center' : num ? 'flex-end' : 'flex-start';
+          return { key: (head ? 'h' : 'c') + i, v: p.blank && !head && !c.b ? '\u00a0' : tx(c.d && res[c.d] ? res[c.d] : c.v), onClick: c.d ? pick(c.d) : undefined,
+            st: { gridColumn: c.cs ? 'span ' + c.cs : 'auto', gridRow: c.rs ? 'span ' + c.rs : 'auto', borderRight: '1px solid ' + ink, borderBottom: '1px solid ' + ink, padding: '4px 5px', fontSize: '11.5px', lineHeight: '1.3', fontWeight: head || c.b ? 700 : 400, display: 'flex', alignItems: 'center', justifyContent: just, textAlign: head ? 'center' : 'left', cursor: c.d ? 'pointer' : 'default', boxShadow: c.d && p.hl === c.d ? 'inset 0 0 0 2px #1F4EF5' : 'none' },
+            vst: { ...(photo && !head ? { ...hand, fontSize: '16px' } : {}), background: open ? 'rgba(255,196,0,.42)' : 'transparent', borderRadius: '2px', padding: open ? '0 2px' : 0 } };
+        };
+        const cells = b.head.map((h, i) => cell(h, i, true));
+        rows.forEach((r, ri) => r.forEach((c, ci) => cells.push(cell(c, ri * 10 + ci + 100, false))));
+        out.push({ key, isTable: true, wrap: { marginBottom: (b.mb || 10) + 'px' }, grid: { display: 'grid', gridTemplateColumns: b.cols, borderTop: '1px solid ' + ink, borderLeft: '1px solid ' + ink }, cells });
+      }
+    });
+    out.forEach(o => { o.isText = !!o.isText; o.isBoxes = !!o.isBoxes; o.isChecks = !!o.isChecks; o.isTable = !!o.isTable; });
+    return {
+      zoom: p.zoom || 1, src, noSrc: !src, isPhoto: photo, num: p.num ? String(p.num) : '', blocks: out,
+      frame: { width: '595px', height: '842px', position: 'relative', overflow: 'hidden', borderRadius: '2px', background: photo ? '#F2EEE5' : '#fff', boxShadow: p.flat ? 'none' : photo ? '0 22px 44px rgba(20,14,0,.3)' : '0 1px 2px rgba(11,16,36,.08), 0 12px 32px rgba(11,16,36,.08)', transform: photo && !p.straight ? 'rotate(-1.1deg)' : 'none', filter: p.blur ? 'blur(2.4px) brightness(.72)' : photo ? 'blur(.25px)' : 'none' },
+      inner: { position: 'absolute', inset: 0, padding: '56px 46px 50px 76px', fontFamily: plain ? 'Arial, Helvetica, sans-serif' : "'Times New Roman','PT Serif',Times,serif", color: ink },
+      capSt: { position: 'absolute', left: 0, right: 0, top: '100%', marginTop: '1px', fontSize: '9px', lineHeight: '1.2', textAlign: 'center', color: photo ? '#4A4740' : '#333', fontFamily: "'Times New Roman','PT Serif',serif", fontStyle: 'normal', fontWeight: 400, whiteSpace: 'nowrap', letterSpacing: 0 },
+    };
+  }
+}
+</script>
+</body>
+</html>

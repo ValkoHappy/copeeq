@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<title>Copeeq — фото документа в Word, таким же, как на бумаге</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&family=Caveat:wght@500;600;700&family=PT+Serif:ital,wght@0,400;0,700;1,400&display=swap">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Rounded:opsz,wght,FILL,GRAD@20..48,300..500,0..1,0&display=block">
+<script src="copeeq-data.js"></script>
+<script src="copeeq-icons.js"></script>
+<style>
+<!-- include: styles/copeeq.css -->
+</style>
+</helmet>
+<div style="min-height:100vh;background:#F9F8F8;color:#0B1024;font-family:Manrope,system-ui,sans-serif">
+<input type="file" multiple="" ref="{{ fileInput }}" onChange="{{ onFile }}" accept=".jpg,.jpeg,.png,.heic,.pdf" style="display:none">
+<input type="file" ref="{{ sigInput }}" onChange="{{ onSigFile }}" accept=".png,.jpg,.jpeg" style="display:none">
+
+<!-- include: layout/show-header.html -->
+
+<!-- include: screens/landing.html -->
+<sc-if value="{{ isShell }}" hint-placeholder-val="{{ false }}">
+<div class="cq-shell" style="display:flex;height:100vh;overflow:hidden;background:#F6F5F8">
+  <aside class="cq-sidebar" style="width:{{ sideW }};flex:none;background:#fff;border-right:1px solid #ECEAF0;display:flex;flex-direction:column;padding:16px 14px 14px;gap:{{ sideGap }};overflow:hidden;transition:width .2s ease">
+    <div style="display:flex;align-items:center;gap:8px">
+      <button onClick="{{ goHome }}" title="На сайт" style="display:flex;align-items:center;gap:9px;border:none;background:none;padding:0 4px;cursor:pointer;flex:1;min-width:0"><img src="assets/logo-mark.png" alt="" style="width:32px;height:34px;object-fit:contain;mix-blend-mode:multiply;flex:none"><sc-if value="{{ sideWide }}"><img src="assets/wordmark.png" alt="copeeq" style="height:21px;width:auto"></sc-if></button>
+      <sc-if value="{{ sideWide }}"><button onClick="{{ toggleSide }}" title="Свернуть меню" style="width:32px;height:32px;border:none;border-radius:9px;background:transparent;color:#5B6478;cursor:pointer;display:flex;align-items:center;justify-content:center;flex:none" style-hover="background:#F1F0F4"><span class="material-symbols-rounded" style="font-size:20px">left_panel_close</span></button></sc-if>
+    </div>
+    <sc-if value="{{ sideNarrow }}"><button onClick="{{ toggleSide }}" title="Развернуть меню" style="width:44px;height:36px;border:none;border-radius:10px;background:transparent;color:#5B6478;cursor:pointer;display:flex;align-items:center;justify-content:center" style-hover="background:#F1F0F4"><span class="material-symbols-rounded" style="font-size:20px">left_panel_open</span></button></sc-if>
+    <button onClick="{{ goNew }}" title="Новый документ" style="height:46px;min-height:46px;flex:none;border:none;border-radius:999px;background:#1F4EF5;color:#fff;font-size:14px;font-weight:800;cursor:pointer;display:flex;align-items:center;justify-content:center;gap:8px;box-shadow:0 8px 18px rgba(31,78,245,.24);white-space:nowrap" style-hover="background:#1740D8"><span class="material-symbols-rounded" style="font-size:21px">add</span><sc-if value="{{ sideWide }}"><span>Новый документ</span></sc-if></button>
+    <sc-for list="{{ sideGroups }}" as="g" hint-placeholder-count="2">
+      <div style="display:flex;flex-direction:column;gap:2px;flex:none">
+        <sc-if value="{{ g.showTitle }}"><span style="font-size:11px;font-weight:800;letter-spacing:.08em;text-transform:uppercase;color:#A3A0AE;padding:0 12px 6px">{{ g.title }}</span></sc-if>
+        <sc-for list="{{ g.items }}" as="it"><button onClick="{{ it.go }}" title="{{ it.label }}" style="display:flex;align-items:center;gap:12px;height:{{ itemH }};min-height:{{ itemH }};flex:none;padding:0 10px;border:none;border-radius:12px;background:{{ it.bg }};color:{{ it.fg }};font-size:14px;font-weight:700;cursor:pointer;text-align:left;white-space:nowrap;opacity:{{ it.op }}" style-hover="background:#F3F2F6"><img src="{{ it.ico }}" alt="" style="width:30px;height:30px;flex:none;margin:0 -3px;filter:{{ it.icoFilter }}"><sc-if value="{{ sideWide }}"><span style="flex:1;overflow:hidden;text-overflow:ellipsis">{{ it.label }}</span><sc-if value="{{ it.count }}"><span style="min-width:22px;height:20px;padding:0 6px;border-radius:10px;background:{{ it.cBg }};color:{{ it.cFg }};font-size:11px;font-weight:800;display:flex;align-items:center;justify-content:center">{{ it.count }}</span></sc-if></sc-if></button></sc-for>
+      </div>
+    </sc-for>
+    <sc-if value="{{ sideCur }}">
+      <div style="border-radius:16px;background:#F6F5F8;padding:10px;display:flex;flex-direction:column;gap:6px">
+        <span style="font-size:11px;font-weight:800;letter-spacing:.08em;text-transform:uppercase;color:#A3A0AE;padding:2px 4px">Открыт сейчас</span>
+        <span style="font-size:13px;font-weight:800;padding:0 4px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis">{{ sideCur.type }}</span>
+        <span style="font-size:12px;color:#5B6478;padding:0 4px">{{ sideCur.meta }}</span>
+        <div style="display:flex;gap:4px"><sc-for list="{{ sideCur.links }}" as="l"><button onClick="{{ l.go }}" style="flex:1;height:32px;border:none;border-radius:10px;background:{{ l.bg }};color:{{ l.fg }};font-size:12px;font-weight:800;cursor:pointer;display:flex;align-items:center;justify-content:center;gap:4px"><span class="material-symbols-rounded" style="font-size:16px">{{ l.icon }}</span>{{ l.label }}</button></sc-for></div>
+      </div>
+    </sc-if>
+    <sc-if value="{{ sideRecentShow }}">
+      <div style="display:flex;flex-direction:column;gap:2px">
+        <span style="font-size:11px;font-weight:800;letter-spacing:.08em;text-transform:uppercase;color:#A3A0AE;padding:0 12px 6px">Недавние</span>
+        <sc-for list="{{ sideRecent }}" as="d"><button onClick="{{ d.go }}" style="display:flex;align-items:center;gap:10px;padding:7px 12px;border:none;border-radius:10px;background:transparent;cursor:pointer;text-align:left" style-hover="background:#F3F2F6"><span style="width:8px;height:8px;flex:none;border-radius:4px;background:{{ d.dot }}"></span><span style="flex:1;min-width:0;display:flex;flex-direction:column"><span style="font-size:13px;font-weight:700;color:#0B1024;white-space:nowrap;overflow:hidden;text-overflow:ellipsis">{{ d.type }}</span><span style="font-size:11px;color:#8A90A2">{{ d.date }}</span></span></button></sc-for>
+      </div>
+    </sc-if>
+    <div style="flex:1"></div>
+    <sc-if value="{{ sideWide }}">
+      <sc-if value="{{ authed }}">
+        <div style="border-radius:18px;background:#0B1024;color:#fff;padding:14px;display:flex;flex-direction:column;gap:8px">
+          <span style="display:flex;align-items:center;gap:8px"><img src="{{ coinWhite }}" alt="" style="width:26px;height:26px"><span style="font-size:12px;font-weight:700;color:#9AA3BF">Баланс</span></span>
+          <span style="font-size:24px;font-weight:800;letter-spacing:-0.03em">{{ balLabel }}</span>
+          <div style="height:6px;border-radius:3px;background:#262D4D;overflow:hidden"><div style="height:100%;width:{{ balPct }};background:{{ balDot }};border-radius:3px"></div></div>
+          <button onClick="{{ goBilling }}" style="height:34px;border:none;border-radius:999px;background:#fff;color:#0B1024;font-size:13px;font-weight:800;cursor:pointer">Пополнить</button>
+        </div>
+      </sc-if>
+      <sc-if value="{{ guest }}">
+        <div style="border-radius:18px;background:#E6F6EC;padding:14px;display:flex;flex-direction:column;gap:8px">
+          <span style="font-size:14px;font-weight:800;color:#0B1024">25 кредитов бесплатно</span><span style="font-size:12px;line-height:1.4;color:#3A4156">Войдите — сохраним документы и начислим кредиты.</span>
+          <button onClick="{{ goLogin }}" style="height:36px;border:none;border-radius:999px;background:#15803D;color:#fff;font-size:13px;font-weight:800;cursor:pointer">Войти</button>
+        </div>
+      </sc-if>
+    </sc-if>
+  </aside>
+  <div style="flex:1;min-width:0;display:flex;flex-direction:column">
+    <div style="height:60px;flex:none;background:#fff;border-bottom:1px solid #ECEAF0;display:flex;align-items:center;gap:14px;padding:0 20px 0 24px">
+      <div style="display:flex;align-items:center;gap:8px;min-width:0;flex:1;font-size:14px;font-weight:700;white-space:nowrap;overflow:hidden">
+        <sc-for list="{{ crumbs }}" as="c" hint-placeholder-count="2"><sc-if value="{{ c.sep }}"><span class="material-symbols-rounded" style="font-size:18px;color:#C5C2CE">chevron_right</span></sc-if><button onClick="{{ c.go }}" style="border:none;background:none;padding:0;font-size:14px;font-weight:{{ c.fw }};color:{{ c.fg }};cursor:pointer;overflow:hidden;text-overflow:ellipsis">{{ c.label }}</button></sc-for>
+      </div>
+      <label style="display:flex;align-items:center;gap:8px;height:38px;padding:0 12px;border:1px solid #ECEAF0;border-radius:999px;background:#F6F5F8;width:240px;flex:none"><span class="material-symbols-rounded" style="font-size:19px;color:#8A90A2">search</span><input value="{{ topQ }}" onChange="{{ onTopQ }}" onKeyDown="{{ onTopKey }}" placeholder="Найти документ" style="flex:1;min-width:0;border:none;outline:none;background:transparent;font-size:13px;color:#0B1024"></label>
+      <sc-if value="{{ authed }}">
+        <button onClick="{{ goBilling }}" title="Баланс кредитов" style="position:relative;height:38px;padding:0 12px 0 8px;border:1px solid #E3E1EA;border-radius:999px;background:#fff;display:flex;align-items:center;gap:8px;cursor:pointer;font-size:13px;font-weight:800;color:#0B1024;white-space:nowrap;flex:none" style-hover="border-color:#1F4EF5"><img src="{{ coinChip }}" alt="" style="width:28px;height:28px;margin-left:-4px">{{ balLabel }}<sc-if value="{{ balDelta }}"><span style="position:absolute;right:-6px;top:-14px;height:22px;padding:0 8px;border-radius:11px;background:{{ balDeltaBg }};color:#fff;font-size:12px;font-weight:800;display:flex;align-items:center;animation:fadeUp .3s ease;pointer-events:none">{{ balDelta }}</span></sc-if></button>
+        <button onClick="{{ goAccount }}" title="Профиль" style="width:38px;height:38px;border:none;border-radius:19px;background:#0B1024;color:#fff;font-size:13px;font-weight:800;cursor:pointer;flex:none">{{ initials }}</button>
+      </sc-if>
+      <sc-if value="{{ guest }}"><button onClick="{{ goLogin }}" style="height:38px;padding:0 16px;border:1px solid #E3E1EA;border-radius:999px;background:#fff;color:#0B1024;font-size:13px;font-weight:800;cursor:pointer;flex:none">Войти</button></sc-if>
+    </div>
+    <div style="flex:1;min-height:0;overflow:{{ mainOverflow }}">
+<!-- include: screens/dash.html -->
+<!-- include: screens/editor.html -->
+<!-- include: screens/new.html -->
+
+<!-- include: screens/processing.html -->
+<!-- include: screens/result.html --></div>
+      <div style="border:1px solid #ECEAF0;border-radius:18px;overflow:hidden;flex:none">
+        <button onClick="{{ sEdit.toggle }}" style="width:100%;display:flex;align-items:center;gap:10px;padding:10px 12px;border:none;background:#fff;cursor:pointer;text-align:left"><img src="{{ sEdit.ico }}" alt="" style="width:34px;height:34px;flex:none;margin:-4px"><span style="flex:1;min-width:0;display:flex;flex-direction:column"><span style="font-size:14px;font-weight:800;color:#0B1024">Правки</span><span style="font-size:12px;font-weight:700;color:{{ sEdit.fg }};white-space:nowrap;overflow:hidden;text-overflow:ellipsis">{{ sEdit.status }}</span></span><span class="material-symbols-rounded" style="font-size:22px;color:#8A90A2">{{ sEdit.chev }}</span></button>
+        <sc-if value="{{ sEdit.open }}"><div style="padding:4px 12px 14px;display:flex;flex-direction:column;gap:12px">
+        <div style="display:flex;flex-direction:column;gap:8px">
+          <span style="font-size:14px;font-weight:800">Что поменять?</span>
+          <div style="display:flex;gap:6px"><input value="{{ cur.cmd }}" onChange="{{ onCmd }}" onKeyDown="{{ onCmdKey }}" placeholder="замени 2024 на 2025" style="flex:1;min-width:0;height:42px;border:1px solid #D9D6DF;border-radius:12px;padding:0 12px;font-size:14px;outline:none" style-focus="border-color:#1F4EF5;box-shadow:0 0 0 3px rgba(31,78,245,.14)"><button onClick="{{ applyCmd }}" style="height:42px;padding:0 14px;border:none;border-radius:12px;background:#1F4EF5;color:#fff;font-size:13px;font-weight:800;cursor:pointer">Применить</button></div>
+          <div style="display:flex;gap:6px;flex-wrap:wrap"><sc-for list="{{ cmdHints }}" as="h"><button onClick="{{ h.onClick }}" style="height:30px;padding:0 10px;border-radius:999px;border:1px dashed #C9C6D2;background:#fff;color:#4A5368;font-size:12px;font-weight:700;cursor:pointer;white-space:nowrap">{{ h.t }}</button></sc-for></div>
+          <sc-for list="{{ repList }}" as="r"><div style="display:flex;align-items:center;gap:8px;padding:8px 10px;border-radius:10px;background:#F1F5FF;font-size:13px"><span class="material-symbols-rounded" style="font-size:18px;color:#1F4EF5">find_replace</span><span style="flex:1">«{{ r.a }}» → «{{ r.b }}»</span><button onClick="{{ r.onRemove }}" title="Отменить" style="border:none;background:none;color:#5B6478;cursor:pointer;display:flex"><span class="material-symbols-rounded" style="font-size:18px">close</span></button></div></sc-for>
+        </div>
+        <div style="display:flex;align-items:center;gap:12px;padding:14px;border-radius:16px;background:#F6F5F8">
+          <span style="flex:1;display:flex;flex-direction:column;gap:2px"><span style="font-size:14px;font-weight:800">Сдвинуть годы</span><span style="font-size:12px;color:#5B6478">Во всех датах документа</span></span>
+          <button onClick="{{ yearDown }}" title="На год назад" style="width:34px;height:34px;border:1px solid #D9D6DF;border-radius:17px;background:#fff;cursor:pointer;display:flex;align-items:center;justify-content:center"><span class="material-symbols-rounded" style="font-size:18px">remove</span></button>
+          <span style="min-width:30px;text-align:center;font-size:15px;font-weight:800">{{ shiftLabel }}</span>
+          <button onClick="{{ yearUp }}" title="На год вперёд" style="width:34px;height:34px;border:1px solid #D9D6DF;border-radius:17px;background:#fff;cursor:pointer;display:flex;align-items:center;justify-content:center"><span class="material-symbols-rounded" style="font-size:18px">add</span></button>
+        </div>
+        <sc-if value="{{ hasFields }}">
+          <div style="display:flex;flex-direction:column;gap:8px">
+            <div style="display:flex;align-items:center;gap:8px"><span style="font-size:14px;font-weight:800;flex:1">Поля для заполнения</span><button onClick="{{ toggleFill }}" style="border:none;background:none;color:#1F4EF5;font-size:12px;font-weight:800;cursor:pointer">{{ fillLabel }}</button></div>
+            <sc-for list="{{ fieldRows }}" as="f"><label style="display:flex;flex-direction:column;gap:4px;font-size:12px;font-weight:700;color:#5B6478">{{ f.label }} · стр. {{ f.pn }}<input value="{{ f.v }}" onChange="{{ f.onChange }}" onFocus="{{ f.onFocus }}" style="height:40px;border:1px solid #D9D6DF;border-radius:10px;padding:0 10px;font-size:14px;color:#0B1024;outline:none;font-weight:500" style-focus="border-color:#1F4EF5"></label></sc-for>
+          </div>
+        </sc-if>
+        <div style="display:flex;flex-direction:column;gap:8px">
+          <span style="font-size:14px;font-weight:800">Режим оформления</span>
+          <div style="display:flex;padding:3px;background:#F1F0F4;border-radius:999px;gap:3px"><sc-for list="{{ rModes }}" as="m"><button onClick="{{ m.onClick }}" style="flex:1;height:34px;border:none;border-radius:999px;background:{{ m.bg }};color:{{ m.fg }};font-size:13px;font-weight:800;cursor:pointer;box-shadow:{{ m.shadow }}">{{ m.label }}</button></sc-for></div>
+          <span style="font-size:12px;color:#5B6478">Смена режима и стандарта — бесплатно.</span>
+        </div>
+      </sc-if>
+
+      </div></sc-if></div>
+      <div style="border:1px solid #ECEAF0;border-radius:18px;overflow:hidden;flex:none">
+        <button onClick="{{ sSig.toggle }}" style="width:100%;display:flex;align-items:center;gap:10px;padding:10px 12px;border:none;background:#fff;cursor:pointer;text-align:left"><img src="{{ sSig.ico }}" alt="" style="width:34px;height:34px;flex:none;margin:-4px"><span style="flex:1;min-width:0;display:flex;flex-direction:column"><span style="font-size:14px;font-weight:800;color:#0B1024">Подпись и вложения</span><span style="font-size:12px;font-weight:700;color:{{ sSig.fg }};white-space:nowrap;overflow:hidden;text-overflow:ellipsis">{{ sSig.status }}</span></span><span class="material-symbols-rounded" style="font-size:22px;color:#8A90A2">{{ sSig.chev }}</span></button>
+        <sc-if value="{{ sSig.open }}"><div style="padding:4px 12px 14px;display:flex;flex-direction:column;gap:12px">
+        <sc-if value="{{ hasSigLines }}">
+          <sc-if value="{{ cur.sig }}">
+            <div style="border:1px solid #ECEAF0;border-radius:18px;padding:14px;display:flex;flex-direction:column;gap:12px">
+              <div style="height:90px;border-radius:12px;background:#F6F5F8;display:flex;align-items:center;justify-content:center"><img src="{{ cur.sig }}" alt="Подпись" style="max-height:76px;max-width:90%"></div>
+              <div style="display:flex;flex-direction:column;gap:6px"><span style="font-size:12px;font-weight:700;color:#5B6478">На какой линии</span><sc-for list="{{ sigLineBtns }}" as="l"><button onClick="{{ l.onClick }}" style="display:flex;align-items:center;gap:10px;padding:10px 12px;border:1.5px solid {{ l.border }};border-radius:12px;background:#fff;cursor:pointer;font-size:13px;font-weight:700;color:#0B1024;text-align:left"><span style="width:16px;height:16px;flex:none;border-radius:8px;border:{{ l.dot }}"></span>{{ l.label }}</button></sc-for></div>
+              <div style="display:flex;gap:8px"><button onClick="{{ openSig }}" style="flex:1;height:38px;border:1px solid #D9D6DF;border-radius:999px;background:#fff;font-size:13px;font-weight:800;cursor:pointer">Заменить</button><button onClick="{{ removeSig }}" style="flex:1;height:38px;border:1px solid #F3C9CC;border-radius:999px;background:#fff;color:#C2272D;font-size:13px;font-weight:800;cursor:pointer">Убрать</button></div>
+            </div>
+          </sc-if>
+          <sc-if value="{{ noSig }}">
+            <div style="display:flex;flex-direction:column;gap:8px">
+              <span style="font-size:14px;line-height:1.5;color:#4A5368">Поставим вашу подпись на линию «(подпись)». Нарисуйте её или загрузите фото на белом листе.</span>
+              <button onClick="{{ openSig }}" style="height:46px;border:none;border-radius:999px;background:#1F4EF5;color:#fff;font-size:14px;font-weight:800;cursor:pointer;display:flex;align-items:center;justify-content:center;gap:8px"><span class="material-symbols-rounded" style="font-size:20px">draw</span>Нарисовать подпись</button>
+              <button onClick="{{ uploadSig }}" style="height:46px;border:1px solid #D9D6DF;border-radius:999px;background:#fff;color:#0B1024;font-size:14px;font-weight:800;cursor:pointer;display:flex;align-items:center;justify-content:center;gap:8px"><span class="material-symbols-rounded" style="font-size:20px">upload</span>Загрузить картинку</button>
+              <sc-if value="{{ savedSig }}"><button onClick="{{ useSavedSig }}" style="height:46px;border:1px solid #D9D6DF;border-radius:999px;background:#fff;color:#0B1024;font-size:14px;font-weight:800;cursor:pointer">Взять сохранённую</button></sc-if>
+            </div>
+          </sc-if>
+        </sc-if>
+        <sc-if value="{{ noSigLines }}"><span style="font-size:14px;line-height:1.5;color:#5B6478">В этом документе нет линии для подписи.</span></sc-if>
+        <div style="display:flex;gap:12px;align-items:flex-start;padding:14px;border-radius:16px;background:#F6F5F8"><span style="flex:1;display:flex;flex-direction:column;gap:2px"><span style="font-size:14px;font-weight:800">Приложить скан</span><span style="font-size:12px;line-height:1.4;color:#5B6478">Добавим исходное фото последней страницей в PDF</span></span><button onClick="{{ toggleAttach }}" title="Приложить скан" style="width:42px;height:24px;flex:none;border-radius:12px;border:none;background:{{ attachTg.track }};position:relative;cursor:pointer;padding:0"><span style="position:absolute;top:3px;left:{{ attachTg.knob }};width:18px;height:18px;border-radius:9px;background:#fff;transition:left .15s"></span></button></div>
+      </div></sc-if></div>
+    </div>
+
+    <div style="border-top:1px solid #ECEAF0;padding:16px 20px 18px;display:flex;flex-direction:column;gap:10px;background:#FCFCFD">
+      <div style="display:flex;align-items:center;gap:8px;font-size:13px"><img src="{{ dlInfo.img }}" alt="" style="width:30px;height:30px;flex:none;margin:-6px -4px -6px -6px"><span style="flex:1;line-height:1.4;color:#3A4156">{{ dlInfo.text }}</span></div>
+      <button onClick="{{ dlDocx }}" style="height:52px;border:none;border-radius:999px;background:#1F4EF5;color:#fff;font-size:16px;font-weight:800;cursor:pointer;display:flex;align-items:center;justify-content:center;gap:10px;box-shadow:0 10px 24px rgba(31,78,245,.26)" style-hover="background:#1740D8"><span class="material-symbols-rounded" style="font-size:22px">download</span>Скачать Word</button>
+      <div style="display:flex;gap:6px">
+        <sc-for list="{{ dlMore }}" as="d" hint-placeholder-count="3"><button onClick="{{ d.onClick }}" style="flex:1;height:38px;border:1px solid #D9D6DF;border-radius:999px;background:#fff;color:#0B1024;font-size:12px;font-weight:800;cursor:pointer;white-space:nowrap;padding:0 6px" style-hover="border-color:#1F4EF5">{{ d.label }}</button></sc-for>
+      </div>
+      <sc-if value="{{ canBad }}"><button onClick="{{ openBad }}" style="border:none;background:none;color:#5B6478;font-size:12px;font-weight:700;cursor:pointer;padding:2px" style-hover="color:#C2272D">Получилось плохо? Вернём кредиты</button></sc-if>
+    </div>
+  </aside>
+</div>
+</sc-if>
+<!-- include: screens/docs.html -->
+
+<!-- include: screens/billing.html -->
+
+<!-- include: screens/account.html -->
+<!-- include: screens/examples.html -->
+
+<!-- include: screens/forms.html -->
+
+<!-- include: screens/form.html -->
+
+<!-- include: screens/faq.html -->
+    </div>
+  </div>
+</div>
+</sc-if>
+<!-- include: screens/pricing.html -->
+
+<!-- include: screens/seo.html -->
+
+<!-- include: screens/chistovik.html -->
+
+<!-- include: screens/students.html -->
+
+<!-- include: screens/security.html -->
+
+<!-- include: screens/business.html -->
+
+<!-- include: screens/legal.html -->
+
+<!-- include: screens/pay-result.html -->
+
+<!-- include: screens/notfound.html -->
+
+<!-- include: layout/show-footer.html -->
+
+<!-- include: layout/modal-show.html -->
+<!-- include: layout/toast.html -->
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props="{&quot;startScreen&quot;:{&quot;editor&quot;:&quot;enum&quot;,&quot;options&quot;:[&quot;landing&quot;,&quot;dash&quot;,&quot;new&quot;,&quot;processing&quot;,&quot;result&quot;,&quot;editor&quot;,&quot;docs&quot;,&quot;billing&quot;,&quot;account&quot;,&quot;login&quot;,&quot;pricing&quot;,&quot;examples&quot;,&quot;forms&quot;,&quot;form&quot;,&quot;faq&quot;,&quot;business&quot;,&quot;chistovik&quot;,&quot;students&quot;,&quot;security&quot;,&quot;seo&quot;,&quot;legal&quot;,&quot;payok&quot;,&quot;payfail&quot;,&quot;notfound&quot;],&quot;default&quot;:&quot;landing&quot;,&quot;tsType&quot;:&quot;string&quot;,&quot;section&quot;:&quot;Прототип&quot;},&quot;signedIn&quot;:{&quot;editor&quot;:&quot;boolean&quot;,&quot;default&quot;:false,&quot;tsType&quot;:&quot;boolean&quot;,&quot;section&quot;:&quot;Прототип&quot;},&quot;balance&quot;:{&quot;editor&quot;:&quot;int&quot;,&quot;default&quot;:10,&quot;min&quot;:0,&quot;max&quot;:300,&quot;tsType&quot;:&quot;number&quot;,&quot;section&quot;:&quot;Прототип&quot;}}">
+/* application-bundle */
+</script>
+</body>
+</html>

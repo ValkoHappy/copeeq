@@ -1,0 +1,19 @@
+# Base for organisational documents (ГОСТ Р 7.0.97-2025, in force since 18.08.2025).
+# TODO(verify): page margins and sizes against the official text of the standard (RESEARCH.md §8).
+id: base
+abstract: true
+title: Организационно-распорядительный документ
+page:
+  width_mm: 210
+  height_mm: 297
+  margins: {top_mm: 20, bottom_mm: 20, left_mm: 20, right_mm: 10}
+list_indent_mm: 10
+styles:
+  body:       {size_pt: 14, align: justify, first_line_indent_mm: 12.5, line_spacing: 1.15}
+  title:      {size_pt: 14, align: center, bold: true, all_caps: true, space_after_pt: 6}
+  subtitle:   {size_pt: 14, align: center, line_spacing: 1.0, space_after_pt: 12}
+  list_item:  {size_pt: 14, align: justify, first_line_indent_mm: 12.5, line_spacing: 1.15}
+  note:       {size_pt: 12, align: justify, line_spacing: 1.0}
+  table:      {size_pt: 12, align: left, line_spacing: 1.0}
+  requisites: {size_pt: 14, align: left, left_indent_mm: 95, line_spacing: 1.0}
+  line:       {size_pt: 14, align: left, line_spacing: 1.15}

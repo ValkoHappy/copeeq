@@ -1,0 +1,25 @@
+<sc-if value="{{ showFooter }}" hint-placeholder-val="{{ true }}">
+<footer style="background:#0B1024;color:#C9CEDD;margin-top:40px">
+  <div style="max-width:1240px;margin:0 auto;padding:64px 40px 36px;display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:36px">
+    <div style="display:flex;flex-direction:column;gap:14px;grid-column:span 1">
+      <img src="assets/logo-dark.png" alt="copeeq" style="height:30px;width:auto;align-self:flex-start">
+      <span style="font-size:14px;line-height:1.55">Фото и сканы — в Word, таким же, как на бумаге.</span>
+      <a href="mailto:support@copeeq.ru" style="color:#fff;font-weight:700;font-size:14px">support@copeeq.ru</a>
+    </div>
+    <sc-for list="{{ footCols }}" as="c" hint-placeholder-count="3">
+      <div style="display:flex;flex-direction:column;gap:10px">
+        <span style="font-size:12px;font-weight:800;letter-spacing:.08em;text-transform:uppercase;color:#7D86A3">{{ c.title }}</span>
+        <sc-for list="{{ c.items }}" as="i"><button onClick="{{ i.go }}" style="border:none;background:none;padding:0;text-align:left;font-size:14px;color:#C9CEDD;cursor:pointer" style-hover="color:#fff">{{ i.label }}</button></sc-for>
+      </div>
+    </sc-for>
+  </div>
+  <div style="max-width:1240px;margin:0 auto;padding:22px 40px 40px;border-top:1px solid #1F2540;display:flex;align-items:center;gap:14px 24px;flex-wrap:wrap;font-size:12px;color:#7D86A3">
+    <span>© 2026 Copeeq · [Наименование ИП/ООО] · ОГРН [—] · ИНН [—]</span>
+    <div style="margin-left:auto;display:flex;gap:8px">
+      <span style="height:26px;padding:0 10px;border-radius:6px;background:#fff;color:#0F7B3E;font-size:12px;font-weight:800;display:flex;align-items:center;letter-spacing:.04em">МИР</span>
+      <span style="height:26px;padding:0 10px;border-radius:6px;background:#fff;color:#5B2D90;font-size:12px;font-weight:800;display:flex;align-items:center">СБП</span>
+      <span style="height:26px;padding:0 10px;border-radius:6px;background:#fff;color:#21A038;font-size:12px;font-weight:800;display:flex;align-items:center">SberPay</span>
+    </div>
+  </div>
+</footer>
+</sc-if>

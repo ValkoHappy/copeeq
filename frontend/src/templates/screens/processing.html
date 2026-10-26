@@ -1,0 +1,153 @@
+<sc-if value="{{ isProcessing }}" hint-placeholder-val="{{ false }}">
+<div data-screen-label="Обработка" style="height:100%;box-sizing:border-box;padding:20px 24px;display:grid;grid-template-columns:330px minmax(0,1fr);gap:20px;overflow:hidden">
+  <div style="min-height:0;display:flex;flex-direction:column;gap:14px">
+    <div style="display:flex;flex-direction:column;gap:6px;flex:none">
+      <span style="display:flex;align-items:center;gap:6px;font-size:13px;font-weight:700;color:{{ procKickFg }};white-space:nowrap"><span class="material-symbols-rounded" style="font-size:18px">{{ procKickIcon }}</span>{{ procKick }}</span>
+      <h1 style="margin:0;font-size:27px;line-height:1.1;font-weight:800;letter-spacing:-0.035em;white-space:nowrap;overflow:hidden;text-overflow:ellipsis">{{ procTitle }}</h1>
+      <p style="margin:0;font-size:14px;line-height:1.45;color:#4A5368;height:40px;overflow:hidden">{{ procSub }}</p>
+    </div>
+    <div style="flex:none;background:#fff;border-radius:20px;padding:14px 16px;display:flex;flex-direction:column;gap:10px">
+      <div style="display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:8px">
+        <div style="display:flex;flex-direction:column;gap:2px"><span style="font-size:12px;font-weight:700;color:#5B6478">Прошло</span><span style="font-size:24px;font-weight:800;letter-spacing:-0.02em;font-variant-numeric:tabular-nums">{{ procElapsed }}</span></div>
+        <div style="display:flex;flex-direction:column;gap:2px"><span style="font-size:12px;font-weight:700;color:#5B6478">Осталось</span><span style="font-size:24px;font-weight:800;letter-spacing:-0.02em;font-variant-numeric:tabular-nums;color:#1F4EF5">{{ procLeft }}</span></div>
+        <div style="display:flex;flex-direction:column;gap:2px;opacity:{{ procSerialOp }}"><span style="font-size:12px;font-weight:700;color:#5B6478;white-space:nowrap">В один поток</span><span style="font-size:24px;font-weight:800;letter-spacing:-0.02em;font-variant-numeric:tabular-nums;color:#A3A9B8;text-decoration:line-through;text-decoration-thickness:2px">{{ procSerial }}</span></div>
+      </div>
+      <div style="height:6px;border-radius:3px;background:#E6E4EC;overflow:hidden"><div style="height:100%;width:{{ procPct }};background:{{ procBar }};border-radius:3px;transition:width .25s linear"></div></div>
+    </div>
+    <div style="flex:none;background:#fff;border-radius:20px;padding:8px;display:flex;flex-direction:column;gap:2px">
+      <sc-for list="{{ procRail }}" as="r" hint-placeholder-count="4">
+        <div style="height:38px;padding:0 10px;border-radius:12px;background:{{ r.bg }};color:{{ r.fg }};display:flex;align-items:center;gap:10px;font-size:14px;font-weight:800;transition:background .3s,color .3s"><span class="material-symbols-rounded" style="font-size:20px">{{ r.icon }}</span><span style="flex:1">{{ r.t }}</span><sc-if value="{{ r.on }}"><span style="width:16px;height:16px;border-radius:8px;border:2.5px solid rgba(255,255,255,.35);border-top-color:#fff;animation:spin .8s linear infinite"></span></sc-if></div>
+      </sc-for>
+    </div>
+    <div style="flex:1;min-height:0;background:#fff;border-radius:20px;padding:12px 8px 8px;display:flex;flex-direction:column;gap:6px">
+      <div style="display:flex;align-items:center;gap:8px;padding:0 8px;font-size:13px;font-weight:800;flex:none">Страницы<span style="margin-left:auto;font-size:12px;font-weight:700;color:#1F4EF5">{{ procStreamsLabel }}</span></div>
+      <div style="flex:1;min-height:0;overflow:auto;display:flex;flex-direction:column;gap:2px">
+        <sc-for list="{{ procCards }}" as="c" hint-placeholder-count="3">
+          <div style="flex:none;display:flex;align-items:center;gap:10px;padding:6px 8px;border-radius:12px;background:{{ c.rowBg }};transition:background .3s">
+            <div style="width:30px;height:42px;flex:none;border-radius:3px;overflow:hidden;background:#ECEBEF;box-shadow:0 0 0 1px #E3E1EA"><dc-import name="DocSheet" page="{{ c.page }}" variant="{{ c.variant }}" zoom="0.05" straight="{{ true }}" blur="{{ c.blur }}" hint-size="30px,42px"></dc-import></div>
+            <div style="flex:1;min-width:0;display:flex;flex-direction:column;gap:5px">
+              <div style="display:flex;align-items:center;justify-content:space-between;gap:6px"><span style="font-size:13px;font-weight:800">{{ c.label }}</span><span style="font-size:12px;font-weight:700;color:{{ c.fg }};white-space:nowrap">{{ c.status }}</span></div>
+              <div style="height:4px;border-radius:2px;background:#E6E4EC;overflow:hidden"><div style="height:100%;width:{{ c.w }};background:{{ c.bar }};border-radius:2px;transition:width .25s linear"></div></div>
+            </div>
+            <span style="width:20px;height:20px;flex:none;display:flex;align-items:center;justify-content:center">
+              <sc-if value="{{ c.done }}"><span style="width:20px;height:20px;border-radius:10px;background:#16A34A;color:#fff;display:flex;align-items:center;justify-content:center;animation:pop .3s ease both"><span class="material-symbols-rounded" style="font-size:14px">check</span></span></sc-if>
+              <sc-if value="{{ c.active }}"><span style="width:18px;height:18px;border-radius:9px;border:2.5px solid #DCE4FB;border-top-color:#1F4EF5;animation:spin .8s linear infinite"></span></sc-if>
+              <sc-if value="{{ c.failed }}"><span class="material-symbols-rounded" style="font-size:20px;color:#DC2626">error</span></sc-if>
+            </span>
+          </div>
+        </sc-for>
+      </div>
+    </div>
+  </div>
+
+  <div ref="{{ stageRef }}" style="position:relative;min-height:0;min-width:0;background:#ECEBEF;border-radius:28px;overflow:hidden;display:flex;align-items:center;justify-content:center">
+    <div style="zoom:{{ stageZoom }};display:flex;align-items:center;justify-content:center">
+    <sc-for list="{{ stage }}" as="g" hint-placeholder-count="1">
+      <div style="display:flex;align-items:center;justify-content:center;gap:0;flex-wrap:nowrap;">
+        <div style="display:flex;flex-direction:column;align-items:center;gap:10px">
+          <span style="height:26px;padding:0 12px;border-radius:13px;background:rgba(11,16,36,.78);color:#fff;font-size:12px;font-weight:800;display:flex;align-items:center">Фото · стр. {{ g.n }}</span>
+          <div style="position:relative;width:372px;height:526px">
+            <div style="position:relative;width:372px;height:526px;flex:none;border-radius:4px;overflow:hidden;background:#fff;box-shadow:0 1px 2px rgba(11,16,36,.06),0 14px 34px rgba(11,16,36,.12)">
+              <sc-if value="{{ procSrc }}"><img src="{{ procSrc }}" alt="" style="width:372px;height:526px;object-fit:cover;display:block"></sc-if>
+              <sc-if value="{{ procNoSrc }}"><dc-import name="DocSheet" page="{{ procPage.page }}" variant="photo" zoom="0.62" straight="{{ true }}" blur="{{ procPage.blur }}" hint-size="372px,526px"></dc-import></sc-if>
+              <sc-if value="{{ g.isCheck }}"><div style="position:absolute;left:0;right:0;height:3px;background:#1F4EF5;box-shadow:0 0 18px 6px rgba(31,78,245,.3);animation:sweep 5s linear {{ g.delay }} both"></div></sc-if>
+              <sc-if value="{{ g.isStudy }}"><div style="position:absolute;inset:0;background:rgba(11,16,36,.12);pointer-events:none"></div></sc-if>
+            </div>
+            <sc-if value="{{ g.isStudy }}">
+              <div style="position:absolute;left:0;top:0;width:120px;height:120px;animation:lens 6s ease-in-out {{ g.delay }} both;z-index:3;pointer-events:none">
+                <div style="position:absolute;left:96px;top:96px;width:16px;height:58px;border-radius:8px;background:#0B1024;transform:rotate(-45deg);transform-origin:8px 0;box-shadow:0 6px 14px rgba(11,16,36,.3)"></div>
+                <div style="position:absolute;inset:0;border-radius:60px;border:4px solid #fff;box-shadow:0 0 0 2px #1F4EF5,0 18px 40px rgba(11,16,36,.35);overflow:hidden;background:#fff">
+                  <div style="position:absolute;left:0;top:0;animation:lensIn 6s ease-in-out {{ g.delay }} both">
+                    <sc-if value="{{ procSrc }}"><img src="{{ procSrc }}" alt="" style="width:595px;height:842px;object-fit:cover;display:block"></sc-if>
+                    <sc-if value="{{ procNoSrc }}"><dc-import name="DocSheet" page="{{ procPage.page }}" variant="photo" zoom="0.992" straight="{{ true }}" hint-size="595px,842px"></dc-import></sc-if>
+                  </div>
+                  <div style="position:absolute;inset:0;border-radius:56px;background:radial-gradient(circle at 30% 25%,rgba(255,255,255,.45),rgba(255,255,255,0) 45%)"></div>
+                </div>
+              </div>
+              <sc-for list="{{ g.chips }}" as="c"><span style="position:absolute;left:{{ c.x }};top:{{ c.y }};z-index:4;height:28px;padding:0 11px 0 8px;border-radius:14px;background:#fff;color:#0B1024;font-size:12px;font-weight:800;display:flex;align-items:center;gap:5px;box-shadow:0 8px 20px rgba(11,16,36,.18);animation:pop .3s ease {{ c.delay }} both"><span class="material-symbols-rounded" style="font-size:16px;color:#1F4EF5">{{ c.icon }}</span>{{ c.t }}</span></sc-for>
+            </sc-if>
+          </div>
+        </div>
+
+        <div style="width:128px;flex:none;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:12px;align-self:stretch;padding-top:36px">
+          <sc-if value="{{ g.isStudy }}">
+            <span style="width:56px;height:56px;border-radius:28px;background:#fff;color:#1F4EF5;display:flex;align-items:center;justify-content:center;animation:pulse 1.2s ease-in-out infinite"><span class="material-symbols-rounded" style="font-size:28px">search</span></span>
+            <span style="font-size:13px;font-weight:800;color:#5B6478">Читаем</span>
+          </sc-if>
+          <sc-if value="{{ g.isTransfer }}">
+            <div style="position:relative;width:128px;height:190px">
+              <sc-for list="{{ g.fly }}" as="f"><span style="position:absolute;left:22px;top:{{ f.y }};height:30px;padding:0 10px 0 8px;border-radius:15px;background:#1F4EF5;color:#fff;font-size:12px;font-weight:800;display:flex;align-items:center;gap:5px;white-space:nowrap;box-shadow:0 8px 18px rgba(31,78,245,.35);animation:fly 3.2s linear {{ f.delay }} infinite"><span class="material-symbols-rounded" style="font-size:15px">{{ f.icon }}</span>{{ f.t }}</span></sc-for>
+            </div>
+            <span style="font-size:13px;font-weight:800;color:#1F4EF5">{{ g.flowLabel }}</span>
+          </sc-if>
+          <sc-if value="{{ g.isCheck }}">
+            <span style="width:56px;height:56px;border-radius:28px;background:#fff;color:#1F4EF5;display:flex;align-items:center;justify-content:center"><span class="material-symbols-rounded" style="font-size:28px">compare_arrows</span></span>
+            <span style="font-size:30px;font-weight:800;letter-spacing:-0.03em;font-variant-numeric:tabular-nums;color:#0B1024">{{ procLiveMatch }}</span>
+            <span style="font-size:12px;font-weight:700;color:#5B6478;text-align:center;line-height:1.35">совпадение<br>с оригиналом</span>
+          </sc-if>
+        </div>
+
+        <div style="display:flex;flex-direction:column;align-items:center;gap:10px">
+          <span style="height:26px;padding:0 12px;border-radius:13px;background:#1F4EF5;color:#fff;font-size:12px;font-weight:800;display:flex;align-items:center">Word · стр. {{ g.n }}</span>
+          <div style="position:relative;width:372px;height:526px;flex:none;border-radius:4px;overflow:hidden;background:#fff;box-shadow:0 1px 2px rgba(11,16,36,.06),0 14px 34px rgba(11,16,36,.12)">
+            <sc-if value="{{ g.isStudy }}">
+              <div style="position:absolute;inset:0;padding:54px 36px;display:flex;flex-direction:column;gap:13px;animation:pulse 1.6s ease-in-out infinite">
+                <span style="align-self:flex-end;width:44%;height:9px;border-radius:5px;background:#EEF0F4"></span><span style="align-self:flex-end;width:36%;height:9px;border-radius:5px;background:#EEF0F4"></span>
+                <span style="align-self:center;width:52%;height:12px;border-radius:6px;background:#E4E7EE;margin:18px 0 8px"></span>
+                <span style="width:100%;height:9px;border-radius:5px;background:#EEF0F4"></span><span style="width:92%;height:9px;border-radius:5px;background:#EEF0F4"></span><span style="width:97%;height:9px;border-radius:5px;background:#EEF0F4"></span><span style="width:70%;height:9px;border-radius:5px;background:#EEF0F4"></span>
+                <span style="width:100%;height:90px;border-radius:6px;border:1.5px dashed #E4E7EE;margin:10px 0"></span>
+                <span style="width:88%;height:9px;border-radius:5px;background:#EEF0F4"></span><span style="width:60%;height:9px;border-radius:5px;background:#EEF0F4"></span>
+              </div>
+              <span style="position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);height:32px;padding:0 14px;border-radius:16px;background:#F3F4F7;color:#5B6478;font-size:13px;font-weight:700;display:flex;align-items:center;white-space:nowrap">Ждём текст с фото</span>
+            </sc-if>
+            <sc-if value="{{ g.isTransfer }}">
+              <div style="animation:reveal 6.5s linear {{ g.delay }} both"><dc-import name="DocSheet" page="{{ procPage.page }}" variant="word" zoom="0.62" hint-size="372px,526px"></dc-import></div>
+              <div style="position:absolute;left:0;right:0;top:0;height:2px;background:#1F4EF5;box-shadow:0 0 14px 4px rgba(31,78,245,.25);animation:cursorDown 6.5s linear {{ g.delay }} both"><span style="position:absolute;right:10px;top:-12px;height:22px;padding:0 8px;border-radius:11px;background:#1F4EF5;color:#fff;font-size:11px;font-weight:800;display:flex;align-items:center">пишем</span></div>
+            </sc-if>
+            <sc-if value="{{ g.isCheck }}">
+              <div data-wordsheet="{{ g.key }}" style="position:absolute;inset:0"><dc-import name="DocSheet" page="{{ procPage.page }}" variant="word" zoom="0.62" hint-size="372px,526px"></dc-import></div>
+              <sc-for list="{{ g.marks }}" as="m"><div style="position:absolute;left:{{ m.l }};top:{{ m.t }};width:{{ m.w }};height:{{ m.h }};border:2px solid #E0A100;border-radius:5px;opacity:0;animation:pop .25s ease {{ m.inDelay }} both,fixit .4s ease {{ m.delay }} both"><span style="position:absolute;right:-10px;top:-10px;width:20px;height:20px;border-radius:10px;background:#16A34A;color:#fff;display:flex;align-items:center;justify-content:center;animation:pop .3s ease {{ m.delay }} both"><span class="material-symbols-rounded" style="font-size:14px">check</span></span></div></sc-for>
+              <div style="position:absolute;left:0;right:0;height:3px;background:#1F4EF5;box-shadow:0 0 18px 6px rgba(31,78,245,.3);animation:sweep 5s linear {{ g.delay }} both"></div>
+            </sc-if>
+          </div>
+        </div>
+      </div>
+    </sc-for>
+    </div>
+    <sc-if value="{{ procErr }}">
+      <div style="position:absolute;inset:0;background:rgba(236,235,239,.82);backdrop-filter:blur(3px);display:flex;align-items:center;justify-content:center;padding:24px">
+        <div style="width:100%;max-width:520px;background:#fff;border-radius:28px;padding:30px;display:flex;flex-direction:column;gap:16px;box-shadow:0 24px 60px rgba(11,16,36,.16);animation:fadeUp .3s ease both">
+          <img src="{{ errIco }}" alt="" style="width:68px;height:68px;margin:-8px">
+          <h2 style="margin:0;font-size:26px;font-weight:800;letter-spacing:-0.03em">Не получилось прочитать страницу {{ procErrN }}</h2>
+          <p style="margin:0;font-size:15px;line-height:1.55;color:#4A5368">{{ procErr.reason }}. Кредиты не списаны. Переснимите при хорошем свете — лист должен занимать весь кадр.</p>
+          <div style="display:flex;gap:10px;flex-wrap:wrap">
+            <button onClick="{{ reshoot }}" style="height:50px;padding:0 22px;border:none;border-radius:999px;background:#1F4EF5;color:#fff;font-size:15px;font-weight:800;cursor:pointer;display:flex;align-items:center;gap:8px"><span class="material-symbols-rounded" style="font-size:20px">photo_camera</span>Переснять</button>
+            <sc-if value="{{ canSkip }}"><button onClick="{{ skipPage }}" style="height:50px;padding:0 20px;border:1px solid #D9D6DF;border-radius:999px;background:#fff;color:#0B1024;font-size:15px;font-weight:700;cursor:pointer">Убрать страницу и продолжить</button></sc-if>
+          </div>
+        </div>
+      </div>
+    </sc-if>
+    <sc-if value="{{ procDone }}">
+      <div style="position:absolute;inset:0;background:rgba(236,235,239,.82);backdrop-filter:blur(3px);display:flex;align-items:center;justify-content:center;padding:24px">
+        <div style="width:100%;max-width:560px;max-height:100%;overflow:auto;background:#fff;border-radius:28px;padding:28px;display:flex;flex-direction:column;gap:18px;box-shadow:0 24px 60px rgba(11,16,36,.16);animation:fadeUp .3s ease both">
+          <div style="display:flex;align-items:center;gap:14px">
+            <span style="width:52px;height:52px;flex:none;border-radius:26px;background:#16A34A;color:#fff;display:flex;align-items:center;justify-content:center;animation:pop .4s ease both"><span class="material-symbols-rounded" style="font-size:30px">check</span></span>
+            <div style="display:flex;flex-direction:column;gap:2px"><h2 style="margin:0;font-size:26px;font-weight:800;letter-spacing:-0.03em">Word готов</h2><span style="font-size:14px;color:#4A5368">{{ sumLine }}</span></div>
+          </div>
+          <div style="display:flex;align-items:flex-end;gap:14px"><span style="font-size:64px;line-height:.9;font-weight:800;letter-spacing:-0.05em;color:#1F4EF5;font-variant-numeric:tabular-nums">{{ sumMatch }}</span><span style="font-size:14px;font-weight:700;color:#4A5368;padding-bottom:4px;line-height:1.4">совпадение<br>с оригиналом</span></div>
+          <div style="display:flex;flex-direction:column;gap:8px">
+            <sc-for list="{{ sumRows }}" as="r" hint-placeholder-count="3"><div style="display:grid;grid-template-columns:56px minmax(0,1fr) 56px;gap:12px;align-items:center;font-size:13px"><span style="font-weight:700;color:#5B6478">{{ r.label }}</span><div style="height:7px;border-radius:4px;background:#E6E4EC;overflow:hidden"><div style="height:100%;width:{{ r.w }};background:#1F4EF5;border-radius:4px"></div></div><span style="font-weight:800;text-align:right;font-variant-numeric:tabular-nums">{{ r.pct }}</span></div></sc-for>
+          </div>
+          <div style="display:flex;gap:8px;flex-wrap:wrap">
+            <sc-for list="{{ sumStats }}" as="s"><span style="height:32px;padding:0 12px 0 9px;border-radius:16px;background:#F3F4F7;font-size:13px;font-weight:700;display:flex;align-items:center;gap:6px"><span class="material-symbols-rounded" style="font-size:17px;color:#1F4EF5">{{ s.icon }}</span>{{ s.t }}</span></sc-for>
+          </div>
+          <div style="display:flex;align-items:center;gap:14px;flex-wrap:wrap">
+            <button onClick="{{ procOpen }}" style="height:50px;padding:0 24px;border:none;border-radius:999px;background:#1F4EF5;color:#fff;font-size:15px;font-weight:800;cursor:pointer;display:flex;align-items:center;gap:10px" style-hover="background:#1740D8">Открыть документ<span class="material-symbols-rounded" style="font-size:20px">arrow_forward</span></button>
+            <span style="font-size:13px;color:#5B6478">Откроем сами через пару секунд</span>
+          </div>
+        </div>
+      </div>
+    </sc-if>
+  </div>
+</div>
+</sc-if>

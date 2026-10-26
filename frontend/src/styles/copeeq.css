@@ -1,0 +1,53 @@
+
+*{box-sizing:border-box}
+html,body{margin:0;background:#F9F8F8;color:#0B1024;font-family:Manrope,system-ui,sans-serif;-webkit-font-smoothing:antialiased}
+a{color:#1F4EF5;text-decoration:none}
+a:hover{color:#1740D8;text-decoration:underline}
+button,input,select,textarea{font-family:inherit}
+input[type=range]{accent-color:#1F4EF5}
+@keyframes spin{to{transform:rotate(360deg)}}
+@keyframes fadeUp{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:none}}
+@keyframes pulse{0%,100%{opacity:1}50%{opacity:.45}}
+@keyframes lens{0%{transform:translate(20px,10px)}14%{transform:translate(230px,35px)}28%{transform:translate(30px,130px)}42%{transform:translate(225px,170px)}57%{transform:translate(40px,260px)}71%{transform:translate(220px,310px)}85%{transform:translate(70px,390px)}100%{transform:translate(190px,410px)}}
+@keyframes lensIn{0%{transform:translate(-72px,-56px)}14%{transform:translate(-408px,-96px)}28%{transform:translate(-88px,-248px)}42%{transform:translate(-400px,-312px)}57%{transform:translate(-104px,-456px)}71%{transform:translate(-392px,-536px)}85%{transform:translate(-152px,-664px)}100%{transform:translate(-344px,-696px)}}
+@keyframes reveal{from{clip-path:inset(0 0 100% 0)}to{clip-path:inset(0 0 0 0)}}
+@keyframes cursorDown{from{transform:translateY(0)}to{transform:translateY(524px)}}
+@keyframes fly{0%{transform:translateX(-64px) scale(.85);opacity:0}18%{opacity:1}82%{opacity:1}100%{transform:translateX(64px) scale(1);opacity:0}}
+@keyframes sweep{from{top:0}to{top:100%}}
+@keyframes fixit{0%{background:rgba(255,190,0,.30);border-color:#E0A100}100%{background:rgba(22,163,74,.12);border-color:#16A34A}}
+@keyframes pop{from{opacity:0;transform:scale(.6)}to{opacity:1;transform:none}}
+@keyframes scan{from{transform:translateY(-90px)}to{transform:translateY(560px)}}
+@media(max-width:700px){
+  html,body{overflow-x:clip}
+  header>div{padding:10px 16px!important;gap:12px!important}
+  header nav{display:none!important}
+  header button{flex-shrink:0}
+  header button:last-child{font-size:0!important;width:42px;padding:0!important;justify-content:center}
+  header button:last-child .material-symbols-rounded{font-size:21px!important}
+  [data-screen-label="Лендинг"]>section{padding-left:20px!important;padding-right:20px!important;min-width:0;overflow:hidden}
+  [data-screen-label="Лендинг"]>section:first-child{padding-top:32px!important;gap:28px!important}
+  [data-screen-label="Лендинг"] h1{font-size:clamp(30px,8.5vw,40px)!important;overflow-wrap:anywhere}
+  [data-screen-label="Лендинг"] h2{overflow-wrap:anywhere}
+  [data-screen-label="Лендинг"]>section:nth-child(2)>div>div:last-child{flex-wrap:wrap!important;flex:1 1 100%!important}
+  [data-screen-label="Лендинг"] button{max-width:100%;white-space:normal!important}
+  .cq-shell{flex-direction:column;height:100dvh!important}
+  .cq-sidebar{width:100%!important;height:60px;min-height:60px;padding:8px!important;flex-direction:row!important;align-items:center;gap:8px!important;overflow-x:auto!important}
+  .cq-sidebar>div{display:contents!important}
+  .cq-sidebar button{flex:none!important;min-width:40px}
+  .cq-sidebar button[title="Развернуть меню"]{display:none!important}
+  .cq-shell>div{min-height:0}
+  .cq-shell>div>div:first-child{padding:0 12px!important;gap:8px!important}
+  .cq-shell>div>div:first-child>label{display:none!important}
+  .cq-shell>div>div:last-child{overflow:auto!important}
+  .cq-shell [data-screen-label]{max-width:100%;min-width:0;padding:24px 16px!important}
+  [data-screen-label="Обзор"]>div:nth-child(2){grid-template-columns:minmax(0,1fr)!important}
+  [data-screen-label="Загрузка"],[data-screen-label="Бланк"],[data-screen-label="Обработка"]{grid-template-columns:minmax(0,1fr)!important;height:auto!important;overflow:visible!important}
+  [data-screen-label="Результат"]{display:flex!important;flex-direction:column;height:auto!important;padding:0!important}
+  [data-screen-label="Результат"]>div:first-child{flex-direction:row!important;overflow-x:auto!important;padding:8px!important;min-height:130px}
+  [data-screen-label="Результат"]>div:nth-child(2){min-height:650px;flex:none!important}
+  [data-screen-label="Результат"]>div:nth-child(2)>div:first-child{height:auto!important;min-height:56px;flex-wrap:wrap}
+  [data-screen-label="Результат"]>aside{min-height:450px;border-left:0!important}
+  [data-screen-label="Редактор"]{height:auto!important}
+  [data-screen-label="Редактор"]>div:last-child{grid-template-columns:minmax(0,1fr)!important}
+  [data-screen-label="Редактор"]>div:last-child>div{min-height:600px}
+}

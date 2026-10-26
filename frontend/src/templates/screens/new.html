@@ -1,0 +1,76 @@
+<sc-if value="{{ isNew }}" hint-placeholder-val="{{ false }}">
+<div data-screen-label="Загрузка" style="max-width:1240px;margin:0 auto;padding:36px 40px 64px;display:grid;grid-template-columns:minmax(0,1fr) 380px;gap:28px;align-items:start">
+  <div style="display:flex;flex-direction:column;gap:22px;min-width:0">
+    <div style="display:flex;align-items:center;gap:12px 20px;flex-wrap:wrap">
+      <h1 style="margin:0;font-size:36px;font-weight:800;letter-spacing:-0.04em;flex:1;min-width:240px">Новый документ</h1>
+      <span style="height:36px;padding:0 14px;border-radius:999px;background:{{ nBal.bg }};color:{{ nBal.fg }};font-size:14px;font-weight:800;display:flex;align-items:center;gap:8px"><img src="{{ coinChip }}" alt="" style="width:26px;height:26px;margin-left:-8px">{{ nBal.t }}</span>
+    </div>
+    <div onClick="{{ pickFile }}" onDragOver="{{ dzOver }}" onDragLeave="{{ dzLeave }}" onDrop="{{ dzDrop }}" style="border:2px dashed {{ dzBorder }};background:{{ dzBg }};border-radius:26px;padding:{{ dzPad }};display:flex;align-items:center;gap:18px;flex-wrap:wrap;cursor:pointer;transition:background .15s,border-color .15s">
+      <img src="{{ upIco }}" alt="" style="width:62px;height:62px;flex:none">
+      <span style="flex:1;min-width:220px;display:flex;flex-direction:column;gap:4px"><span style="font-size:19px;font-weight:800;letter-spacing:-0.02em">{{ dzTitle }}</span><span style="font-size:13px;color:#5B6478">JPG, PNG, HEIC, PDF · до 10 страниц за раз · Ctrl+V — вставить из буфера</span></span>
+      <span style="display:flex;gap:8px;flex-wrap:wrap">
+        <span style="height:46px;padding:0 20px;border-radius:999px;background:#0B1024;color:#fff;font-size:14px;font-weight:700;display:inline-flex;align-items:center;gap:8px"><span class="material-symbols-rounded" style="font-size:20px">folder_open</span>Выбрать файлы</span>
+        <button onClick="{{ camera }}" style="height:46px;padding:0 16px;border:1px solid #D9D6DF;border-radius:999px;background:#fff;color:#0B1024;font-size:14px;font-weight:700;display:inline-flex;align-items:center;gap:8px;cursor:pointer"><span class="material-symbols-rounded" style="font-size:20px">photo_camera</span>Снять камерой</button>
+      </span>
+    </div>
+    <sc-if value="{{ hasPages }}">
+      <div style="display:flex;flex-direction:column;gap:12px">
+        <div style="display:flex;align-items:center;gap:10px"><span style="font-size:16px;font-weight:800">{{ pagesTitle }}</span><span style="font-size:13px;color:#5B6478">Перетаскивайте, чтобы поменять порядок</span><button onClick="{{ clearPages }}" style="margin-left:auto;border:none;background:none;color:#5B6478;font-size:13px;font-weight:700;cursor:pointer" style-hover="color:#C2272D">Убрать все</button></div>
+        <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(150px,1fr));gap:14px">
+          <sc-for list="{{ thumbs }}" as="t" hint-placeholder-count="3">
+            <div draggable="true" onDragStart="{{ t.onDragStart }}" onDragOver="{{ t.onDragOver }}" onDrop="{{ t.onDrop }}" style="background:#fff;border-radius:18px;padding:10px;display:flex;flex-direction:column;gap:8px;border:2px solid {{ t.border }};cursor:grab;box-shadow:0 1px 2px rgba(11,16,36,.05)">
+              <div style="height:180px;border-radius:10px;background:#EDEBE6;display:flex;align-items:center;justify-content:center;overflow:hidden;position:relative">
+                <div style="transform:rotate({{ t.rot }});transition:transform .25s"><sc-if value="{{ t.src }}"><img src="{{ t.src }}" alt="" style="max-width:126px;max-height:170px;display:block;filter:{{ t.filter }}"></sc-if><sc-if value="{{ t.noSrc }}"><dc-import name="DocSheet" page="{{ t.page }}" variant="photo" zoom="0.2" blur="{{ t.blur }}" hint-size="119px,168px"></dc-import></sc-if></div>
+                <span style="position:absolute;left:8px;top:8px;width:24px;height:24px;border-radius:12px;background:#0B1024;color:#fff;font-size:12px;font-weight:800;display:flex;align-items:center;justify-content:center">{{ t.n }}</span>
+                <sc-if value="{{ t.blur }}"><span style="position:absolute;left:8px;right:8px;bottom:8px;border-radius:10px;background:#C2551F;color:#fff;font-size:11px;font-weight:700;padding:6px 8px;line-height:1.3">Размыто — лучше переснять</span></sc-if>
+              </div>
+              <div style="display:flex;align-items:center;gap:4px">
+                <span style="flex:1;min-width:0;display:flex;flex-direction:column"><span style="font-size:12px;font-weight:700;white-space:nowrap;overflow:hidden;text-overflow:ellipsis">{{ t.name }}</span><span style="font-size:11px;color:{{ t.costFg }};font-weight:700">{{ t.cost }}</span></span>
+                <button onClick="{{ t.onRotate }}" title="Повернуть" style="width:30px;height:30px;border:none;border-radius:8px;background:transparent;color:#4A5368;cursor:pointer;display:flex;align-items:center;justify-content:center" style-hover="background:#F1F0F4"><span class="material-symbols-rounded" style="font-size:19px">rotate_right</span></button>
+                <button onClick="{{ t.onDelete }}" title="Удалить" style="width:30px;height:30px;border:none;border-radius:8px;background:transparent;color:#4A5368;cursor:pointer;display:flex;align-items:center;justify-content:center" style-hover="background:#FDECEC;color:#C2272D"><span class="material-symbols-rounded" style="font-size:19px">delete</span></button>
+              </div>
+            </div>
+          </sc-for>
+        </div>
+      </div>
+    </sc-if>
+    <sc-if value="{{ pdf }}">
+      <div style="background:#fff;border-radius:20px;padding:16px 18px;display:flex;align-items:center;gap:14px;flex-wrap:wrap">
+        <span style="width:44px;height:50px;border-radius:8px;background:#C2272D;color:#fff;font-size:11px;font-weight:800;display:flex;align-items:flex-end;justify-content:center;padding-bottom:6px;clip-path:polygon(0 0,72% 0,100% 22%,100% 100%,0 100%)">PDF</span>
+        <span style="flex:1;min-width:180px;display:flex;flex-direction:column;gap:2px"><span style="font-size:14px;font-weight:800">{{ pdf.name }}</span><span style="font-size:12px;color:#5B6478">{{ pdf.total }} страниц · платите только за выбранные</span></span>
+        <label style="display:flex;align-items:center;gap:8px;font-size:14px;font-weight:700">Страницы с<input type="number" min="1" max="{{ pdf.total }}" value="{{ pdf.from }}" onChange="{{ onPdfFrom }}" style="width:58px;height:38px;border:1px solid #D9D6DF;border-radius:10px;padding:0 8px;font-size:14px">по<input type="number" min="1" max="{{ pdf.total }}" value="{{ pdf.to }}" onChange="{{ onPdfTo }}" style="width:58px;height:38px;border:1px solid #D9D6DF;border-radius:10px;padding:0 8px;font-size:14px"></label>
+        <button onClick="{{ dropPdf }}" title="Убрать PDF" style="width:34px;height:34px;border:none;border-radius:9px;background:transparent;color:#4A5368;cursor:pointer;display:flex;align-items:center;justify-content:center"><span class="material-symbols-rounded" style="font-size:20px">close</span></button>
+      </div>
+    </sc-if>
+    <div style="display:flex;flex-direction:column;gap:10px">
+      <span style="font-size:14px;font-weight:800">Нет документа под рукой? Возьмите пример</span>
+      <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(210px,1fr));gap:10px">
+        <sc-for list="{{ samples }}" as="s" hint-placeholder-count="4"><button onClick="{{ s.onClick }}" style="display:flex;flex-direction:column;gap:3px;padding:14px 16px;border:1.5px solid {{ s.border }};border-radius:16px;background:#fff;cursor:pointer;text-align:left" style-hover="border-color:#1F4EF5"><span style="font-size:14px;font-weight:800;color:#0B1024">{{ s.label }}</span><span style="font-size:12px;color:#5B6478">{{ s.sub }}</span></button></sc-for>
+      </div>
+    </div>
+  </div>
+
+  <aside style="position:sticky;top:24px;background:#fff;border-radius:26px;padding:24px;display:flex;flex-direction:column;gap:20px;box-shadow:0 1px 2px rgba(11,16,36,.04),0 20px 50px rgba(11,16,36,.06)">
+    <div style="display:flex;flex-direction:column;gap:10px">
+      <span style="font-size:12px;font-weight:800;letter-spacing:.08em;text-transform:uppercase;color:#8A90A2">Режим</span>
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:8px">
+        <sc-for list="{{ modeOpts }}" as="m"><button onClick="{{ m.onClick }}" style="display:flex;flex-direction:column;gap:4px;padding:14px;border:2px solid {{ m.border }};border-radius:16px;background:{{ m.bg }};cursor:pointer;text-align:left"><img src="{{ m.ico }}" alt="" style="width:44px;height:44px;margin:-6px 0 -2px -6px"><span style="font-size:15px;font-weight:800;color:#0B1024">{{ m.label }}</span><span style="font-size:12px;line-height:1.35;color:#5B6478">{{ m.sub }}</span></button></sc-for>
+      </div>
+      <sc-if value="{{ isClean }}">
+        <div style="display:flex;flex-direction:column;gap:6px">
+          <sc-for list="{{ stdOpts }}" as="o"><button onClick="{{ o.onClick }}" style="display:flex;align-items:center;gap:10px;padding:10px 12px;border:1px solid {{ o.border }};border-radius:12px;background:{{ o.bg }};cursor:pointer;text-align:left;opacity:{{ o.op }}"><span style="width:18px;height:18px;flex:none;border-radius:9px;border:{{ o.dot }};background:#fff"></span><span style="flex:1;display:flex;flex-direction:column"><span style="font-size:14px;font-weight:700;color:#0B1024">{{ o.label }}</span><span style="font-size:12px;color:#5B6478">{{ o.sub }}</span></span><sc-if value="{{ o.biz }}"><span style="font-size:11px;font-weight:800;color:#5B6478;background:#F1F0F4;border-radius:8px;padding:3px 7px">бизнес</span></sc-if></button></sc-for>
+        </div>
+      </sc-if>
+    </div>
+    <div style="display:flex;flex-direction:column;gap:12px">
+      <sc-for list="{{ optRows }}" as="r" hint-placeholder-count="3"><div style="display:flex;gap:12px;align-items:flex-start"><span style="flex:1;display:flex;flex-direction:column;gap:2px"><span style="font-size:14px;font-weight:700">{{ r.t }}</span><span style="font-size:12px;line-height:1.4;color:#5B6478">{{ r.s }}</span></span><button onClick="{{ r.onClick }}" title="{{ r.t }}" style="width:42px;height:24px;flex:none;border-radius:12px;border:none;background:{{ r.tg.track }};position:relative;cursor:pointer;padding:0;transition:background .15s"><span style="position:absolute;top:3px;left:{{ r.tg.knob }};width:18px;height:18px;border-radius:9px;background:#fff;transition:left .15s;box-shadow:0 1px 2px rgba(0,0,0,.2)"></span></button></div></sc-for>
+    </div>
+    <div style="border-radius:18px;background:#F6F5F8;padding:16px;display:flex;flex-direction:column;gap:6px">
+      <span style="font-size:15px;font-weight:800">{{ costLine }}</span>
+      <span style="font-size:13px;line-height:1.45;color:{{ costNoteFg }}">{{ costNote }}</span>
+    </div>
+    <button onClick="{{ startProc }}" style="height:56px;border:none;border-radius:999px;background:#1F4EF5;color:#fff;font-size:16px;font-weight:800;cursor:pointer;display:flex;align-items:center;justify-content:center;gap:10px;opacity:{{ ctaOp }};box-shadow:0 12px 26px rgba(31,78,245,.28)" style-hover="background:#1740D8">Сделать Word<span class="material-symbols-rounded" style="font-size:22px">arrow_forward</span></button>
+    <span style="font-size:12px;line-height:1.45;color:#5B6478;text-align:center">Обработка и просмотр бесплатны. Кредиты списываются при первом скачивании.</span>
+  </aside>
+</div>
+</sc-if>

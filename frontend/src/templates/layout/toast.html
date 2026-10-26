@@ -1,0 +1,8 @@
+<sc-if value="{{ toast }}" hint-placeholder-val="{{ false }}">
+  <div style="position:fixed;left:50%;bottom:28px;transform:translateX(-50%);z-index:300;background:#0B1024;color:#fff;border-radius:16px;padding:12px 12px 12px 18px;display:flex;align-items:center;gap:14px;box-shadow:0 18px 44px rgba(11,16,36,.32);font-size:14px;max-width:min(640px,92vw);animation:fadeUp .2s ease">
+    <sc-if value="{{ toastImg }}"><img src="{{ toastImg }}" alt="" style="width:34px;height:34px;margin:-6px -4px -6px -8px;flex:none"></sc-if><sc-if value="{{ toastNoImg }}"><span class="material-symbols-rounded" style="font-size:20px;color:#8FB0FF">{{ toast.icon }}</span></sc-if>
+    <span style="line-height:1.4">{{ toast.text }}</span>
+    <sc-if value="{{ toast.action }}"><button onClick="{{ toastAction }}" style="border:none;background:none;color:#8FB0FF;font-size:14px;font-weight:800;cursor:pointer;white-space:nowrap">{{ toast.action }}</button></sc-if>
+    <button onClick="{{ closeToast }}" title="Закрыть" style="width:28px;height:28px;border:none;border-radius:8px;background:transparent;color:#C9CEDD;display:flex;align-items:center;justify-content:center;cursor:pointer"><span class="material-symbols-rounded" style="font-size:18px">close</span></button>
+  </div>
+</sc-if>

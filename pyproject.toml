@@ -1,0 +1,66 @@
+[project]
+name = "foto2word"
+version = "0.1.0"
+description = "Photo of a paper document -> clean editable Word document"
+readme = "README.md"
+requires-python = ">=3.12"
+dependencies = [
+    "anthropic",
+    "fastapi",
+    "python-multipart",
+    "uvicorn",
+    "httpx",
+    "openai",
+    "openpyxl",
+    "pillow",
+    "pydantic>=2.9",
+    "pypdfium2",
+    "pydantic-settings",
+    "python-docx>=1.1",
+    "rapidfuzz",
+    "pyyaml",
+    "typer",
+    "opencv-python-headless>=5.0.0.93",
+]
+
+[project.optional-dependencies]
+heic = ["pillow-heif"]
+
+[project.scripts]
+f2w = "foto2word.cli.main:app"
+
+[dependency-groups]
+dev = ["mypy", "pytest", "pytest-cov", "ruff", "types-pyyaml", "types-openpyxl"]
+
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[tool.hatch.build.targets.wheel]
+packages = ["src/foto2word"]
+
+[tool.ruff]
+line-length = 100
+target-version = "py312"
+
+[tool.ruff.lint]
+select = ["E", "F", "W", "I", "N", "UP", "B", "SIM", "RUF", "PL", "PT", "ANN", "RET", "PTH"]
+ignore = ["PLR0913", "RUF001", "RUF002", "RUF003", "ANN401"]
+
+[tool.ruff.lint.per-file-ignores]
+"tests/**" = ["ANN", "PLR2004", "PLC0415"]
+"src/foto2word/cli/**" = ["PLR0917"]  # typer maps parameters to CLI options
+
+[tool.mypy]
+strict = true
+python_version = "3.12"
+plugins = ["pydantic.mypy"]
+files = ["src", "tests"]
+
+[[tool.mypy.overrides]]
+module = ["docx.*", "pypdfium2.*"]
+ignore_missing_imports = true
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+addopts = "-q --strict-markers"

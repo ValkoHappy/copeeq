@@ -1,0 +1,20 @@
+<sc-if value="{{ isBusiness }}" hint-placeholder-val="{{ false }}">
+<div data-screen-label="Для бизнеса" style="max-width:1240px;margin:0 auto;padding:56px 40px 40px;display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,460px),1fr));gap:40px;align-items:start">
+  <div style="display:flex;flex-direction:column;gap:24px">
+    <h1 style="margin:0;font-size:clamp(40px,5vw,64px);line-height:1;font-weight:800;letter-spacing:-0.05em">Для бизнеса</h1>
+    <p style="margin:0;font-size:18px;line-height:1.5;color:#4A5368">Секретари, кадровики, бухгалтеры, юристы: потоки бланков, договоров и актов — в Word и Excel по вашему шаблону.</p>
+    <sc-for list="{{ bizRows }}" as="b" hint-placeholder-count="4"><div style="display:flex;gap:14px;align-items:flex-start"><img src="{{ b.ico }}" alt="" style="width:56px;height:56px;flex:none;margin:-6px 0 0 -6px"><span style="display:flex;flex-direction:column;gap:3px"><span style="font-size:17px;font-weight:800">{{ b.t }}</span><span style="font-size:14px;line-height:1.5;color:#4A5368">{{ b.d }}</span></span></div></sc-for>
+  </div>
+  <div style="background:#fff;border-radius:28px;padding:28px;display:flex;flex-direction:column;gap:14px;box-shadow:0 20px 50px rgba(11,16,36,.06)">
+    <sc-if value="{{ bizSent }}"><div style="display:flex;flex-direction:column;gap:10px;align-items:center;text-align:center;padding:30px 0"><img src="{{ doneIco }}" alt="" style="width:80px;height:80px"><span style="font-size:22px;font-weight:800">Заявка отправлена</span><span style="font-size:15px;color:#4A5368">Ответим на {{ biz.email }} в течение рабочего дня.</span></div></sc-if>
+    <sc-if value="{{ bizForm }}">
+      <span style="font-size:22px;font-weight:800">Заявка</span>
+      <label style="display:flex;flex-direction:column;gap:6px;font-size:13px;font-weight:700;color:#3A4156">Компания<input value="{{ biz.name }}" onChange="{{ onBizName }}" placeholder="ООО «Северный ветер»" style="height:46px;border:1px solid #E3E1EA;border-radius:12px;padding:0 12px;font-size:15px;outline:none"></label>
+      <label style="display:flex;flex-direction:column;gap:6px;font-size:13px;font-weight:700;color:#3A4156">Почта<input value="{{ biz.email }}" onChange="{{ onBizEmail }}" placeholder="office@company.ru" style="height:46px;border:1px solid {{ bizEmailBorder }};border-radius:12px;padding:0 12px;font-size:15px;outline:none"></label>
+      <label style="display:flex;flex-direction:column;gap:6px;font-size:13px;font-weight:700;color:#3A4156">Страниц в месяц<select value="{{ biz.vol }}" onChange="{{ onBizVol }}" style="height:46px;border:1px solid #E3E1EA;border-radius:12px;padding:0 10px;font-size:15px;background:#fff"><option value="500">до 500</option><option value="2000">500–2 000</option><option value="5000">2 000–5 000</option><option value="10000">больше 5 000</option></select></label>
+      <span style="font-size:13px;color:#5B6478">{{ bizHint }}</span>
+      <button onClick="{{ sendBiz }}" style="height:52px;border:none;border-radius:999px;background:#1F4EF5;color:#fff;font-size:15px;font-weight:800;cursor:pointer">Отправить</button>
+    </sc-if>
+  </div>
+</div>
+</sc-if>

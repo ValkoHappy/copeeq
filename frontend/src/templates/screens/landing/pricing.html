@@ -1,0 +1,27 @@
+  <section style="position:relative;isolation:isolate;max-width:1240px;margin:0 auto;padding:24px 40px 88px;display:flex;flex-direction:column;gap:40px">
+
+    <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,420px),1fr));align-items:end;gap:20px 64px">
+      <div style="display:flex;flex-direction:column;gap:14px"><span style="font-size:13px;font-weight:800;letter-spacing:.1em;text-transform:uppercase;color:#1F4EF5">Цены</span><h2 style="margin:0;font-size:clamp(36px,4.6vw,64px);line-height:1;font-weight:800;letter-spacing:-0.05em;text-wrap:balance">Попробуйте бесплатно и выберите пакет</h2></div>
+      <div style="display:flex;flex-direction:column;gap:14px;align-items:flex-start;padding-bottom:6px"><p style="margin:0;font-size:18px;line-height:1.55;color:#4A5368;max-width:460px;text-wrap:pretty">Печатная страница — 5 кредитов, «Чистовик» — 8, рукописная — 10. 1 кредит ≈ 1 ₽. Цену видно до запуска, кредиты списываются только при скачивании и не сгорают.</p><button onClick="{{ goPricing }}" style="border:none;background:none;padding:0;font-size:15px;font-weight:800;color:#1F4EF5;cursor:pointer;text-decoration:underline;text-underline-offset:6px">Сколько стоит каждая операция</button></div>
+    </div>
+    <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));border-top:1px solid #DDE0EA;border-bottom:1px solid #DDE0EA">
+      <sc-for list="{{ planCards }}" as="p" hint-placeholder-count="4">
+        <div style="position:relative;background:{{ p.bg }};color:{{ p.fg }};padding:30px 28px 32px;display:flex;flex-direction:column;gap:10px;border-left:1px solid {{ p.line }}">
+          <sc-if value="{{ p.hasTag }}"><span style="position:absolute;top:-15px;right:20px;height:30px;padding:0 14px;border-radius:999px;background:{{ p.tagBg }};color:#fff;font-size:12px;font-weight:800;display:flex;align-items:center;white-space:nowrap">{{ p.tag }}</span></sc-if>
+          <span style="font-size:13px;font-weight:800;letter-spacing:.1em;text-transform:uppercase;opacity:.75">{{ p.name }}</span>
+          <span style="display:flex;align-items:baseline;gap:6px;margin-top:22px;white-space:nowrap"><span style="font-size:clamp(52px,5.4vw,76px);font-weight:800;letter-spacing:-0.055em;line-height:.95">{{ p.priceNum }}</span><span style="font-size:clamp(30px,3vw,42px);font-weight:800;letter-spacing:-0.03em">₽</span><sc-if value="{{ p.isSub }}"><span style="font-size:18px;font-weight:700;opacity:.7">/мес</span></sc-if></span>
+          <span style="display:flex;align-items:center;gap:8px;font-size:26px;font-weight:800;letter-spacing:-0.03em;margin-top:10px">{{ p.credits }}<img src="{{ p.coin }}" alt="кредитов" style="width:30px;height:30px"><span style="font-size:15px;font-weight:700;letter-spacing:0;opacity:.7">{{ p.creditsNote }}</span></span>
+          <span style="display:flex;align-items:center;gap:8px;font-size:17px;font-weight:800"><span class="material-symbols-rounded" style="font-size:22px;color:{{ p.docIc }}">description</span>{{ p.docs }}</span>
+          <span style="font-size:14px;line-height:1.45;font-weight:600;opacity:.75;min-height:42px">{{ p.who }}</span>
+          <button onClick="{{ p.onBuy }}" style="height:54px;margin-top:8px;border-radius:999px;border:1.5px solid {{ p.btnBorder }};background:{{ p.btnBg }};color:{{ p.btnFg }};font-size:16px;font-weight:800;cursor:pointer">{{ p.cta }}</button>
+        </div>
+      </sc-for>
+    </div>
+    <span style="font-size:13px;color:#5B6478;margin-top:-24px">Документ — в среднем 3 печатные страницы (15 кредитов): заявление, анкета, акт.</span>
+    <div style="position:relative;overflow:hidden;isolation:isolate;background:#0B1024;color:#fff;border-radius:28px;padding:30px 36px;display:flex;align-items:center;gap:20px 40px;flex-wrap:wrap">
+      <div aria-hidden="true" style="position:absolute;right:-60px;top:-120px;width:360px;height:360px;border-radius:50%;background:radial-gradient(circle,rgba(31,78,245,.55),rgba(31,78,245,0) 70%);z-index:-1"></div>
+      <span style="display:flex;flex-direction:column;gap:4px;flex:none;min-width:150px"><span style="display:flex;align-items:center;gap:8px"><span style="font-size:72px;font-weight:800;letter-spacing:-0.06em;line-height:.9">25</span><img src="{{ coinWhite }}" alt="" style="width:48px;height:48px"></span><span style="font-size:14px;font-weight:800;color:#8FB0FF">в подарок</span></span>
+      <span style="flex:1;min-width:260px;display:flex;flex-direction:column;gap:8px"><span style="font-size:clamp(22px,2.4vw,30px);font-weight:800;letter-spacing:-0.03em;line-height:1.1">Попробуйте Copeeq на своём документе</span><span style="font-size:15px;line-height:1.5;color:#C9CEDD">После регистрации начислим 25 кредитов — хватит на 5 печатных страниц и скачивание Word. Карта не нужна.</span></span>
+      <button onClick="{{ goNew }}" style="height:54px;padding:0 28px;border:none;border-radius:999px;background:#1F4EF5;color:#fff;font-size:16px;font-weight:800;cursor:pointer;white-space:nowrap" style-hover="background:#3B66FF">Попробовать бесплатно</button>
+    </div>
+  </section>

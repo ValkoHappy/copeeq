@@ -1,0 +1,67 @@
+<sc-if value="{{ modalShow }}" hint-placeholder-val="{{ false }}">
+<div onClick="{{ closeModal }}" style="{{ ovStyle }}">
+  <div onClick="{{ stopProp }}" style="width:100%;max-width:{{ modalW }};max-height:calc(100vh - 48px);overflow:auto;background:#fff;border-radius:28px;padding:28px;display:flex;flex-direction:column;gap:18px;box-shadow:0 30px 80px rgba(11,16,36,.3)">
+    <div style="display:flex;align-items:flex-start;gap:12px"><span style="flex:1;font-size:24px;font-weight:800;letter-spacing:-0.03em;line-height:1.15">{{ mTitle }}</span><button onClick="{{ closeModal }}" title="Закрыть" style="width:36px;height:36px;flex:none;border:none;border-radius:18px;background:#F1F0F4;color:#3A4156;cursor:pointer;display:flex;align-items:center;justify-content:center"><span class="material-symbols-rounded" style="font-size:20px">close</span></button></div>
+    <sc-if value="{{ mSub }}"><span style="font-size:15px;line-height:1.55;color:#4A5368;margin-top:-8px">{{ mSub }}</span></sc-if>
+
+    <sc-if value="{{ mLogin }}">
+      <sc-if value="{{ loginEmailStep }}">
+        <label style="display:flex;flex-direction:column;gap:6px;font-size:13px;font-weight:700;color:#3A4156">Почта<input value="{{ login.email }}" onChange="{{ onLoginEmail }}" onKeyDown="{{ onLoginKey }}" placeholder="name@mail.ru" style="height:50px;border:1.5px solid {{ loginBorder }};border-radius:14px;padding:0 14px;font-size:16px;color:#0B1024;outline:none" style-focus="border-color:#1F4EF5;box-shadow:0 0 0 3px rgba(31,78,245,.14)"></label>
+        <sc-if value="{{ login.err }}"><span style="font-size:13px;font-weight:600;color:#C2272D;margin-top:-10px">{{ login.err }}</span></sc-if>
+        <button onClick="{{ sendCode }}" style="height:52px;border:none;border-radius:999px;background:#1F4EF5;color:#fff;font-size:16px;font-weight:800;cursor:pointer">Получить код</button>
+        <div style="display:flex;align-items:center;gap:12px;font-size:12px;color:#8A90A2"><span style="flex:1;height:1px;background:#ECEAF0"></span>или<span style="flex:1;height:1px;background:#ECEAF0"></span></div>
+        <div style="display:grid;grid-template-columns:1fr 1fr;gap:8px">
+          <button onClick="{{ yandex }}" style="height:50px;border:1px solid #E3E1EA;border-radius:999px;background:#fff;font-size:15px;font-weight:800;cursor:pointer;display:flex;align-items:center;justify-content:center;gap:8px"><span style="width:24px;height:24px;border-radius:12px;background:#FC3F1D;color:#fff;font-size:14px;font-weight:800;display:flex;align-items:center;justify-content:center">Я</span>Яндекс ID</button>
+          <button onClick="{{ vk }}" style="height:50px;border:1px solid #E3E1EA;border-radius:999px;background:#fff;font-size:15px;font-weight:800;cursor:pointer;display:flex;align-items:center;justify-content:center;gap:8px"><span style="width:24px;height:24px;border-radius:7px;background:#0077FF;color:#fff;font-size:11px;font-weight:800;display:flex;align-items:center;justify-content:center">VK</span>VK ID</button>
+        </div>
+        <span style="font-size:12px;line-height:1.5;color:#8A90A2;text-align:center">Без паролей — код на почту. Новым аккаунтам — 25 кредитов бесплатно, один раз.</span>
+      </sc-if>
+      <sc-if value="{{ loginCodeStep }}">
+        <span style="font-size:15px;color:#4A5368;margin-top:-6px">Отправили 6 цифр на <b style="color:#0B1024">{{ login.email }}</b></span>
+        <input value="{{ login.code }}" onChange="{{ onLoginCode }}" inputMode="numeric" maxLength="6" placeholder="••••••" autoFocus="{{ true }}" style="height:64px;border:1.5px solid {{ loginBorder }};border-radius:16px;padding:0 18px;font-size:30px;font-weight:800;letter-spacing:.5em;text-align:center;color:#0B1024;outline:none" style-focus="border-color:#1F4EF5">
+        <sc-if value="{{ login.err }}"><span style="font-size:13px;font-weight:600;color:#C2272D;margin-top:-10px">{{ login.err }}</span></sc-if>
+        <button onClick="{{ checkCode }}" style="height:52px;border:none;border-radius:999px;background:#1F4EF5;color:#fff;font-size:16px;font-weight:800;cursor:pointer">Войти</button>
+        <div style="display:flex;justify-content:space-between;font-size:13px;font-weight:700"><button onClick="{{ backEmail }}" style="border:none;background:none;color:#5B6478;cursor:pointer;padding:0">Другая почта</button><button onClick="{{ resend }}" style="border:none;background:none;color:#1F4EF5;cursor:pointer;padding:0">Отправить ещё раз</button></div>
+        <span style="font-size:12px;color:#8A90A2;text-align:center">В прототипе подойдёт любой код из 6 цифр.</span>
+      </sc-if>
+    </sc-if>
+
+    <sc-if value="{{ mBuy }}">
+      <sc-if value="{{ buyNeed }}"><div style="display:grid;grid-template-columns:repeat(3,1fr);gap:8px"><sc-for list="{{ needBoxes }}" as="n"><div style="border-radius:16px;background:{{ n.bg }};padding:12px 14px;display:flex;flex-direction:column;gap:2px"><span style="font-size:12px;font-weight:700;color:{{ n.lf }}">{{ n.label }}</span><span style="font-size:24px;font-weight:800;color:{{ n.fg }}">{{ n.v }}</span></div></sc-for></div></sc-if>
+      <div style="display:flex;flex-direction:column;gap:8px">
+        <sc-for list="{{ buyOpts }}" as="o" hint-placeholder-count="4"><button onClick="{{ o.onClick }}" style="display:flex;align-items:center;gap:14px;padding:14px 16px;border:2px solid {{ o.border }};border-radius:18px;background:{{ o.bg }};cursor:pointer;text-align:left"><span style="width:20px;height:20px;flex:none;border-radius:10px;border:{{ o.dot }};background:#fff"></span><img src="{{ o.ico }}" alt="" style="width:38px;height:38px;flex:none"><span style="flex:1;display:flex;flex-direction:column;gap:2px"><span style="font-size:15px;font-weight:800;color:#0B1024">{{ o.name }}</span><span style="font-size:12px;color:#5B6478">{{ o.sub }}</span></span><sc-if value="{{ o.fits }}"><span style="font-size:11px;font-weight:800;color:#15803D;background:#E6F6EC;border-radius:8px;padding:3px 8px">хватит</span></sc-if><span style="font-size:18px;font-weight:800;color:#0B1024;white-space:nowrap">{{ o.price }}</span></button></sc-for>
+      </div>
+      <div style="display:flex;padding:3px;background:#F1F0F4;border-radius:999px;gap:3px"><sc-for list="{{ payMethods }}" as="m"><button onClick="{{ m.onClick }}" style="flex:1;height:38px;border:none;border-radius:999px;background:{{ m.bg }};color:{{ m.fg }};font-size:13px;font-weight:800;cursor:pointer;box-shadow:{{ m.shadow }}">{{ m.label }}</button></sc-for></div>
+      <button onClick="{{ payNow }}" style="height:54px;border:none;border-radius:999px;background:#1F4EF5;color:#fff;font-size:16px;font-weight:800;cursor:pointer;display:flex;align-items:center;justify-content:center;gap:10px"><sc-if value="{{ buyPaying }}"><img src="{{ coinSpin }}" alt="" style="width:30px;height:30px;margin-left:-6px"></sc-if>{{ payLabel }}</button>
+      <span style="font-size:12px;line-height:1.5;color:#8A90A2;text-align:center">{{ payNote }}</span>
+    </sc-if>
+
+    <sc-if value="{{ mSig }}">
+      <div style="position:relative;height:200px;border-radius:18px;background:#F6F5F8;border:1.5px dashed #C9C6D2;overflow:hidden">
+        <sc-if value="{{ sigImg }}"><img src="{{ sigImg }}" alt="Подпись" style="position:absolute;inset:0;width:100%;height:100%;object-fit:contain;mix-blend-mode:multiply"></sc-if>
+        <sc-if value="{{ sigDraw }}"><canvas ref="{{ canvasRef }}" width="880" height="400" onPointerDown="{{ sigDown }}" onPointerMove="{{ sigMove }}" onPointerUp="{{ sigUp }}" onPointerLeave="{{ sigUp }}" style="position:absolute;inset:0;width:100%;height:100%;touch-action:none;cursor:crosshair"></canvas></sc-if>
+        <sc-if value="{{ sigEmpty }}"><span style="position:absolute;left:0;right:0;top:50%;transform:translateY(-50%);text-align:center;font-family:Caveat,cursive;font-size:28px;color:#A3A0AE;pointer-events:none">распишитесь здесь</span></sc-if>
+        <span style="position:absolute;left:40px;right:40px;bottom:46px;border-top:1px solid #C9C6D2;pointer-events:none"></span>
+      </div>
+      <div style="display:flex;gap:8px;flex-wrap:wrap"><button onClick="{{ sigClear }}" style="height:38px;padding:0 14px;border:1px solid #E3E1EA;border-radius:999px;background:#fff;font-size:13px;font-weight:800;cursor:pointer">Очистить</button><button onClick="{{ uploadSig }}" style="height:38px;padding:0 14px;border:1px solid #E3E1EA;border-radius:999px;background:#fff;font-size:13px;font-weight:800;cursor:pointer">Загрузить картинку</button></div>
+      <div style="display:flex;flex-direction:column;gap:6px"><span style="font-size:13px;font-weight:700;color:#3A4156">На какой линии</span><sc-for list="{{ draftLineBtns }}" as="l"><button onClick="{{ l.onClick }}" style="display:flex;align-items:center;gap:10px;padding:10px 12px;border:1.5px solid {{ l.border }};border-radius:12px;background:#fff;cursor:pointer;font-size:14px;font-weight:700;color:#0B1024;text-align:left"><span style="width:16px;height:16px;flex:none;border-radius:8px;border:{{ l.dot }}"></span>{{ l.label }}</button></sc-for></div>
+      <button onClick="{{ toggleConsent }}" style="display:flex;gap:12px;align-items:flex-start;border:none;background:none;padding:0;text-align:left;cursor:pointer;font-size:13px;line-height:1.45;color:#3A4156"><span style="width:22px;height:22px;flex:none;border-radius:6px;border:1.5px solid {{ consentBorder }};background:{{ consentBg }};color:#fff;display:flex;align-items:center;justify-content:center"><span class="material-symbols-rounded" style="font-size:17px">{{ consentMark }}</span></span>Это моя подпись, я разрешаю поставить её в этот документ и сохранить в профиле. Удалить её можно в любой момент.</button>
+      <button onClick="{{ sigSave }}" style="height:52px;border:none;border-radius:999px;background:#1F4EF5;color:#fff;font-size:16px;font-weight:800;cursor:pointer;opacity:{{ sigSaveOp }}">Поставить подпись</button>
+    </sc-if>
+
+    <sc-if value="{{ mBad }}">
+      <div style="display:flex;flex-direction:column;gap:8px"><sc-for list="{{ badReasons }}" as="b"><button onClick="{{ b.onClick }}" style="display:flex;align-items:center;gap:12px;padding:12px 14px;border:1.5px solid {{ b.border }};border-radius:14px;background:{{ b.bg }};cursor:pointer;text-align:left;font-size:14px;font-weight:700;color:#0B1024"><span style="width:18px;height:18px;flex:none;border-radius:9px;border:{{ b.dot }};background:#fff"></span>{{ b.t }}</button></sc-for></div>
+      <button onClick="{{ refund }}" style="height:52px;border:none;border-radius:999px;background:#1F4EF5;color:#fff;font-size:16px;font-weight:800;cursor:pointer">{{ refundLabel }}</button>
+      <span style="font-size:12px;line-height:1.5;color:#8A90A2;text-align:center">Автоматически — раз в сутки, в течение 24 часов после скачивания. Дальше — через support@copeeq.ru.</span>
+    </sc-if>
+
+    <sc-if value="{{ mWarn }}">
+      <div style="display:flex;gap:10px"><button onClick="{{ warnCheck }}" style="flex:1;height:50px;border:none;border-radius:999px;background:#1F4EF5;color:#fff;font-size:15px;font-weight:800;cursor:pointer">Проверить</button><button onClick="{{ warnSkip }}" style="flex:1;height:50px;border:1px solid #E3E1EA;border-radius:999px;background:#fff;color:#0B1024;font-size:15px;font-weight:800;cursor:pointer">Скачать как есть</button></div>
+    </sc-if>
+
+    <sc-if value="{{ mConfirm }}">
+      <div style="display:flex;gap:10px"><button onClick="{{ closeModal }}" style="flex:1;height:50px;border:1px solid #E3E1EA;border-radius:999px;background:#fff;color:#0B1024;font-size:15px;font-weight:800;cursor:pointer">Отмена</button><button onClick="{{ confirmDel }}" style="flex:1;height:50px;border:none;border-radius:999px;background:#C2272D;color:#fff;font-size:15px;font-weight:800;cursor:pointer">Удалить</button></div>
+    </sc-if>
+  </div>
+</div>
+</sc-if>

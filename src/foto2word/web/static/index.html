@@ -1,0 +1,158 @@
+<!doctype html>
+<html lang="ru">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Фото в Word</title>
+  <link rel="stylesheet" href="/static/styles.css">
+</head>
+<body>
+  <header class="topbar">
+    <a href="/" class="brand">Фото <span>→</span> Word</a>
+    <span class="tagline">Бумажный документ — в аккуратный Word, с учётом правок от руки</span>
+  </header>
+
+  <main>
+    <section id="screen-upload" class="screen">
+      <div class="hero">
+        <h1>Сфотографируйте документ</h1>
+        <p>Мы прочитаем текст дословно, найдём правки ручкой и карандашом и соберём документ Word.</p>
+      </div>
+      <label id="dropzone" class="dropzone" tabindex="0">
+        <input id="file-input" type="file" accept="image/*,application/pdf" multiple hidden>
+        <strong>Перетащите фото сюда</strong>
+        <span>или нажмите, чтобы выбрать. Несколько страниц — несколько фото.</span>
+      </label>
+      <div class="actions-row">
+        <label class="button secondary camera">
+          <input id="camera-input" type="file" accept="image/*" capture="environment" hidden>
+          Сфотографировать
+        </label>
+      </div>
+      <ul id="thumbs" class="thumbs"></ul>
+      <label class="check">
+        <input id="review-toggle" type="checkbox">
+        Самопроверка: сравнить результат с фото ещё раз (дольше, точнее)
+      </label>
+      <button id="start" class="button primary" disabled>Сделать документ</button>
+      <p class="fineprint">Фото и документ удаляются автоматически через 24 часа.</p>
+    </section>
+
+    <section id="screen-progress" class="screen" hidden>
+      <div class="spinner" aria-hidden="true"></div>
+      <h2>Читаем документ…</h2>
+      <p class="muted">Обычно это занимает 20–60 секунд. Самопроверка добавляет ещё столько же.</p>
+    </section>
+
+    <section id="screen-error" class="screen" hidden>
+      <h2>Не получилось</h2>
+      <p id="error-text" class="error"></p>
+      <button class="button primary" data-action="restart">Попробовать снова</button>
+    </section>
+
+    <section id="screen-result" class="screen result" hidden>
+      <div class="viewer">
+        <div class="tabs" role="tablist">
+          <button class="tab active" data-tab="preview" role="tab">Результат</button>
+          <button class="tab" data-tab="photo" role="tab">Оригинал</button>
+        </div>
+        <div id="viewer-preview" class="pages"></div>
+        <div id="viewer-photo" class="pages" hidden></div>
+      </div>
+
+      <aside class="panel">
+        <div class="card actions">
+          <a id="download" class="button primary" href="#">Скачать Word</a>
+          <div class="exports">
+            <a id="download-pdf" class="button secondary small" href="#">PDF</a>
+            <a id="download-scan" class="button secondary small" href="#">Чистый скан</a>
+            <a id="download-xlsx" class="button secondary small" href="#">Таблицы в Excel</a>
+          </div>
+          <button class="button ghost" data-action="restart">Новый документ</button>
+          <p id="status-line" class="fineprint"></p>
+        </div>
+        <div class="card">
+          <h3>Тип документа</h3>
+          <p id="type-guess" class="muted"></p>
+          <select id="type-select"></select>
+        </div>
+
+        <div class="card">
+          <h3>Оформление</h3>
+          <label class="radio"><input type="radio" name="mode" value="faithful"> Как на фото</label>
+          <label class="radio"><input type="radio" name="mode" value="standard"> По стандарту для этого типа</label>
+        </div>
+
+        <div class="card">
+          <h3>Изменить словами</h3>
+          <textarea id="instruction" placeholder="Например: замени Павлова Н.А. на Иванова И.И., дату акта — на 19 октября 2027"></textarea>
+          <button id="instruction-send" class="button secondary">Изменить</button>
+          <p id="instruction-result" class="muted"></p>
+        </div>
+
+        <div class="card">
+          <h3>Обновить на новый период</h3>
+          <p class="muted">Сдвинуть все даты и годы документа (даты выдачи паспорта и т.п. не трогаем).</p>
+          <select id="shift-years">
+            <option value="0">Не менять</option>
+            <option value="1">На год вперёд</option>
+            <option value="2">На 2 года вперёд</option>
+            <option value="-1">На год назад</option>
+          </select>
+          <ul id="date-changes" class="fields"></ul>
+        </div>
+
+        <div class="card" id="card-corrections" hidden>
+          <h3>Правки от руки</h3>
+          <p class="muted">Отметьте, какие исправления применить.</p>
+          <div id="corrections"></div>
+        </div>
+
+        <div class="card" id="card-suggestions" hidden>
+          <h3>Возможные опечатки оригинала</h3>
+          <p class="muted">По умолчанию текст переписан дословно. Отметьте, что исправить.</p>
+          <div id="suggestions"></div>
+        </div>
+
+        <div class="card" id="card-fields" hidden>
+          <h3>Сверьте и при необходимости замените</h3>
+          <p class="muted">Значения подставятся во весь документ — так его можно заполнить заново.</p>
+          <div id="fields"></div>
+          <ul id="flags" class="fields"></ul>
+        </div>
+
+        <div class="card" id="card-signature" hidden>
+          <h3>Подписи</h3>
+          <label class="radio"><input type="radio" name="signature" value="blank"> Пустая линия — подпишу от руки</label>
+          <label class="radio"><input type="radio" name="signature" value="placeholder"> «/подпись/» там, где оригинал подписан (как в копиях)</label>
+          <label class="radio"><input type="radio" name="signature" value="own"> Моя подпись</label>
+          <div id="own-signature" hidden>
+            <canvas id="signature-pad" width="600" height="200" aria-label="Нарисуйте подпись"></canvas>
+            <div class="actions-row">
+              <button id="signature-clear" class="button ghost small">Очистить</button>
+              <label class="button ghost small">
+                <input id="signature-file" type="file" accept="image/*" hidden> Загрузить фото подписи
+              </label>
+            </div>
+            <label class="check"><input id="signature-consent" type="checkbox"> Это моя собственная подпись</label>
+            <button id="signature-save" class="button secondary">Сохранить подпись</button>
+            <p class="muted">Поставить на строки:</p>
+            <div id="signature-lines"></div>
+          </div>
+          <label class="check"><input id="attach-scan" type="checkbox"> Приложить фото оригинала в конце документа</label>
+          <label class="check"><input id="editable" type="checkbox"> Удобно заполнять: строки и рамки растут под текст, ничего не обрезается</label>
+        </div>
+
+        <details class="card" id="card-text">
+          <summary><h3>Править текст</h3></summary>
+          <div id="blocks"></div>
+          <button id="save-edits" class="button secondary">Применить правки текста</button>
+        </details>
+
+      </aside>
+    </section>
+  </main>
+
+  <script src="/static/app.js" type="module"></script>
+</body>
+</html>

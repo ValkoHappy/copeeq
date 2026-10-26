@@ -1,0 +1,108 @@
+<sc-if value="{{ isResult }}" hint-placeholder-val="{{ false }}">
+<div data-screen-label="Результат" style="display:grid;grid-template-columns:108px minmax(0,1fr) minmax(330px,380px);height:100%">
+  <div style="background:#fff;border-right:1px solid #ECEAF0;overflow-y:auto;overflow-x:hidden;padding:16px 12px;display:flex;flex-direction:column;gap:12px;align-items:center">
+    <sc-for list="{{ rThumbs }}" as="t" hint-placeholder-count="3">
+      <button onClick="{{ t.onClick }}" style="position:relative;border:2px solid {{ t.border }};border-radius:8px;padding:3px;background:#fff;cursor:pointer;display:flex;flex-direction:column;align-items:center;gap:4px">
+        <dc-import name="DocSheet" page="{{ t.page }}" variant="word" zoom="0.13" flat="{{ true }}" resolved="{{ t.resolved }}" values="{{ t.values }}" hint-size="77px,109px"></dc-import>
+        <span style="font-size:11px;font-weight:800;color:#4A5368">{{ t.n }}</span>
+        <sc-if value="{{ t.warn }}"><span style="position:absolute;top:-6px;right:-6px;width:18px;height:18px;border-radius:9px;background:#F2B200;color:#3B2600;font-size:11px;font-weight:800;display:flex;align-items:center;justify-content:center">{{ t.warn }}</span></sc-if>
+      </button>
+    </sc-for>
+  </div>
+
+  <div style="display:flex;flex-direction:column;min-width:0;min-height:0;background:#ECEBEF">
+    <div style="height:58px;flex:none;display:flex;align-items:center;gap:12px;padding:0 18px;background:#F6F5F8;border-bottom:1px solid #E3E1EA;flex-wrap:nowrap;overflow:hidden">
+      <div style="display:flex;padding:3px;background:#E3E1EA;border-radius:999px;gap:2px;flex:none">
+        <sc-for list="{{ viewBtns }}" as="v" hint-placeholder-count="3"><button onClick="{{ v.onClick }}" style="height:34px;padding:0 14px;border:none;border-radius:999px;background:{{ v.bg }};color:{{ v.fg }};font-size:13px;font-weight:800;cursor:pointer;box-shadow:{{ v.shadow }};white-space:nowrap">{{ v.label }}</button></sc-for>
+      </div>
+      <div style="display:flex;align-items:center;gap:2px;flex:none">
+        <button onClick="{{ prevPage }}" title="Предыдущая страница" style="width:32px;height:32px;border:none;border-radius:8px;background:transparent;color:#3A4156;cursor:pointer;display:flex;align-items:center;justify-content:center" style-hover="background:#E3E1EA"><span class="material-symbols-rounded" style="font-size:22px">chevron_left</span></button>
+        <span style="font-size:13px;font-weight:800;min-width:46px;text-align:center">{{ pageLabel }}</span>
+        <button onClick="{{ nextPage }}" title="Следующая страница" style="width:32px;height:32px;border:none;border-radius:8px;background:transparent;color:#3A4156;cursor:pointer;display:flex;align-items:center;justify-content:center" style-hover="background:#E3E1EA"><span class="material-symbols-rounded" style="font-size:22px">chevron_right</span></button>
+      </div>
+
+      <sc-if value="{{ userNote }}"><span style="font-size:12px;color:#5B6478;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;min-width:0">Прототип: распознавание показано на примере</span></sc-if>
+      <div style="flex:1"></div>
+      <div style="display:flex;align-items:center;gap:2px;background:#fff;border:1px solid #E3E1EA;border-radius:999px;padding:2px;flex:none">
+        <button onClick="{{ zoomOut }}" title="Уменьшить" style="width:30px;height:30px;border:none;border-radius:15px;background:transparent;color:#3A4156;cursor:pointer;display:flex;align-items:center;justify-content:center"><span class="material-symbols-rounded" style="font-size:18px">remove</span></button>
+        <span style="min-width:44px;text-align:center;font-size:12px;font-weight:800">{{ zoomLabel }}</span>
+        <button onClick="{{ zoomIn }}" title="Увеличить" style="width:30px;height:30px;border:none;border-radius:15px;background:transparent;color:#3A4156;cursor:pointer;display:flex;align-items:center;justify-content:center"><span class="material-symbols-rounded" style="font-size:18px">add</span></button>
+      </div>
+    </div>
+    <sc-if value="{{ isEditView }}"><div style="flex:none;background:#fff;border-bottom:1px solid #ECEAF0;display:flex;align-items:center;gap:4px;padding:6px 14px;flex-wrap:wrap">
+      <sc-for list="{{ tbGroups }}" as="g" hint-placeholder-count="3"><div style="display:flex;align-items:center;gap:2px;padding:0 6px;border-right:1px solid #ECEAF0"><sc-for list="{{ g.items }}" as="t"><button onMouseDown="{{ keepFocus }}" onClick="{{ t.onClick }}" title="{{ t.title }}" style="width:32px;height:32px;border:none;border-radius:9px;background:transparent;color:#3A4156;cursor:pointer;display:flex;align-items:center;justify-content:center" style-hover="background:#F1F0F4"><span class="material-symbols-rounded" style="font-size:19px">{{ t.icon }}</span></button></sc-for></div></sc-for>
+      <input value="{{ edFind }}" onChange="{{ onEdFind }}" placeholder="Найти" style="width:100px;height:32px;border:1px solid #E3E1EA;border-radius:9px;padding:0 9px;font-size:13px;outline:none;margin-left:6px"><input value="{{ edRepl }}" onChange="{{ onEdRepl }}" placeholder="Заменить на" style="width:110px;height:32px;border:1px solid #E3E1EA;border-radius:9px;padding:0 9px;font-size:13px;outline:none"><button onClick="{{ edReplaceAll }}" style="height:32px;padding:0 12px;border:none;border-radius:9px;background:#0B1024;color:#fff;font-size:12px;font-weight:800;cursor:pointer;white-space:nowrap">Заменить все</button>
+      <span style="margin-left:auto;display:flex;align-items:center;gap:6px;font-size:12px;font-weight:700;color:{{ edSave.fg }};white-space:nowrap"><span class="material-symbols-rounded" style="font-size:17px">{{ edSave.icon }}</span>{{ edSave.t }}</span>
+    </div></sc-if>
+    <sc-if value="{{ withPhoto }}"><div style="flex:1;min-height:0;display:flex;flex-direction:column;gap:3px;background:#D9DCE6">
+      <div style="flex:1;min-height:0;position:relative">
+        <span style="position:absolute;left:14px;top:10px;z-index:3;height:26px;padding:0 11px;border-radius:13px;background:rgba(11,16,36,.78);color:#fff;font-size:12px;font-weight:800;display:flex;align-items:center;box-shadow:0 2px 6px rgba(11,16,36,.15)">Фото оригинала</span>
+        <div ref="{{ photoRef }}" onScroll="{{ onScrollP }}" style="position:absolute;inset:0;overflow:auto">
+          <div style="display:flex;flex-direction:column;gap:24px;align-items:center;padding:44px 24px 48px;width:max-content;min-width:100%">
+            <sc-for list="{{ photoSheets }}" as="v" hint-placeholder-count="1">
+          <div data-pg="{{ v.pg }}" style="display:flex;flex-direction:column;gap:10px;align-items:center">
+            <sc-if value="{{ v.label }}"><span style="height:26px;padding:0 12px;border-radius:13px;background:{{ v.chipBg }};color:{{ v.chipFg }};font-size:12px;font-weight:800;display:flex;align-items:center">{{ v.label }}</span></sc-if>
+            <dc-import name="DocSheet" page="{{ v.page }}" variant="{{ v.variant }}" zoom="{{ v.zoom }}" src="{{ v.src }}" resolved="{{ v.resolved }}" values="{{ v.values }}" year-shift="{{ v.shift }}" replaces="{{ v.reps }}" sig="{{ v.sig }}" hl="{{ v.hl }}" fillable="{{ v.fill }}" no-hand="{{ v.noHand }}" on-pick="{{ v.onPick }}" num="{{ v.num }}" editable="{{ v.editable }}" on-field="{{ v.onField }}" hint-size="595px,842px"></dc-import>
+          </div>
+        </sc-for>
+          </div>
+        </div>
+      </div>
+      <div style="flex:1;min-height:0;position:relative">
+        <span style="position:absolute;left:14px;top:10px;z-index:3;height:26px;padding:0 11px;border-radius:13px;background:#1F4EF5;color:#fff;font-size:12px;font-weight:800;display:flex;align-items:center;box-shadow:0 2px 6px rgba(11,16,36,.15)">Редактор</span>
+        <div ref="{{ viewerRef }}" onScroll="{{ onScrollE }}" style="position:absolute;inset:0;overflow:auto">
+          <div style="display:flex;flex-direction:column;gap:24px;align-items:center;padding:44px 24px 48px;width:max-content;min-width:100%">
+            <sc-for list="{{ viewSheets }}" as="v" hint-placeholder-count="1">
+          <div data-pg="{{ v.pg }}" style="display:flex;flex-direction:column;gap:10px;align-items:center">
+            <sc-if value="{{ v.label }}"><span style="height:26px;padding:0 12px;border-radius:13px;background:{{ v.chipBg }};color:{{ v.chipFg }};font-size:12px;font-weight:800;display:flex;align-items:center">{{ v.label }}</span></sc-if>
+            <dc-import name="DocSheet" page="{{ v.page }}" variant="{{ v.variant }}" zoom="{{ v.zoom }}" src="{{ v.src }}" resolved="{{ v.resolved }}" values="{{ v.values }}" year-shift="{{ v.shift }}" replaces="{{ v.reps }}" sig="{{ v.sig }}" hl="{{ v.hl }}" fillable="{{ v.fill }}" no-hand="{{ v.noHand }}" on-pick="{{ v.onPick }}" num="{{ v.num }}" editable="{{ v.editable }}" on-field="{{ v.onField }}" hint-size="595px,842px"></dc-import>
+          </div>
+        </sc-for>
+          </div>
+        </div>
+      </div>
+    </div></sc-if>
+    <sc-if value="{{ noPhoto }}"><div ref="{{ viewerRef }}" style="flex:1;min-height:0;overflow:auto">
+      <div style="min-height:100%;display:flex;flex-direction:column;gap:24px;justify-content:center;align-items:center;padding:28px 24px 56px;width:max-content;min-width:100%">
+        <sc-for list="{{ viewSheets }}" as="v" hint-placeholder-count="1">
+          <div data-pg="{{ v.pg }}" style="display:flex;flex-direction:column;gap:10px;align-items:center">
+            <sc-if value="{{ v.label }}"><span style="height:26px;padding:0 12px;border-radius:13px;background:{{ v.chipBg }};color:{{ v.chipFg }};font-size:12px;font-weight:800;display:flex;align-items:center">{{ v.label }}</span></sc-if>
+            <dc-import name="DocSheet" page="{{ v.page }}" variant="{{ v.variant }}" zoom="{{ v.zoom }}" src="{{ v.src }}" resolved="{{ v.resolved }}" values="{{ v.values }}" year-shift="{{ v.shift }}" replaces="{{ v.reps }}" sig="{{ v.sig }}" hl="{{ v.hl }}" fillable="{{ v.fill }}" no-hand="{{ v.noHand }}" on-pick="{{ v.onPick }}" num="{{ v.num }}" editable="{{ v.editable }}" on-field="{{ v.onField }}" hint-size="595px,842px"></dc-import>
+          </div>
+        </sc-for>
+      </div>
+    </div></sc-if>
+
+  </div>
+
+  <aside style="background:#fff;border-left:1px solid #ECEAF0;display:flex;flex-direction:column;min-height:0">
+    <div style="padding:18px 20px 0;display:flex;flex-direction:column;gap:12px">
+      <div style="display:flex;align-items:center;gap:10px">
+        <span style="flex:1;min-width:0;display:flex;flex-direction:column;gap:2px"><span style="font-size:12px;font-weight:700;color:#8A90A2">Определили тип</span><span style="font-size:18px;font-weight:800;letter-spacing:-0.02em;white-space:nowrap;overflow:hidden;text-overflow:ellipsis">{{ cur.type }}</span></span>
+        <select value="{{ cur.type }}" onChange="{{ onType }}" aria-label="Другой тип документа" style="height:36px;border:1px solid #D9D6DF;border-radius:10px;padding:0 8px;font-size:13px;font-weight:700;background:#fff;color:#0B1024;max-width:130px"><option value="Анкета соискателя">Анкета соискателя</option><option value="Заявление о приёме">Заявление о приёме</option><option value="Заявление о приёме на работу">Заявление о приёме на работу</option><option value="Акт выполненных работ">Акт выполненных работ</option><option value="Договор">Договор</option><option value="Справка">Справка</option><option value="Другой документ">Другой документ</option></select>
+      </div>
+      <div style="display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:6px">
+        <sc-for list="{{ quick }}" as="q" hint-placeholder-count="4"><button onClick="{{ q.onClick }}" title="{{ q.label }}" style="display:flex;flex-direction:column;align-items:center;gap:4px;padding:8px 2px 9px;border:1.5px solid {{ q.border }};border-radius:14px;background:{{ q.bg }};cursor:pointer;font-size:11.5px;font-weight:800;color:#0B1024;line-height:1.15;text-align:center"><img src="{{ q.ico }}" alt="" style="width:34px;height:34px">{{ q.label }}</button></sc-for>
+      </div>
+    </div>
+    <div style="flex:1;min-height:0;overflow:auto;padding:16px 20px 20px;display:flex;flex-direction:column;gap:12px">
+      <div style="border:1px solid #ECEAF0;border-radius:18px;overflow:hidden;flex:none">
+        <button onClick="{{ sCheck.toggle }}" style="width:100%;display:flex;align-items:center;gap:10px;padding:10px 12px;border:none;background:#fff;cursor:pointer;text-align:left"><img src="{{ sCheck.ico }}" alt="" style="width:34px;height:34px;flex:none;margin:-4px"><span style="flex:1;min-width:0;display:flex;flex-direction:column"><span style="font-size:14px;font-weight:800;color:#0B1024">Проверка</span><span style="font-size:12px;font-weight:700;color:{{ sCheck.fg }};white-space:nowrap;overflow:hidden;text-overflow:ellipsis">{{ sCheck.status }}</span></span><span class="material-symbols-rounded" style="font-size:22px;color:#8A90A2">{{ sCheck.chev }}</span></button>
+        <sc-if value="{{ sCheck.open }}"><div style="padding:4px 12px 14px;display:flex;flex-direction:column;gap:12px">
+        <sc-if value="{{ noDoubts }}"><div style="display:flex;flex-direction:column;gap:8px;align-items:center;text-align:center;padding:28px 10px"><img src="{{ doneIco }}" alt="" style="width:72px;height:72px"><span style="font-size:16px;font-weight:800">{{ doubtsDoneTitle }}</span><span style="font-size:13px;line-height:1.5;color:#5B6478">Сравните с фото в режиме «Рядом» и скачивайте.</span></div></sc-if>
+        <sc-for list="{{ doubtCards }}" as="d" hint-placeholder-count="3">
+          <div onClick="{{ d.onFocus }}" style="border:1.5px solid {{ d.border }};border-radius:18px;padding:14px;display:flex;flex-direction:column;gap:10px;cursor:pointer;background:#fff">
+            <div style="display:flex;align-items:center;gap:8px"><span style="width:10px;height:10px;border-radius:5px;background:{{ d.dot }}"></span><span style="font-size:12px;font-weight:700;color:#5B6478;flex:1">{{ d.label }} · стр. {{ d.pn }}</span><sc-if value="{{ d.done }}"><span style="font-size:12px;font-weight:800;color:#15803D">{{ d.doneLabel }}</span></sc-if></div>
+            <span style="font-family:'PT Serif',serif;font-size:17px;line-height:1.35">{{ d.value }}</span>
+            <sc-if value="{{ d.open }}"><div style="display:flex;gap:8px"><button onClick="{{ d.onAccept }}" style="flex:1;height:38px;border:none;border-radius:999px;background:#1F4EF5;color:#fff;font-size:13px;font-weight:800;cursor:pointer">Принять</button><button onClick="{{ d.onFix }}" style="flex:1;height:38px;border:1px solid #D9D6DF;border-radius:999px;background:#fff;color:#0B1024;font-size:13px;font-weight:800;cursor:pointer">Исправить</button></div></sc-if>
+            <sc-if value="{{ d.editing }}">
+              <div style="display:flex;flex-direction:column;gap:8px">
+                <div style="display:flex;gap:6px;flex-wrap:wrap"><sc-for list="{{ d.alts }}" as="a"><button onClick="{{ a.onClick }}" style="height:32px;padding:0 12px;border-radius:999px;border:1px solid #D9D6DF;background:#fff;color:#0B1024;font-size:13px;font-weight:700;cursor:pointer" style-hover="border-color:#1F4EF5">{{ a.v }}</button></sc-for></div>
+                <div style="display:flex;gap:6px"><input value="{{ d.draft }}" onChange="{{ d.onDraft }}" onClick="{{ stop }}" placeholder="Свой вариант" style="flex:1;min-width:0;height:38px;border:1px solid #D9D6DF;border-radius:10px;padding:0 10px;font-size:14px;outline:none" style-focus="border-color:#1F4EF5"><button onClick="{{ d.onSave }}" style="height:38px;padding:0 14px;border:none;border-radius:10px;background:#0B1024;color:#fff;font-size:13px;font-weight:800;cursor:pointer">Сохранить</button></div>
+              </div>
+            </sc-if>
+          </div>
+        </sc-for>
+      </sc-if>
+
+      </div></sc-if>

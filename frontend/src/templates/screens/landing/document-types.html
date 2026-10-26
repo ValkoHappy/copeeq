@@ -1,0 +1,6 @@
+  <section style="max-width:1240px;margin:0 auto;padding:0 40px 88px;display:flex;flex-direction:column;gap:28px">
+    <h2 style="margin:0;font-size:clamp(30px,3.2vw,44px);line-height:1.05;font-weight:800;letter-spacing:-0.04em">Для каких документов</h2>
+    <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(150px,1fr));gap:12px">
+      <sc-for list="{{ typeTiles }}" as="t" hint-placeholder-count="7"><button onClick="{{ t.onClick }}" style="background:#fff;border:none;border-radius:22px;padding:18px;display:flex;flex-direction:column;gap:12px;cursor:pointer;text-align:left;box-shadow:0 0 0 1px rgba(11,16,36,0);transition:box-shadow .25s ease,background .25s ease" style-hover="background:#FBFBFE;box-shadow:0 0 0 1px #E6E9F5,0 6px 16px rgba(11,16,36,.04)"><img src="{{ t.ico }}" alt="" style="width:64px;height:64px;margin:-4px 0 0 -4px"><span style="font-size:15px;font-weight:800;color:#0B1024">{{ t.label }}</span></button></sc-for>
+    </div>
+  </section>
