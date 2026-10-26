@@ -1,4 +1,4 @@
-/** State port: isolates feature controllers from the Claude rendering runtime. */
+/** State port: isolates feature controllers from the rendering runtime. */
 export class ComponentStore {
   constructor(component) {
     this.component = component;
