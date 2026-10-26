@@ -305,6 +305,8 @@ def detect_previewer() -> Previewer | None:
 
 
 def _word_installed() -> bool:
+    if sys.platform != "win32":
+        return False
     try:
         import winreg  # noqa: PLC0415 - Windows-only module
 
