@@ -4,11 +4,11 @@
       <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,420px),1fr));gap:24px 48px;align-items:end">
         <div style="display:flex;flex-direction:column;gap:16px">
           <span style="display:flex;align-items:center;gap:12px;font-size:12px;font-weight:800;letter-spacing:.12em;text-transform:uppercase;color:#1F4EF5">Свой редактор</span>
-          <h2 style="margin:0;font-size:clamp(34px,3.8vw,52px);line-height:1.02;font-weight:800;letter-spacing:-0.045em;text-wrap:balance">Доправьте документ прямо в браузере</h2>
+          <h2 style="margin:0;font-size:clamp(34px,3.8vw,52px);line-height:1.02;font-weight:800;letter-spacing:-0.045em;text-wrap:balance">Отредактируйте документ в браузере</h2>
         </div>
         <div style="display:flex;flex-direction:column;gap:14px">
-          <p style="margin:0;font-size:17px;line-height:1.55;color:#4A5368;max-width:520px;text-wrap:pretty">Word на компьютере не нужен. Copeeq открывает результат в своём редакторе: впишите данные, поставьте галочки и подпись — и скачайте готовый .docx.</p>
-          <span style="font-family:Caveat,cursive;font-size:26px;line-height:1.1;color:#1F4EF5;transform:rotate(-1.5deg);align-self:flex-start">попробуйте — всё ниже работает ↓</span>
+          <p style="margin:0;font-size:17px;line-height:1.55;color:#4A5368;max-width:520px;text-wrap:pretty">Откройте результат в редакторе Copeeq. Можно заполнить поля, исправить текст и добавить подпись перед сохранением в Word.</p>
+          <span style="font-family:Caveat,cursive;font-size:26px;line-height:1.1;color:#1F4EF5;transform:rotate(-1.5deg);align-self:flex-start">Попробуйте редактор на этом заявлении</span>
         </div>
       </div>
 
@@ -51,7 +51,7 @@
             <div style="display:flex;align-items:center;gap:8px"><span class="material-symbols-rounded" style="font-size:19px;color:#1F4EF5">dynamic_form</span><span style="font-size:14px;font-weight:800">Поля документа</span></div>
             <label style="display:flex;flex-direction:column;gap:5px;font-size:11px;font-weight:700;color:#7A8296">ФИО<input value="{{ L.demo.fio }}" onChange="{{ onDemoFio }}" aria-label="ФИО — панель" style="height:36px;border:1px solid #DCE2EE;border-radius:9px;padding:0 10px;font-size:13px;font-weight:500;color:#0B1024;background:#fff;outline:none;width:100%" style-focus="border-color:#1F4EF5;box-shadow:0 0 0 3px rgba(31,78,245,.15)"></label>
             <label style="display:flex;flex-direction:column;gap:5px;font-size:11px;font-weight:700;color:#7A8296">Дата<input value="{{ L.demo.date }}" onChange="{{ onDemoDate }}" aria-label="Дата — панель" style="height:36px;border:1px solid #DCE2EE;border-radius:9px;padding:0 10px;font-size:13px;font-weight:500;color:#0B1024;background:#fff;outline:none;width:100%" style-focus="border-color:#1F4EF5;box-shadow:0 0 0 3px rgba(31,78,245,.15)"></label>
-            <div style="font-size:12px;line-height:1.45;color:#5B6478">Меняйте здесь или прямо на листе — значения связаны.</div>
+            <div style="font-size:12px;line-height:1.45;color:#5B6478">Изменения в полях сразу видны на странице.</div>
             <div style="height:1px;background:#EEF0F4"></div>
             <div style="display:flex;flex-direction:column;gap:8px">
               <sc-for list="{{ demoFeats }}" as="f"><div style="display:flex;gap:10px;align-items:center;font-size:13px;color:#3A4156"><span class="material-symbols-rounded" style="font-size:18px;color:#1F4EF5">{{ f.i }}</span>{{ f.t }}</div></sc-for>
@@ -62,7 +62,7 @@
 
       <div style="display:flex;align-items:center;gap:16px 28px;flex-wrap:wrap">
         <button onClick="{{ goNew }}" style="height:54px;padding:0 26px;border:none;border-radius:999px;background:#1F4EF5;color:#fff;font-size:16px;font-weight:800;display:flex;align-items:center;gap:10px;cursor:pointer" style-hover="background:#1740D8">Открыть свой документ в редакторе<span class="material-symbols-rounded" style="font-size:22px">arrow_forward</span></button>
-        <span style="font-size:14px;color:#5B6478">Правки бесплатные — кредиты списываются только за распознавание.</span>
+        <span style="font-size:14px;color:#5B6478">За правки доплачивать не нужно. Кредиты списываются при первом скачивании.</span>
       </div>
     </div>
   </section>

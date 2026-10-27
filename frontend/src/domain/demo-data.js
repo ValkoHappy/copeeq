@@ -26,8 +26,8 @@ export const SAMPLES = [
   },
   {
     id: "blur",
-    label: "Размытое фото",
-    sub: "Как выглядит ошибка",
+    label: "Нечитаемый снимок",
+    sub: "Пример ошибки распознавания",
     type: "Анкета соискателя",
     pages: [["ank1", "IMG_4030.jpg", 0, 1]],
   },
@@ -82,9 +82,9 @@ export const SIGS = {
 };
 export const TABLES = { ank2: 1, akt: 1 };
 export const STEPS = [
-  "Изучаем фото",
+  "Читаем документ",
   "Переносим в Word",
-  "Сверяем и доделываем",
+  "Проверяем распознавание",
 ];
 export const CYCLE = ["ank1", "ank2", "ank3", "zayav", "akt"];
 export const APP = [

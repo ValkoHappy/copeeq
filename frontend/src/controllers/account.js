@@ -51,7 +51,7 @@ export class AccountController {
         }),
         exportData: () =>
           this.ports.toast(
-            "Готовим архив — ссылка придёт на " + st.email,
+            "Выгрузка архива пока не подключена. Почта аккаунта: " + st.email,
             "archive",
           ),
         askDelAccount: () => this.store.update({ modal: "delacc" }),

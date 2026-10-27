@@ -118,7 +118,7 @@ export class ResultViewController {
       ? {
           icon: "verified",
           ic: "#16A34A",
-          text: "Оплачено. Повторные скачивания и другие форматы — бесплатно.",
+          text: "Оплачено. Повторное скачивание и другие форматы доступны без доплаты.",
         }
       : !st.authed
         ? {
@@ -127,7 +127,7 @@ export class ResultViewController {
             text:
               "Стоимость — " +
               kr(cur.cost) +
-              ". Спишем при первом скачивании — бесплатные страницы.",
+              ". Спишем при первом скачивании из бесплатных кредитов.",
           }
         : tot >= cur.cost
           ? {
@@ -190,10 +190,7 @@ export class ResultViewController {
         const v = e.target.value;
         this.ports.patchCur({ type: v });
         this.ports.setDoc(cur.id, { type: v });
-        this.ports.toast(
-          "Пересобрали разметку под тип «" + v + "». Бесплатно.",
-          "category",
-        );
+        this.ports.toast("Выбран тип документа «" + v + "».", "category");
       },
       rThumbs: cur.pages.map((p, i) => ({
         key: p.id,
@@ -358,8 +355,8 @@ export class ResultViewController {
             this.ports.patchCur({ mode: id });
             this.ports.toast(
               id === "clean"
-                ? "Привели к ГОСТ Р 7.0.97-2016 — бесплатно"
-                : "Вернули оформление как в оригинале",
+                ? "Выбрано оформление делового документа"
+                : "Выбран режим «Копия»",
               "auto_awesome",
             );
           },

@@ -3,14 +3,14 @@
       <div style="display:flex;justify-content:space-between;align-items:flex-end;gap:20px 40px;flex-wrap:wrap">
         <div style="display:flex;flex-direction:column;gap:14px;max-width:620px">
           <span style="font-family:Caveat,cursive;font-size:28px;color:#8FB0FF;transform:rotate(-2deg);align-self:flex-start">режим «Чистовик»</span>
-          <h2 style="margin:0;font-size:clamp(34px,3.8vw,52px);line-height:1.02;font-weight:800;letter-spacing:-0.045em">Не просто копия — документ по стандарту</h2>
-          <p style="margin:0;font-size:17px;line-height:1.55;color:#C9CEDD">Деловое письмо по ГОСТ Р 7.0.97-2016, реферат по требованиям вуза, фирменный шаблон компании. Всё сделано стилями Word — дальше легко править.</p>
+          <h2 style="margin:0;font-size:clamp(34px,3.8vw,52px);line-height:1.02;font-weight:800;letter-spacing:-0.045em">Единое оформление в режиме «Чистовик»</h2>
+          <p style="margin:0;font-size:17px;line-height:1.55;color:#C9CEDD">Выберите настройки для делового документа или учебной работы. Поля, интервалы и заголовки задаются стилями Word, их можно изменить после скачивания.</p>
         </div>
         <button onClick="{{ goChistovik }}" style="height:48px;padding:0 22px;border:1px solid #39406A;border-radius:999px;background:transparent;color:#fff;font-size:15px;font-weight:700;cursor:pointer;white-space:nowrap" style-hover="border-color:#8FB0FF">Подробнее о «Чистовике»</button>
       </div>
       <div style="display:flex;gap:28px;flex-wrap:wrap;justify-content:center;align-items:flex-start">
-        <div style="display:flex;flex-direction:column;gap:10px;align-items:center"><dc-import name="DocSheet" page="akt" variant="plain" zoom="0.55" hint-size="327px,463px"></dc-import><span style="font-size:14px;font-weight:700;color:#9AA3BF">Сырой OCR</span></div>
-        <div style="display:flex;flex-direction:column;gap:10px;align-items:center"><dc-import name="DocSheet" page="akt" variant="word" zoom="0.55" hint-size="327px,463px"></dc-import><span style="font-size:14px;font-weight:700;color:#fff">«Чистовик» по ГОСТ Р 7.0.97</span></div>
+        <div style="display:flex;flex-direction:column;gap:10px;align-items:center"><dc-import name="DocSheet" page="akt" variant="plain" zoom="0.55" hint-size="327px,463px"></dc-import><span style="font-size:14px;font-weight:700;color:#9AA3BF">Распознанный текст</span></div>
+        <div style="display:flex;flex-direction:column;gap:10px;align-items:center"><dc-import name="DocSheet" page="akt" variant="word" zoom="0.55" hint-size="327px,463px"></dc-import><span style="font-size:14px;font-weight:700;color:#fff">«Чистовик» · деловой документ</span></div>
         <div style="flex:0 1 280px;display:flex;flex-direction:column;gap:10px">
           <sc-for list="{{ stdNotes }}" as="n" hint-placeholder-count="6"><div style="display:flex;gap:12px;align-items:center;background:#161D3A;border-radius:14px;padding:12px 14px;font-size:14px"><span class="material-symbols-rounded" style="font-size:20px;color:#8FB0FF">{{ n.icon }}</span><span style="flex:1">{{ n.t }}</span></div></sc-for>
         </div>

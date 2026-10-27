@@ -27,7 +27,7 @@ export class PaymentResultController {
             text:
               "Кредиты уже на балансе: " +
               kr(this.ports.total()) +
-              ". Чек отправили на почту.",
+              ". Реальная оплата не проводилась.",
             primaryLabel: back ? "Вернуться к документу" : "Загрузить документ",
             primary: () => this.ports.go(back ? "result" : "new"),
           }
@@ -37,7 +37,7 @@ export class PaymentResultController {
             bg: "#FDECEC",
             fg: "#C2272D",
             title: "Оплата не прошла",
-            text: "Деньги не списаны. Попробуйте другую карту или СБП — документ сохранён и ждёт вас.",
+            text: "Оплата не завершена. Документ остаётся открытым. Можно вернуться к выбору способа оплаты.",
             primaryLabel: "Попробовать снова",
             primary: () =>
               this.store.update({

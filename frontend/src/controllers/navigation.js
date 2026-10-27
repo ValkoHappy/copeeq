@@ -53,7 +53,7 @@ export class NavigationController {
       return;
     }
     this.ports.toast(
-      "Сначала откройте документ — затем его можно править в редакторе.",
+      "Откройте документ, чтобы перейти к редактированию.",
       "edit_document",
       "Мои документы",
       () => this.go("docs"),

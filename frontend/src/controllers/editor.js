@@ -39,14 +39,14 @@ export class EditorController {
       .match(/^замени(?:ть)?\s+[«"]?(.+?)[»"]?\s+на\s+[«"]?(.*?)[»"]?$/i);
     if (!m) {
       this.ports.toast(
-        "Пока понимаем команды вида «замени 2024 на 2025».",
+        "Введите замену в формате «замени 2024 на 2025».",
         "info",
       );
       return;
     }
     this.ports.patchCur((c) => ({ reps: [...c.reps, [m[1], m[2]]], cmd: "" }));
     this.ports.toast(
-      "Заменили «" + m[1] + "» на «" + m[2] + "» во всём документе. Бесплатно.",
+      "Заменили «" + m[1] + "» на «" + m[2] + "» во всём документе.",
       "find_replace",
     );
   }
@@ -54,7 +54,7 @@ export class EditorController {
   undo() {
     this.ensureHistory();
     if (!this.hist || !this.hist.length) {
-      this.ports.toast("Отменять нечего", "undo");
+      this.ports.toast("Пока нет изменений для отмены", "undo");
       return;
     }
     this.fut = this.fut || [];

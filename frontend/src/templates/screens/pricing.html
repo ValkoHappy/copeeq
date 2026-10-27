@@ -1,6 +1,6 @@
 <sc-if value="{{ isPricing }}" hint-placeholder-val="{{ false }}">
 <div data-screen-label="Цены" style="max-width:1240px;margin:0 auto;padding:56px 40px 40px;display:flex;flex-direction:column;gap:40px">
-  <div style="display:flex;flex-direction:column;gap:14px;max-width:760px"><h1 style="margin:0;font-size:clamp(40px,5vw,64px);line-height:1;font-weight:800;letter-spacing:-0.05em">Цены. 1 кредит ≈ 1 ₽.</h1><p style="margin:0;font-size:18px;line-height:1.5;color:#4A5368">Обработка и просмотр — бесплатно. Платите при скачивании, повторные скачивания и другие форматы — без доплаты. Здесь те же пакеты, что на главной, плюс подробности: сколько стоит каждая операция и что выгоднее.</p></div>
+  <div style="display:flex;flex-direction:column;gap:14px;max-width:760px"><h1 style="margin:0;font-size:clamp(40px,5vw,64px);line-height:1;font-weight:800;letter-spacing:-0.05em">Стоимость обработки</h1><p style="margin:0;font-size:18px;line-height:1.5;color:#4A5368">Обработка и просмотр бесплатны. Кредиты списываются при первом скачивании. Повторно скачать документ или выбрать другой формат можно без доплаты.</p></div>
   <div style="display:flex;flex-direction:column;gap:40px">
     <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));border-top:1px solid #DDE0EA;border-bottom:1px solid #DDE0EA">
       <sc-for list="{{ planCards }}" as="p" hint-placeholder-count="4">
@@ -15,18 +15,18 @@
         </div>
       </sc-for>
     </div>
-    <span style="font-size:13px;color:#5B6478;margin-top:-24px">Документ — в среднем 3 печатные страницы (15 кредитов): заявление, анкета, акт.</span>
+    <span style="font-size:13px;color:#5B6478;margin-top:-24px">Для сравнения пакетов взят документ из 3 печатных страниц в режиме «Копия». Он стоит 15 кредитов.</span>
     <div style="position:relative;overflow:hidden;isolation:isolate;background:#0B1024;color:#fff;border-radius:28px;padding:30px 36px;display:flex;align-items:center;gap:20px 40px;flex-wrap:wrap">
       <div aria-hidden="true" style="position:absolute;right:-60px;top:-120px;width:360px;height:360px;border-radius:50%;background:radial-gradient(circle,rgba(31,78,245,.55),rgba(31,78,245,0) 70%);z-index:-1"></div>
-      <span style="display:flex;flex-direction:column;gap:4px;flex:none;min-width:150px"><span style="display:flex;align-items:center;gap:8px"><span style="font-size:72px;font-weight:800;letter-spacing:-0.06em;line-height:.9">25</span><img src="{{ coinWhite }}" alt="" style="width:48px;height:48px"></span><span style="font-size:14px;font-weight:800;color:#8FB0FF">в подарок</span></span>
-      <span style="flex:1;min-width:260px;display:flex;flex-direction:column;gap:8px"><span style="font-size:clamp(22px,2.4vw,30px);font-weight:800;letter-spacing:-0.03em;line-height:1.1">Попробуйте Copeeq на своём документе</span><span style="font-size:15px;line-height:1.5;color:#C9CEDD">После регистрации начислим 25 кредитов — хватит на 5 печатных страниц и скачивание Word. Карта не нужна.</span></span>
+      <span style="display:flex;flex-direction:column;gap:4px;flex:none;min-width:150px"><span style="display:flex;align-items:center;gap:8px"><span style="font-size:72px;font-weight:800;letter-spacing:-0.06em;line-height:.9">25</span><img src="{{ coinWhite }}" alt="" style="width:48px;height:48px"></span><span style="font-size:14px;font-weight:800;color:#8FB0FF">для начала</span></span>
+      <span style="flex:1;min-width:260px;display:flex;flex-direction:column;gap:8px"><span style="font-size:clamp(22px,2.4vw,30px);font-weight:800;letter-spacing:-0.03em;line-height:1.1">Попробуйте Copeeq на своём документе</span><span style="font-size:15px;line-height:1.5;color:#C9CEDD">После регистрации доступны 25 кредитов. Этого хватит на 5 печатных страниц в режиме «Копия». Банковская карта не нужна.</span></span>
       <button onClick="{{ goNew }}" style="height:54px;padding:0 28px;border:none;border-radius:999px;background:#1F4EF5;color:#fff;font-size:16px;font-weight:800;cursor:pointer;white-space:nowrap" style-hover="background:#3B66FF">Попробовать бесплатно</button>
     </div>
 </div>
   <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,460px),1fr));gap:16px;align-items:start">
     <div style="background:#fff;border-radius:26px;overflow:hidden"><div style="padding:20px 24px;font-size:19px;font-weight:800;border-bottom:1px solid #F1F0F4">Сколько стоит операция</div><sc-for list="{{ opsRows }}" as="o" hint-placeholder-count="6"><div style="display:flex;align-items:center;gap:16px;padding:14px 24px;border-bottom:1px solid #F6F5F8"><span style="flex:1;font-size:14px;line-height:1.45">{{ o.t }}</span><span style="min-width:44px;height:30px;padding:0 10px;border-radius:15px;background:{{ o.bg }};color:{{ o.fg }};font-size:14px;font-weight:800;display:flex;align-items:center;justify-content:center">{{ o.n }}</span></div></sc-for></div>
     <div style="background:#0B1024;color:#fff;border-radius:26px;padding:28px;display:flex;flex-direction:column;gap:18px">
-      <span style="font-size:20px;font-weight:800">Что выгоднее: пакет или подписка?</span>
+      <span style="font-size:20px;font-weight:800">Подберите пакет по числу страниц</span>
       <div style="display:flex;align-items:center;gap:16px"><input type="range" min="5" max="400" step="5" value="{{ priceCalc }}" onChange="{{ onPriceCalc }}" aria-label="Страниц в месяц" style="flex:1"><span style="min-width:120px;text-align:right;font-size:22px;font-weight:800">{{ priceCalc }} стр./мес</span></div>
       <div style="background:#1F4EF5;border-radius:18px;padding:18px;display:flex;flex-direction:column;gap:4px"><span style="font-size:13px;color:#DCE5FF">Советуем</span><span style="font-size:24px;font-weight:800">{{ calcBest.name }}</span><span style="font-size:14px;color:#E3EAFF">{{ calcBest.note }}</span></div>
     </div>

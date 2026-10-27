@@ -325,7 +325,7 @@ export class ShellController {
             ["examples", "Примеры"],
             ["pricing", "Цены"],
             ["faq", "Вопросы"],
-            ["chistovik", "Оформление по ГОСТу"],
+            ["chistovik", "Режим «Чистовик»"],
             ["students", "Студентам"],
             ["business", "Для бизнеса"],
           ],
@@ -356,10 +356,10 @@ export class ShellController {
           key: "c4",
           title: "Документы",
           items: [
-            ["legal:offer", "Оферта"],
+            ["legal:offer", "Условия использования"],
             ["legal:privacy", "Персональные данные"],
             ["security", "Данные и безопасность"],
-            ["legal:contacts", "Контакты и реквизиты"],
+            ["legal:contacts", "Контакты"],
           ],
         },
       ].map((c) => ({

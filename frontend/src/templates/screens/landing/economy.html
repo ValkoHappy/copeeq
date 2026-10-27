@@ -1,5 +1,5 @@
   <section style="position:relative;isolation:isolate;overflow:hidden;max-width:1240px;margin:0 auto;padding:88px 40px 72px;display:flex;flex-direction:column;gap:28px">
-    <div style="display:flex;align-items:flex-end;justify-content:space-between;gap:16px 40px;flex-wrap:wrap"><div style="display:flex;flex-direction:column;gap:14px"><h2 style="margin:0;font-size:clamp(34px,3.8vw,52px);line-height:1.02;font-weight:800;letter-spacing:-0.045em;max-width:620px">Меньше ручной работы — больше готовых документов</h2></div><span style="font-size:13px;color:#8A90A2;max-width:300px">Тестовые значения. Экономия: страницы × 15 минут на поля, шрифты и таблицы.</span></div>
+    <div style="display:flex;align-items:flex-end;justify-content:space-between;gap:16px 40px;flex-wrap:wrap"><div style="display:flex;flex-direction:column;gap:14px"><h2 style="margin:0;font-size:clamp(34px,3.8vw,52px);line-height:1.02;font-weight:800;letter-spacing:-0.045em;max-width:620px">Сколько времени занимает оформление</h2></div><span style="font-size:13px;color:#8A90A2;max-width:300px">Расчёт ниже помогает сравнить ручное оформление и работу в Copeeq. Время условное и зависит от документа.</span></div>
     <div style="display:grid;grid-template-columns:repeat(4,minmax(0,1fr));border-radius:28px;overflow:hidden;background:#fff;box-shadow:0 1px 2px rgba(11,16,36,.04)">
       <sc-for list="{{ counters }}" as="c" hint-placeholder-count="4"><div style="background:{{ c.bg }};color:{{ c.fg }};padding:26px 24px;display:flex;flex-direction:column;gap:10px;border-right:1px solid {{ c.line }}"><span style="font-size:12px;font-weight:800;letter-spacing:.1em;text-transform:uppercase;opacity:.7">{{ c.k }}</span><span style="font-size:clamp(30px,3.2vw,46px);font-weight:800;letter-spacing:-0.045em;line-height:1">{{ c.v }}</span><span style="font-size:14px;line-height:1.4;opacity:.8">{{ c.t }}</span></div></sc-for>
     </div>
@@ -7,8 +7,8 @@
   <div style="background:#0B1024;color:#fff;border-radius:28px;padding:32px;display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,360px),1fr));gap:28px 44px">
       <div style="display:flex;flex-direction:column;gap:20px;min-width:0">
         <div style="display:flex;flex-direction:column;gap:8px">
-          <span style="font-size:22px;font-weight:800;letter-spacing:-0.02em;line-height:1.2">Сколько времени уйдёт на ваши документы</span>
-          <span style="font-size:14px;line-height:1.55;color:#AEB6CC;text-wrap:pretty">Обычно так: сканер достаёт текст за пару минут, а потом его вручную расставляют по полям, клеткам и таблицам. Copeeq сразу отдаёт готовый Word — остаётся проверить.</span>
+          <span style="font-size:22px;font-weight:800;letter-spacing:-0.02em;line-height:1.2">Оцените время на обработку документов</span>
+          <span style="font-size:14px;line-height:1.55;color:#AEB6CC;text-wrap:pretty">Выберите тип документа, число страниц и стоимость часа работы. Калькулятор сравнит время на ручное оформление с загрузкой и проверкой результата.</span>
         </div>
         <div style="display:flex;flex-direction:column;gap:10px">
           <span style="font-size:12px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;color:#7F89A6">Какие документы</span>
@@ -30,19 +30,19 @@
       </div>
       <div style="display:flex;flex-direction:column;gap:14px;min-width:0">
         <div style="background:#161D3A;border-radius:18px;padding:18px 20px;display:flex;flex-direction:column;gap:10px">
-          <div style="display:flex;align-items:baseline;justify-content:space-between;gap:12px"><span style="font-size:14px;font-weight:700;color:#C9D1E6">Сканер + ручное оформление</span><span style="font-size:22px;font-weight:800;white-space:nowrap">{{ ec.oldH }}</span></div>
+          <div style="display:flex;align-items:baseline;justify-content:space-between;gap:12px"><span style="font-size:14px;font-weight:700;color:#C9D1E6">Распознавание и ручное оформление</span><span style="font-size:22px;font-weight:800;white-space:nowrap">{{ ec.oldH }}</span></div>
           <div style="height:10px;border-radius:5px;background:#252D4D;overflow:hidden"><div style="height:100%;width:100%;background:#5B6478;border-radius:5px"></div></div>
           <span style="font-size:12px;color:#8F98B3">{{ ec.oldNote }}</span>
         </div>
         <div style="background:#161D3A;border-radius:18px;padding:18px 20px;display:flex;flex-direction:column;gap:10px">
           <div style="display:flex;align-items:baseline;justify-content:space-between;gap:12px"><span style="font-size:14px;font-weight:700;color:#fff">Copeeq</span><span style="font-size:22px;font-weight:800;white-space:nowrap;color:#8FB0FF">{{ ec.newH }}</span></div>
           <div style="height:10px;border-radius:5px;background:#252D4D;overflow:hidden"><div style="height:100%;width:{{ ec.newPct }};background:#1F4EF5;border-radius:5px;transition:width .3s"></div></div>
-          <span style="font-size:12px;color:#8F98B3">≈ 1 мин на страницу: загрузить и проверить</span>
+          <span style="font-size:12px;color:#8F98B3">В расчёте отведена 1 минута на загрузку и проверку страницы</span>
         </div>
         <div style="background:#1F4EF5;border-radius:18px;padding:18px 20px;display:flex;flex-direction:column;gap:14px">
           <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:12px 20px">
-            <span style="display:flex;flex-direction:column;gap:2px"><span style="font-size:13px;font-weight:600;color:#DCE5FF">Освободится в месяц</span><span style="font-size:34px;font-weight:800;letter-spacing:-0.03em;line-height:1.05">{{ ec.saveH }}</span></span>
-            <span style="display:flex;flex-direction:column;gap:2px"><span style="font-size:13px;font-weight:600;color:#DCE5FF">Сэкономите в месяц</span><span style="font-size:34px;font-weight:800;letter-spacing:-0.03em;line-height:1.05">{{ ec.netRub }}</span></span>
+            <span style="display:flex;flex-direction:column;gap:2px"><span style="font-size:13px;font-weight:600;color:#DCE5FF">Разница во времени за месяц</span><span style="font-size:34px;font-weight:800;letter-spacing:-0.03em;line-height:1.05">{{ ec.saveH }}</span></span>
+            <span style="display:flex;flex-direction:column;gap:2px"><span style="font-size:13px;font-weight:600;color:#DCE5FF">Разница в затратах за месяц</span><span style="font-size:34px;font-weight:800;letter-spacing:-0.03em;line-height:1.05">{{ ec.netRub }}</span></span>
           </div>
           <span style="font-size:13px;line-height:1.45;color:#DCE5FF;padding-top:12px;border-top:1px solid rgba(255,255,255,.22)">{{ ec.costLine }}</span>
         </div>

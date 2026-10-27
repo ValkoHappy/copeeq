@@ -215,7 +215,7 @@ export class UploadController {
         onClick: this.useSample(s),
       })),
       modeOpts: [
-        ["copy", "Копия", "1-в-1 с оригиналом", "content_copy"],
+        ["copy", "Копия", "С оформлением оригинала", "content_copy"],
         ["clean", "Чистовик", "По выбранному стандарту", "auto_awesome"],
       ].map(([id, label, sub, icon]) => {
         const on = up.mode === id;
@@ -303,7 +303,7 @@ export class UploadController {
               "."
             : "Не хватает " +
               (cost - tot) +
-              " — всё равно запускаем, оплату попросим при скачивании.",
+              " кредитов. Посмотреть результат можно сейчас, пополнить баланс перед скачиванием.",
       costNoteFg:
         st.authed && pages.length && tot < cost ? "#C2551F" : "#5B6478",
       ctaOp: pages.length ? 1 : 0.5,

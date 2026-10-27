@@ -103,7 +103,7 @@ export class WalletController {
         docs: "≈ " + docs + " " + dw(docs) + (sub ? " в месяц" : ""),
         who: p.who,
         hasTag: hot || sub,
-        tag: hot ? "Чаще выбирают" : "Для потока",
+        tag: hot ? "500 кредитов" : "Для регулярной работы",
         tagBg: hot ? "#0B1024" : "#1F4EF5",
         bg: hot ? "#1F4EF5" : dark ? "#0B1024" : "transparent",
         fg: hot || dark ? "#fff" : "#0B1024",

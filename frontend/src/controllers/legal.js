@@ -25,9 +25,9 @@ export class LegalController {
       out.legal = L;
       out.legalSecs = L.sec.map((s, i) => ({ key: "s" + i, t: s[0], d: s[1] }));
       out.legalTabs = [
-        ["offer", "Оферта"],
+        ["offer", "Условия использования"],
         ["privacy", "Персональные данные"],
-        ["contacts", "Контакты и реквизиты"],
+        ["contacts", "Контакты"],
       ].map(([id, label]) => ({
         key: id,
         label,

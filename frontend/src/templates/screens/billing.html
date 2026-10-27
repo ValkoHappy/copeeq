@@ -12,7 +12,7 @@
     </div>
     <div style="background:#fff;border-radius:28px;padding:28px;display:flex;flex-direction:column;gap:14px">
       <div style="display:flex;align-items:center;gap:10px"><span style="font-size:18px;font-weight:800;flex:1">Подписка «Офис»</span><span style="height:26px;padding:0 10px;border-radius:13px;background:{{ subChip.bg }};color:{{ subChip.fg }};font-size:12px;font-weight:800;display:flex;align-items:center">{{ subChip.t }}</span></div>
-      <span style="font-size:14px;line-height:1.5;color:#4A5368">750 кредитов (≈ 150 страниц) каждый месяц за 490 ₽ — ≈ 3,3 ₽ за страницу. Неиспользованные сгорают в конце месяца.</span>
+      <span style="font-size:14px;line-height:1.5;color:#4A5368">750 кредитов в месяц за 490 ₽. Хватит примерно на 150 печатных страниц в режиме «Копия». Остаток не переносится на следующий месяц.</span>
       <div style="flex:1"></div>
       <sc-if value="{{ subOn }}"><div style="display:flex;gap:8px;flex-wrap:wrap"><span style="flex:1;font-size:13px;color:#5B6478;align-self:center">Следующее списание — 22 ноября</span><button onClick="{{ cancelSub }}" style="height:42px;padding:0 18px;border:1px solid #E3E1EA;border-radius:999px;background:#fff;color:#0B1024;font-size:14px;font-weight:800;cursor:pointer">Отменить</button></div></sc-if>
       <sc-if value="{{ subOff }}"><button onClick="{{ buySub }}" style="height:46px;border:none;border-radius:999px;background:#1F4EF5;color:#fff;font-size:14px;font-weight:800;cursor:pointer">Оформить за 490 ₽ / мес</button></sc-if>
@@ -23,7 +23,7 @@
     <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:12px">
       <sc-for list="{{ buyCards }}" as="p" hint-placeholder-count="3"><div style="background:#fff;border:2px solid {{ p.border }};border-radius:24px;padding:22px;display:flex;flex-direction:column;gap:10px"><span style="display:flex;align-items:center;gap:10px"><img src="{{ coinPlain }}" alt="" style="width:40px;height:40px"><span style="font-size:16px;font-weight:800">{{ p.name }}</span></span><span style="font-size:32px;font-weight:800;letter-spacing:-0.04em">{{ p.priceLabel }}</span><span style="font-size:14px;font-weight:700;color:#3A4156">{{ p.creditsLabel }} · {{ p.per }}</span><span style="font-size:12px;color:#5B6478">Действуют 12 месяцев</span><button onClick="{{ p.onBuy }}" style="height:44px;border:none;border-radius:999px;background:{{ p.btnBg }};color:{{ p.btnFg }};font-size:14px;font-weight:800;cursor:pointer;margin-top:4px">Купить</button></div></sc-for>
     </div>
-    <span style="font-size:13px;color:#5B6478">Карты, СБП, SberPay через ЮKassa. Чек по 54-ФЗ придёт на почту. Юрлицам — счёт от 5 000 ₽.</span>
+    <span style="font-size:13px;color:#5B6478">Выберите пакет, чтобы посмотреть сценарий покупки. Реальное списание денег не подключено.</span>
   </div>
   <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,440px),1fr));gap:16px;align-items:start">
     <div style="background:#fff;border-radius:24px;overflow:hidden">

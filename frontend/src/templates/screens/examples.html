@@ -1,6 +1,6 @@
 <sc-if value="{{ isExamples }}" hint-placeholder-val="{{ false }}">
 <div data-screen-label="Примеры" style="max-width:1240px;margin:0 auto;padding:40px 40px 48px;display:flex;flex-direction:column;gap:28px">
-  <div style="display:flex;flex-direction:column;gap:12px;max-width:760px"><h1 style="margin:0;font-size:clamp(34px,3.6vw,46px);line-height:1;font-weight:800;letter-spacing:-0.05em">Примеры: оригинал → наш Word</h1><p style="margin:0;font-size:18px;line-height:1.5;color:#4A5368">Реальные типы бланков. Скачайте файл и откройте — это обычный .docx.</p></div>
+  <div style="display:flex;flex-direction:column;gap:12px;max-width:760px"><h1 style="margin:0;font-size:clamp(34px,3.6vw,46px);line-height:1;font-weight:800;letter-spacing:-0.05em">Сравните оригинал и документ в Word</h1><p style="margin:0;font-size:18px;line-height:1.5;color:#4A5368">Заявление, анкета и таблица показывают, как выглядит результат. Откройте пример и сравните оформление.</p></div>
   <div style="display:flex;gap:6px;flex-wrap:wrap"><sc-for list="{{ exChips }}" as="c" hint-placeholder-count="5"><button onClick="{{ c.onClick }}" style="height:38px;padding:0 16px;border-radius:999px;border:1px solid {{ c.border }};background:{{ c.bg }};color:{{ c.fg }};font-size:14px;font-weight:700;cursor:pointer">{{ c.label }}</button></sc-for></div>
   <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(min(100%,520px),1fr));gap:16px">
     <sc-for list="{{ exCards }}" as="x" hint-placeholder-count="4">

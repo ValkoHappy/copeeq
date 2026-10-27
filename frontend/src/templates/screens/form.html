@@ -7,7 +7,7 @@
     <div style="display:flex;flex-direction:column;gap:12px;font-size:15px;line-height:1.55">
       <div style="display:flex;gap:12px"><span class="material-symbols-rounded" style="font-size:22px;color:#1F4EF5">help</span><span><b>Для чего:</b> {{ form.why }}</span></div>
       <div style="display:flex;gap:12px"><span class="material-symbols-rounded" style="font-size:22px;color:#1F4EF5">verified</span><span><b>Источник:</b> {{ form.src }}</span></div>
-      <div style="display:flex;gap:12px"><span class="material-symbols-rounded" style="font-size:22px;color:#1F4EF5">edit_document</span><span>Поля подсвечены — их можно заполнить прямо в Word.</span></div>
+      <div style="display:flex;gap:12px"><span class="material-symbols-rounded" style="font-size:22px;color:#1F4EF5">edit_document</span><span>Подсвеченные поля предназначены для заполнения в Word.</span></div>
     </div>
     <button onClick="{{ dlForm }}" style="height:56px;border:none;border-radius:999px;background:#1F4EF5;color:#fff;font-size:16px;font-weight:800;cursor:pointer;display:flex;align-items:center;justify-content:center;gap:10px;box-shadow:0 12px 26px rgba(31,78,245,.28)"><span class="material-symbols-rounded" style="font-size:22px">download</span>Скачать пустой Word · бесплатно</button>
     <span style="font-size:13px;color:#5B6478">{{ formNote }}</span>

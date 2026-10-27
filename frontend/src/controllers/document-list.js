@@ -22,17 +22,17 @@ export class DocumentListController {
       };
       Object.assign(out, {
         keepNote:
-          "Файлы удаляются автоматически через " +
+          "Выбранный срок хранения: " +
           st.prefs.keep +
           " " +
           plural(st.prefs.keep, "день", "дня", "дней") +
-          " — срок меняется в профиле.",
+          ". Его можно изменить в профиле.",
         docsQ: st.docsQ,
         onDocsQ: (e) => this.store.update({ docsQ: e.target.value }),
         docsEmpty: !list.length,
         docsEmptyTitle: q
-          ? "Ничего не нашли по «" + st.docsQ + "»"
-          : "Здесь пока пусто",
+          ? "Нет документов по запросу «" + st.docsQ + "»"
+          : "Документов пока нет",
         docCards: list.map((d) => {
           const su = SU[d.status];
           return {
@@ -51,7 +51,7 @@ export class DocumentListController {
               plural(d.pages, "страница", "страницы", "страниц") +
               (d.status === "error"
                 ? " · " + d.reason + ", не списано"
-                : " · удалится через " +
+                : " · срок хранения ещё " +
                   d.days +
                   " " +
                   plural(d.days, "день", "дня", "дней")),
@@ -90,7 +90,7 @@ export class DocumentListController {
       out.mTitle = "Удалить документ сейчас?";
       out.mSub =
         (d ? "«" + d.type + "» " : "") +
-        "удалится вместе с исходными фото. Восстановить будет нельзя.";
+        "будет убран из списка документов в этой вкладке.";
       out.confirmDel = () => {
         this.store.update((s) => ({
           docs: s.docs.filter((x) => x.id !== s.delId),

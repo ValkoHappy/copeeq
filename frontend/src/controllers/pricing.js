@@ -73,7 +73,7 @@ export class PricingController {
                 : kr(p.credits),
           per: p.per,
           who: p.who,
-          tag: hot ? "Выгоднее" : dark ? "Для потока" : "",
+          tag: hot ? "Стандарт" : dark ? "Для регулярной работы" : "",
           tagBg: hot ? "#fff" : "#1F4EF5",
           tagFg: hot ? "#1F4EF5" : "#fff",
           bg: hot ? "#1F4EF5" : dark ? "#0B1024" : "#fff",
@@ -136,7 +136,7 @@ export class PricingController {
             ? {
                 name: "Пакет «" + (n > 50 ? "Большой" : "Стандарт") + "»",
                 note:
-                  "Кредиты живут 12 месяцев — хватит на " +
+                  "Кредиты действуют 12 месяцев — хватит на " +
                   Math.floor(((n > 50 ? 200 : 50) / n) * 10) / 10 +
                   " мес.",
               }

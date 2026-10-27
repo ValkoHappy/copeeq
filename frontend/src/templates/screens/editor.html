@@ -30,7 +30,7 @@
     </div>
     <aside style="background:#fff;border-left:1px solid #ECEAF0;display:flex;flex-direction:column;min-height:0">
       <div style="flex:1;min-height:0;overflow:auto;padding:18px;display:flex;flex-direction:column;gap:16px">
-        <div style="display:flex;flex-direction:column;gap:4px"><span style="font-size:17px;font-weight:800">Редактор</span><span style="font-size:13px;line-height:1.45;color:#5B6478">Кликните в текст и правьте как в Word. Поля и галочки — прямо на странице. Всё сохраняется само.</span></div>
+        <div style="display:flex;flex-direction:column;gap:4px"><span style="font-size:17px;font-weight:800">Редактор</span><span style="font-size:13px;line-height:1.45;color:#5B6478">Нажмите на текст, чтобы его изменить. Поля и галочки редактируются на странице. Правки сохраняются до перезагрузки вкладки.</span></div>
         <sc-if value="{{ edOpenDoubts }}"><button onClick="{{ goResultCheck }}" style="display:flex;gap:10px;align-items:center;padding:12px;border:none;border-radius:14px;background:#FFF6DA;cursor:pointer;text-align:left"><span class="material-symbols-rounded" style="font-size:20px;color:#9A5B00">priority_high</span><span style="flex:1;font-size:13px;font-weight:700;color:#3B2600">{{ edOpenDoubts }}</span><span class="material-symbols-rounded" style="font-size:18px;color:#9A5B00">chevron_right</span></button></sc-if>
         <sc-if value="{{ hasFields }}">
           <div style="display:flex;flex-direction:column;gap:8px">

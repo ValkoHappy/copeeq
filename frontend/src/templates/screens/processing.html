@@ -10,7 +10,7 @@
       <div style="display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:8px">
         <div style="display:flex;flex-direction:column;gap:2px"><span style="font-size:12px;font-weight:700;color:#5B6478">Прошло</span><span style="font-size:24px;font-weight:800;letter-spacing:-0.02em;font-variant-numeric:tabular-nums">{{ procElapsed }}</span></div>
         <div style="display:flex;flex-direction:column;gap:2px"><span style="font-size:12px;font-weight:700;color:#5B6478">Осталось</span><span style="font-size:24px;font-weight:800;letter-spacing:-0.02em;font-variant-numeric:tabular-nums;color:#1F4EF5">{{ procLeft }}</span></div>
-        <div style="display:flex;flex-direction:column;gap:2px;opacity:{{ procSerialOp }}"><span style="font-size:12px;font-weight:700;color:#5B6478;white-space:nowrap">В один поток</span><span style="font-size:24px;font-weight:800;letter-spacing:-0.02em;font-variant-numeric:tabular-nums;color:#A3A9B8;text-decoration:line-through;text-decoration-thickness:2px">{{ procSerial }}</span></div>
+        <div style="display:flex;flex-direction:column;gap:2px;opacity:{{ procSerialOp }}"><span style="font-size:12px;font-weight:700;color:#5B6478;white-space:nowrap">При последовательной обработке</span><span style="font-size:24px;font-weight:800;letter-spacing:-0.02em;font-variant-numeric:tabular-nums;color:#A3A9B8;text-decoration:line-through;text-decoration-thickness:2px">{{ procSerial }}</span></div>
       </div>
       <div style="height:6px;border-radius:3px;background:#E6E4EC;overflow:hidden"><div style="height:100%;width:{{ procPct }};background:{{ procBar }};border-radius:3px;transition:width .25s linear"></div></div>
     </div>
@@ -98,7 +98,7 @@
                 <span style="width:100%;height:90px;border-radius:6px;border:1.5px dashed #E4E7EE;margin:10px 0"></span>
                 <span style="width:88%;height:9px;border-radius:5px;background:#EEF0F4"></span><span style="width:60%;height:9px;border-radius:5px;background:#EEF0F4"></span>
               </div>
-              <span style="position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);height:32px;padding:0 14px;border-radius:16px;background:#F3F4F7;color:#5B6478;font-size:13px;font-weight:700;display:flex;align-items:center;white-space:nowrap">Ждём текст с фото</span>
+              <span style="position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);height:32px;padding:0 14px;border-radius:16px;background:#F3F4F7;color:#5B6478;font-size:13px;font-weight:700;display:flex;align-items:center;white-space:nowrap">Ожидаем распознавания</span>
             </sc-if>
             <sc-if value="{{ g.isTransfer }}">
               <div style="animation:reveal 6.5s linear {{ g.delay }} both"><dc-import name="DocSheet" page="{{ procPage.page }}" variant="word" zoom="0.62" hint-size="372px,526px"></dc-import></div>
@@ -119,7 +119,7 @@
         <div style="width:100%;max-width:520px;background:#fff;border-radius:28px;padding:30px;display:flex;flex-direction:column;gap:16px;box-shadow:0 24px 60px rgba(11,16,36,.16);animation:fadeUp .3s ease both">
           <img src="{{ errIco }}" alt="" style="width:68px;height:68px;margin:-8px">
           <h2 style="margin:0;font-size:26px;font-weight:800;letter-spacing:-0.03em">Не получилось прочитать страницу {{ procErrN }}</h2>
-          <p style="margin:0;font-size:15px;line-height:1.55;color:#4A5368">{{ procErr.reason }}. Кредиты не списаны. Переснимите при хорошем свете — лист должен занимать весь кадр.</p>
+          <p style="margin:0;font-size:15px;line-height:1.55;color:#4A5368">{{ procErr.reason }}. Кредиты не списаны. Сделайте новый снимок при ровном свете. Все края листа должны быть видны.</p>
           <div style="display:flex;gap:10px;flex-wrap:wrap">
             <button onClick="{{ reshoot }}" style="height:50px;padding:0 22px;border:none;border-radius:999px;background:#1F4EF5;color:#fff;font-size:15px;font-weight:800;cursor:pointer;display:flex;align-items:center;gap:8px"><span class="material-symbols-rounded" style="font-size:20px">photo_camera</span>Переснять</button>
             <sc-if value="{{ canSkip }}"><button onClick="{{ skipPage }}" style="height:50px;padding:0 20px;border:1px solid #D9D6DF;border-radius:999px;background:#fff;color:#0B1024;font-size:15px;font-weight:700;cursor:pointer">Убрать страницу и продолжить</button></sc-if>
@@ -143,7 +143,7 @@
           </div>
           <div style="display:flex;align-items:center;gap:14px;flex-wrap:wrap">
             <button onClick="{{ procOpen }}" style="height:50px;padding:0 24px;border:none;border-radius:999px;background:#1F4EF5;color:#fff;font-size:15px;font-weight:800;cursor:pointer;display:flex;align-items:center;gap:10px" style-hover="background:#1740D8">Открыть документ<span class="material-symbols-rounded" style="font-size:20px">arrow_forward</span></button>
-            <span style="font-size:13px;color:#5B6478">Откроем сами через пару секунд</span>
+            <span style="font-size:13px;color:#5B6478">Документ откроется автоматически</span>
           </div>
         </div>
       </div>

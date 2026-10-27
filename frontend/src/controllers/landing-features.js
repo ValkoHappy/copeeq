@@ -24,8 +24,8 @@ export class LandingFeaturesController {
         {
           key: "p",
           variant: "plain",
-          title: "Обычный конвертер",
-          tag: "осталось настроить вручную: 14 мест",
+          title: "Текст без оформления",
+          tag: "оформление нужно восстановить",
           tagBg: "#FDECEC",
           tagFg: "#C2272D",
           bg: "#fff",
@@ -34,7 +34,7 @@ export class LandingFeaturesController {
           key: "c",
           variant: "word",
           title: "Copeeq",
-          tag: "можно сразу отправлять",
+          tag: "результат в Word",
           tagBg: "#E6F6EC",
           tagFg: "#15803D",
           bg: "#EEF3FF",
@@ -49,7 +49,7 @@ export class LandingFeaturesController {
         [
           "tune",
           "Выберите «Копию» или «Чистовик»",
-          "«Копия» — 1-в-1 с оригиналом. «Чистовик» — по стандарту.",
+          "«Копия» сохраняет исходное оформление. «Чистовик» применяет выбранные настройки.",
         ],
         [
           "download",
@@ -123,7 +123,7 @@ export class LandingFeaturesController {
         ["format_line_spacing", "Интервал 1,5, абзац 1,25 см"],
         ["title", "Заголовки — стилями Word"],
         ["table", "Таблица с шапкой и итогом"],
-        ["tag", "Нумерация страниц полем"],
+        ["tag", "Автоматические номера страниц"],
       ].map((n, i) => ({ key: "n" + i, icon: n[0], t: n[1] })),
     };
   }

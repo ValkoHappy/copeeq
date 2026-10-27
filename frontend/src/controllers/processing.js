@@ -78,7 +78,7 @@ export class ProcessingController {
           proc: {
             ...p,
             t,
-            err: { pi: bj, reason: "Фото слишком размыто — текст не читается" },
+            err: { pi: bj, reason: "Снимок размыт, текст не читается" },
           },
         });
         this.ports.setDoc(st.cur.id, {
@@ -119,7 +119,7 @@ export class ProcessingController {
             " " +
             plural(n, "место", "места", "мест") +
             ", где мы не уверены."
-        : "Готово. Документ собран — можно скачивать.",
+        : "Готово. Документ собран. Проверьте результат перед скачиванием.",
       "task_alt",
     );
   }

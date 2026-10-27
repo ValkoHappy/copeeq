@@ -93,7 +93,7 @@ export class AuthenticationController {
               ? "Пустые бланки бесплатны после входа."
               : p.route === "new"
                 ? "Чтобы загрузить документ, войдите или зарегистрируйтесь. Новым аккаунтам — 25 кредитов бесплатно."
-                : "Код на почту — без паролей."
+                : "Для входа используется код из 6 цифр."
           : "";
       Object.assign(out, {
         login: L,
@@ -106,7 +106,7 @@ export class AuthenticationController {
         },
         sendCode: () => {
           if (!/^\S+@\S+\.\S+$/.test(this.store.state.login.email.trim())) {
-            setLogin({ err: "Проверьте адрес — нужен вид name@mail.ru" });
+            setLogin({ err: "Введите почту в формате name@mail.ru" });
             return;
           }
           setLogin({ step: "code", code: "", err: "" });
@@ -122,7 +122,7 @@ export class AuthenticationController {
         },
         checkCode: () => {
           if (this.store.state.login.code.length < 6) {
-            setLogin({ err: "Нужно 6 цифр из письма" });
+            setLogin({ err: "Введите код из 6 цифр" });
             return;
           }
           this.loginDone(this.store.state.login.email.trim());

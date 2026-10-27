@@ -74,7 +74,7 @@ export class EditorViewController {
       edReplaceAll: () => {
         const a = st.edFind.trim();
         if (!a) {
-          this.ports.toast("Впишите, что найти", "search");
+          this.ports.toast("Введите текст для поиска", "search");
           return;
         }
         this.ports.patchCur((c) => ({ reps: [...c.reps, [a, st.edRepl]] }));
@@ -86,7 +86,7 @@ export class EditorViewController {
       },
       edSave: st.edSaving
         ? { t: "Сохраняем…", icon: "sync", fg: "#5B6478" }
-        : { t: "Все изменения сохранены", icon: "cloud_done", fg: "#15803D" },
+        : { t: "Сохранено в этой вкладке", icon: "cloud_done", fg: "#15803D" },
       edOpenDoubts: dn
         ? "Не проверено " + dn + " " + plural(dn, "место", "места", "мест")
         : "",

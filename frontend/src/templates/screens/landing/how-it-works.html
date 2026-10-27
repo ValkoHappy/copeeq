@@ -1,7 +1,7 @@
   <section id="how" style="position:relative;isolation:isolate;max-width:1240px;margin:0 auto;padding:72px 40px 40px;display:flex;flex-direction:column;gap:36px">
     <div style="display:flex;align-items:flex-end;justify-content:space-between;gap:24px 48px;flex-wrap:wrap">
-      <div style="display:flex;flex-direction:column;gap:14px"><span style="display:flex;align-items:center;gap:10px;font-size:13px;font-weight:800;letter-spacing:.1em;text-transform:uppercase;color:#1F4EF5">Как это работает</span><h2 style="margin:0;font-size:clamp(36px,4.6vw,64px);line-height:1;font-weight:800;letter-spacing:-0.05em;max-width:720px;text-wrap:balance">Фото в Word за три шага</h2></div>
-      <p style="margin:0;font-size:17px;line-height:1.55;color:#4A5368;max-width:420px;text-wrap:pretty">Copeeq распознает документ, уточнит, как его оформить, и соберёт файлы, которые можно сразу отправлять.</p>
+      <div style="display:flex;flex-direction:column;gap:14px"><span style="display:flex;align-items:center;gap:10px;font-size:13px;font-weight:800;letter-spacing:.1em;text-transform:uppercase;color:#1F4EF5">Как это работает</span><h2 style="margin:0;font-size:clamp(36px,4.6vw,64px);line-height:1;font-weight:800;letter-spacing:-0.05em;max-width:720px;text-wrap:balance">Загрузите, проверьте, сохраните</h2></div>
+      <p style="margin:0;font-size:17px;line-height:1.55;color:#4A5368;max-width:420px;text-wrap:pretty">Выберите файл и режим оформления. Перед скачиванием сравните документ с оригиналом и исправьте ошибки.</p>
     </div>
     <div style="position:relative;overflow:hidden;border-radius:36px;background:#0B1024;color:#fff;padding:48px 48px 28px;display:flex;flex-direction:column;gap:36px">
       <div aria-hidden="true" style="position:absolute;inset:0;background:radial-gradient(60% 70% at 78% 40%,rgba(31,78,245,.42),rgba(31,78,245,0) 70%),radial-gradient(40% 50% at 10% 100%,rgba(31,78,245,.18),rgba(31,78,245,0) 70%);pointer-events:none"></div>
@@ -10,7 +10,7 @@
         <div style="flex:1 1 250px;display:flex;flex-direction:column;gap:12px;min-width:0">
           <span style="font-size:48px;line-height:1;font-weight:800;letter-spacing:-0.04em;color:#7C9BFF">01</span>
           <span style="font-size:22px;font-weight:800;letter-spacing:-0.02em">Загрузите фото</span>
-          <span style="font-size:14px;line-height:1.5;color:#AEB8D6;min-height:42px;max-width:260px">Снимок на телефон, скан или PDF. Можно несколько страниц сразу.</span>
+          <span style="font-size:14px;line-height:1.5;color:#AEB8D6;min-height:42px;max-width:260px">Подойдёт фотография, скан или PDF. За один раз можно добавить до 10 страниц.</span>
           <div style="height:360px;display:flex;align-items:center;justify-content:center;margin-top:8px">
             <div style="position:relative;transform:rotate(-4deg)">
               <div style="padding:8px;border-radius:16px;background:#fff;box-shadow:0 24px 50px rgba(0,0,0,.45)"><div style="border-radius:9px;overflow:hidden;width:226px;height:320px"><dc-import name="DocSheet" page="{{ how.page }}" variant="photo" zoom="0.38" straight="{{ true }}" flat="{{ true }}" hint-size="226px,320px"></dc-import></div></div>
@@ -22,7 +22,7 @@
         <div style="flex:1 1 270px;display:flex;flex-direction:column;gap:12px;min-width:0">
           <span style="font-size:48px;line-height:1;font-weight:800;letter-spacing:-0.04em;color:#7C9BFF">02</span>
           <span style="font-size:22px;font-weight:800;letter-spacing:-0.02em">Выберите, как оформить</span>
-          <span style="font-size:14px;line-height:1.5;color:#AEB8D6;min-height:42px;max-width:280px">Копия 1-в-1 с оригиналом или чистовик по ГОСТ. Попробуйте здесь.</span>
+          <span style="font-size:14px;line-height:1.5;color:#AEB8D6;min-height:42px;max-width:280px">Сохраните оформление оригинала или выберите «Чистовик». Переключите режимы в примере ниже.</span>
           <div style="height:360px;display:flex;align-items:center;justify-content:center;margin-top:8px">
             <div style="width:100%;max-width:300px;background:#fff;color:#0B1024;border-radius:22px;padding:20px 18px;display:flex;flex-direction:column;gap:16px;transform:rotate(1.5deg);box-shadow:0 24px 50px rgba(0,0,0,.45)">
               <div style="display:flex;flex-direction:column;gap:10px"><span style="font-size:15px;font-weight:800">Как оформить?</span>
@@ -39,7 +39,7 @@
         <div style="flex:1.4 1 340px;display:flex;flex-direction:column;gap:12px;min-width:0">
           <span style="font-size:48px;line-height:1;font-weight:800;letter-spacing:-0.04em;color:#7C9BFF">03</span>
           <span style="font-size:22px;font-weight:800;letter-spacing:-0.02em">Скачайте готовые файлы</span>
-          <span style="font-size:14px;line-height:1.5;color:#AEB8D6;min-height:42px;max-width:320px">Настоящий .docx — правится как обычный Word. И всё, что отметили.</span>
+          <span style="font-size:14px;line-height:1.5;color:#AEB8D6;min-height:42px;max-width:320px">Сохраните документ в Word и выберите дополнительные форматы для скачивания.</span>
           <div style="height:360px;display:flex;align-items:center;justify-content:center;gap:14px;margin-top:8px">
             <div style="display:flex;flex-direction:column;align-items:center;gap:10px;flex:none">
               <div style="padding:6px;border-radius:14px;background:#fff;box-shadow:0 0 0 3px #7C9BFF,0 24px 50px rgba(0,0,0,.45)"><div style="border-radius:8px;overflow:hidden;width:178px;height:252px"><dc-import name="DocSheet" page="{{ how.page }}" variant="{{ how.wordVariant }}" zoom="0.3" flat="{{ true }}" hint-size="178px,252px"></dc-import></div></div>
