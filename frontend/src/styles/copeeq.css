@@ -17,6 +17,11 @@ input[type=range]{accent-color:#1F4EF5}
 @keyframes fixit{0%{background:rgba(255,190,0,.30);border-color:#E0A100}100%{background:rgba(22,163,74,.12);border-color:#16A34A}}
 @keyframes pop{from{opacity:0;transform:scale(.6)}to{opacity:1;transform:none}}
 @keyframes scan{from{transform:translateY(-90px)}to{transform:translateY(560px)}}
+.cq-how-intro{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,360px);align-items:end;gap:24px 48px}
+@media(max-width:900px){
+  .cq-how-intro{grid-template-columns:minmax(0,1fr)}
+  .cq-how-intro>p{max-width:560px}
+}
 @media(max-width:700px){
   html,body{overflow-x:clip}
   header>div{padding:10px 16px!important;gap:12px!important}
